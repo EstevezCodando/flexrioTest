@@ -1,7 +1,7 @@
 import { all, audit, run, transaction } from '../db/index.ts';
-import { SIGNAL_INFO, type SignalLevel } from '../domain/reference.ts';
+import { GUARDRAILS, SIGNAL_INFO, type SignalLevel } from '../domain/reference.ts';
 import { newId } from '../lib/crypto.ts';
-import { badRequest, notFound } from '../lib/http.ts';
+import { badRequest, conflict, notFound } from '../lib/http.ts';
 import { isoLocal, nowEpoch } from '../lib/util.ts';
 import { notifyMany } from './notifications.ts';
 import { region } from './regions.ts';
@@ -19,6 +19,7 @@ export type SignalRow = {
   created_by: string;
   created_at: number;
   cancelled_at: number | null;
+  origin: 'manual' | 'flexia';
 };
 
 /** Sinais do gestor em memória: consultados a cada cálculo de preço, então evitamos ir ao banco. */
@@ -64,6 +65,8 @@ export function toDto(s: SignalRow) {
     title: s.title,
     message: s.message,
     createdAt: isoLocal(s.created_at),
+    origin: s.origin,
+    approvedBy: s.created_by,
   };
 }
 
@@ -77,6 +80,7 @@ export type CreateSignalInput = {
   multiplier?: number;
   creditBonusKwh?: number;
   notifyConsumers: boolean;
+  origin?: 'manual' | 'flexia';
 };
 
 /**
@@ -85,9 +89,26 @@ export type CreateSignalInput = {
  */
 export function createSignal(input: CreateSignalInput, managerId: string, ip?: string) {
   region(input.regionId);
+  const now = nowEpoch();
+  const G = GUARDRAILS;
   if (input.endsAt <= input.startsAt) throw badRequest('O fim do sinal deve ser posterior ao início');
-  if (input.endsAt - input.startsAt > 7 * 86400) throw badRequest('Um sinal pode durar no máximo 7 dias');
-  if (input.endsAt <= nowEpoch()) throw badRequest('O sinal termina no passado');
+  if (input.endsAt <= now) throw badRequest('O sinal termina no passado');
+  if (input.endsAt - input.startsAt > G.maxDurationHours * 3600) {
+    throw badRequest(`Guard rail: um sinal pode durar no máximo ${G.maxDurationHours} h`);
+  }
+  const multiplier = input.multiplier ?? SIGNAL_INFO[input.level].multiplier;
+  const bonus = input.creditBonusKwh ?? SIGNAL_INFO[input.level].creditBonusKwh;
+  if (multiplier < G.multiplierMin || multiplier > G.multiplierMax) {
+    throw badRequest(`Guard rail: o multiplicador de preço deve ficar entre ${G.multiplierMin} e ${G.multiplierMax}`);
+  }
+  if (bonus > G.creditBonusMaxKwh) throw badRequest(`Guard rail: o bônus de crédito não pode passar de R$ ${G.creditBonusMaxKwh}/kWh`);
+  // Coerência: verde nunca encarece, vermelho nunca barateia, e só o verde concede bônus.
+  if (input.level === 'verde' && multiplier > 1) throw badRequest('Guard rail: sinal verde não pode aumentar o preço');
+  if (input.level === 'vermelho' && multiplier < 1) throw badRequest('Guard rail: sinal vermelho não pode reduzir o preço');
+  if (input.level !== 'verde' && bonus > 0) throw badRequest('Guard rail: bônus de crédito só é permitido em sinal verde');
+  // Um único sinal por região e janela: evita instruções contraditórias aos consumidores.
+  const overlap = load().find((x) => x.region_id === input.regionId && x.starts_at < input.endsAt && input.startsAt < x.ends_at);
+  if (overlap) throw conflict(`Já existe o sinal "${overlap.title}" nesta região e janela. Cancele-o antes de publicar outro.`);
 
   const row: SignalRow = {
     id: newId('sig'),
@@ -95,23 +116,32 @@ export function createSignal(input: CreateSignalInput, managerId: string, ip?: s
     level: input.level,
     starts_at: input.startsAt,
     ends_at: input.endsAt,
-    multiplier: input.multiplier ?? SIGNAL_INFO[input.level].multiplier,
-    credit_bonus_kwh: input.creditBonusKwh ?? SIGNAL_INFO[input.level].creditBonusKwh,
+    multiplier,
+    credit_bonus_kwh: bonus,
     title: input.title,
     message: input.message,
     created_by: managerId,
-    created_at: nowEpoch(),
+    created_at: now,
     cancelled_at: null,
+    origin: input.origin ?? 'manual',
   };
 
   const notified = transaction(() => {
     run(
-      `INSERT INTO price_signals (id, region_id, level, starts_at, ends_at, multiplier, credit_bonus_kwh, title, message, created_by, created_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO price_signals (id, region_id, level, starts_at, ends_at, multiplier, credit_bonus_kwh, title, message, created_by, created_at, origin)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       row.id, row.region_id, row.level, row.starts_at, row.ends_at, row.multiplier, row.credit_bonus_kwh,
-      row.title, row.message, row.created_by, row.created_at,
+      row.title, row.message, row.created_by, row.created_at, row.origin,
     );
-    audit(managerId, 'signal.create', `${row.id} ${row.region_id} ${row.level}`, ip);
+    audit(managerId, 'signal.create', `${row.id} ${row.region_id} ${row.level} x${row.multiplier} origem=${row.origin}`, ip);
+    // Os demais gestores são avisados de que um sinal foi aprovado e por quem (controle cruzado).
+    const others = all<{ id: string }>("SELECT id FROM users WHERE role = 'manager' AND id <> ?", managerId);
+    notifyMany(others.map((m) => m.id), {
+      kind: 'manager_signal',
+      title: `Sinal ${row.level} publicado em ${row.region_id}`,
+      body: `"${row.title}" (×${row.multiplier}, origem: ${row.origin === 'flexia' ? 'proposta da FlexIA aprovada por gestor' : 'gestor'}).`,
+      data: { signalId: row.id, regionId: row.region_id },
+    });
     if (!input.notifyConsumers) return 0;
     const consumers = all<{ id: string }>("SELECT id FROM users WHERE role = 'consumer' AND region_id = ?", row.region_id);
     notifyMany(

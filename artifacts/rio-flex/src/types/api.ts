@@ -142,6 +142,17 @@ export type SignalDto = {
   title: string;
   message: string;
   createdAt: string;
+  origin: 'manual' | 'flexia';
+  approvedBy: string;
+};
+
+export type Guardrails = {
+  multiplierMin: number;
+  multiplierMax: number;
+  creditBonusMaxKwh: number;
+  maxDurationHours: number;
+  loadAlertPct: number;
+  alertCooldownSeconds: number;
 };
 
 export type PriceNow = {

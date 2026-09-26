@@ -6,7 +6,7 @@
 > `✅ Implementado` (existe no código e foi exercitado) · `🟡 MVP/Parcial` (existe de forma simulada ou reduzida) · `🔵 Planejado` (desenho, sem código).
 > Os caminhos citados em "Evidência" existem no repositório.
 
-**Índice:** [1. Critério de avaliação](#1-critério-de-avaliação) · [2. Arquitetura](#2-arquitetura-da-solução) · [3. Cavuca](#3-cavuca-coleta-de-dados-externos) · [4. Data Lake](#4-data-lake-e-ciclo-de-vida) · [5. Rastreabilidade](#5-rastreabilidade-e-auditabilidade-taesa) · [6. Normas](#6-normas-e-regulamentações) · [7. FlexIA](#7-flexia-camada-de-inteligência) · [8. Integração](#8-integração) · [9. Rio Flex (interface)](#9-rio-flex-interface-operacional) · [10. IoT](#10-iot-e-carregadores) · [11. Gamificação](#11-gamificação-e-flexibilidade) · [12. Segurança](#12-segurança-e-conformidade) · [13. Maturidade](#13-maturidade-técnica-do-mvp) · [14. Matriz do critério](#14-atendimento-ao-critério-2--execução-técnica-e-uso-de-dados-20) · [15. Diagramas](#15-diagramas) · [16. Como rodar](#16-como-rodar) · [17. API](#17-api-implementada) · [18. Roteiro de 40 s](#18-roteiro-de-demonstração-de-40-segundos)
+**Índice:** [1. Critério de avaliação](#1-critério-de-avaliação) · [2. Arquitetura](#2-arquitetura-da-solução) · [3. Cavuca](#3-cavuca-coleta-de-dados-externos) · [4. Data Lake](#4-data-lake-e-ciclo-de-vida) · [5. Rastreabilidade](#5-rastreabilidade-e-auditabilidade-taesa) · [6. Normas](#6-normas-e-regulamentações) · [7. FlexIA](#7-flexia-camada-de-inteligência) · [7.1 A IA não decide sozinha](#71-governança-do-sinal-de-preço-a-ia-não-decide-sozinha) · [8. Integração](#8-integração) · [9. Rio Flex (interface)](#9-rio-flex-interface-operacional) · [10. IoT](#10-iot-e-carregadores) · [11. Gamificação](#11-gamificação-e-flexibilidade) · [12. Segurança](#12-segurança-e-conformidade) · [13. Maturidade](#13-maturidade-técnica-do-mvp) · [14. Matriz do critério](#14-atendimento-ao-critério-2--execução-técnica-e-uso-de-dados-20) · [15. Diagramas](#15-diagramas) · [16. Como rodar](#16-como-rodar) · [17. API](#17-api-implementada) · [18. Roteiro de 40 s](#18-roteiro-de-demonstração-de-40-segundos)
 
 ---
 
@@ -22,6 +22,8 @@ Este projeto responde ao **Critério 2 — Execução Técnica e Uso de Dados (2
 | **Rastreabilidade (Taesa)** | Fontes rastreáveis e informações auditáveis. | [§3](#3-cavuca-coleta-de-dados-externos)–[§6](#6-normas-e-regulamentações), [§5](#5-rastreabilidade-e-auditabilidade-taesa) |
 
 A tabela-resumo com **evidência por arquivo/endpoint** está em [§14](#14-atendimento-ao-critério-2--execução-técnica-e-uso-de-dados-20).
+
+**Princípio de governança:** a IA **não emite sinal de preço sozinha**. A FlexIA só *propõe*; quem publica é um gestor identificado, o servidor aplica **guard rails** que nem a IA nem o gestor conseguem contornar pela API, os demais gestores são **alertados**, e tudo fica **rastreado** ([§7.1](#71-governança-do-sinal-de-preço-a-ia-não-decide-sozinha)).
 
 **Resumo honesto do estágio:** é um **MVP funcional de ponta a ponta na camada de aplicação** (API, banco persistente, dois portais, FlexIA, testes) sobre **uma fonte de dados real e rastreável** (estações de recarga do RJ). Preço de energia, rede e clima são **simulados**; Data Lake em camadas, Kafka e telemetria IoT real estão **planejados** e claramente marcados.
 
@@ -68,7 +70,7 @@ artifacts/
    ├─ src/flexia/      agent (Claude) · local-engine · tools · knowledge
    ├─ src/middleware/  segurança (sessão, CSRF, papéis, rate limit, erros)
    ├─ data/carregados_rj/  CSVs + manifesto.json + validacao.json (proveniência da coleta)
-   └─ test/            12 testes de integração
+   └─ test/            16 testes de integração
 ```
 
 ---
@@ -202,7 +204,7 @@ Objetivo: dado um evento (ex.: uma recarga em determinada data), identificar **q
 ## 7. FlexIA — camada de inteligência
 
 Assistente **exclusivo dos gestores** (`/gestor/flexia`), com 9 ferramentas somente-leitura sobre os mesmos serviços da API (`src/flexia/tools.ts`):
-`listar_regioes`, `consultar_preco_energia`, `consultar_mercado_pld`, `consultar_rede`, `consultar_clima`, `buscar_regulacao`, `resumo_estacoes`, `listar_sinais` e `propor_sinal_preco` (**só propõe**; o gestor aprova e publica pela interface).
+`listar_regioes`, `consultar_preco_energia`, `consultar_mercado_pld`, `consultar_rede`, `consultar_clima`, `buscar_regulacao`, `resumo_estacoes`, `listar_sinais` e `propor_sinal_preco` (**só propõe**; o gestor aprova e publica pela interface, sob os guard rails — [§7.1](#71-governança-do-sinal-de-preço-a-ia-não-decide-sozinha)).
 
 | Capacidade pedida | Estado | Como é hoje |
 |---|---|---|
@@ -215,6 +217,30 @@ Assistente **exclusivo dos gestores** (`/gestor/flexia`), com 9 ferramentas some
 | versão do modelo, dados usados, data de geração, horizonte, métricas de qualidade | 🟡 | `provenance` (`processingVersion`, `generatedAt`, `marketProvider`); horizonte = parâmetro `hours`; **métricas de qualidade e `model_version` 🔵** (não há modelo treinado a avaliar) |
 
 **Motores.** Com `ANTHROPIC_API_KEY`: Claude (`claude-opus-5`, configurável em `FLEXIA_MODEL`) com **loop manual de ferramentas**, *adaptive thinking* e cache do prompt de sistema. Sem chave ou em falha da API: **motor local** por intenção que chama as mesmas ferramentas. As respostas indicam o motor e as ferramentas usadas; o texto sempre lembra que os dados são simulados.
+
+### 7.1 Governança do sinal de preço: a IA não decide sozinha
+
+O sinal de preço muda o que o consumidor paga. Por isso a decisão **não é delegada à IA**: ela é uma consultora; a decisão é humana e limitada por regras determinísticas.
+
+```
+FlexIA (propõe) → Gestor (revisa e aprova) → Guard rails do servidor (validam) → Publicação → Alertas aos demais gestores → Auditoria
+```
+
+| Camada de controle | Estado | Como funciona | Evidência |
+|---|---|---|---|
+| **A IA não tem permissão de escrita** | ✅ | Todas as ferramentas da FlexIA são somente-leitura, exceto `propor_sinal_preco`, que apenas **devolve um objeto de proposta**; nada é gravado. Publicar exige `POST /manager/signals` com **sessão de gestor** | `src/flexia/tools.ts`, `src/routes/manager.ts` |
+| **Aprovação humana explícita** | ✅ | A proposta aparece na conversa como "não publicada — requer aprovação"; o botão **Aprovar e publicar** é o que chama a API. O gestor que clicou fica como responsável (`created_by`) | `pages/manager/Flexia.tsx`, `price_signals.created_by` |
+| **Guard rails no servidor** | ✅ | Validados para **qualquer** origem (manual ou FlexIA): multiplicador de preço entre **0,7 e 1,5**; duração máx. **24 h**; bônus máx. **R$ 0,50/kWh** e **somente em sinal verde**; **verde não pode encarecer** e **vermelho não pode baratear**; **um sinal por região e janela** (sem instruções contraditórias); não aceita janela no passado. Violação → `400/409` com a regra violada | `GUARDRAILS` em `src/domain/reference.ts`, `createSignal` em `src/services/signals.ts`, `GET /manager/guardrails` |
+| **Alertas aos gestores** | ✅ | Job a cada 60 s gera notificações persistidas: **pico de demanda** (carga regional ≥ 85 %), **preço crítico sem sinal do operador** (vermelho automático) e **sinal publicado** avisando os *outros* gestores (controle cruzado). Cooldown de 3 h por região/tipo. Aparecem na Visão geral | `evaluateManagerAlerts` em `src/services/alerts.ts`, `index.ts`, `pages/manager/Overview.tsx` |
+| **Origem e responsável rastreáveis** | ✅ | Cada sinal guarda `origin` (`manual` ou `flexia`) e o gestor aprovador; a auditoria registra `signal.create ... x<multiplicador> origem=<origem>`; conversas guardam motor e ferramentas consultadas | `price_signals.origin`, `audit_log`, `flexia_messages.meta_json` |
+| **Reversibilidade** | ✅ | Gestor cancela qualquer sinal (`DELETE /manager/signals/:id`, auditado); o sinal expira sozinho | `cancelSignal` |
+| **Dados de entrada rastreados** | ✅/🟡 | A proposta consulta as mesmas fontes rastreáveis do sistema (`provenance` com `processingVersion`; estações com lineage até URL + SHA-256). Preço/rede/clima ainda são simulados | [§5](#5-rastreabilidade-e-auditabilidade-taesa) |
+
+**Esclarecimentos honestos**
+- **O nível automático (🟢🟡🔴) não é a IA.** Quando nenhum gestor publica sinal, o sistema aplica um nível calculado por **regra determinística** (percentis do custo do dia e posto de ponta) com multiplicadores fixos (0,88 / 1,00 / 1,22), sempre dentro da faixa dos guard rails. É reproduzível e não usa modelo de IA. Se ficar vermelho sem sinal do operador, os gestores são alertados.
+- **Aprovação por um gestor, não por dois.** Hoje basta um gestor aprovar; os demais são avisados depois. Aprovação em duas etapas (*four-eyes*) para sinais vermelhos e limites por perfil de gestor são 🔵.
+- **Os limites são constantes do código**, não configuráveis pela interface; alterá-los exige mudança versionada.
+- **Sem revisão jurídica automática:** os guard rails limitam preço e duração, mas não validam a mensagem ao consumidor nem checam conformidade tarifária; isso continua sendo responsabilidade do gestor.
 
 ---
 
@@ -247,7 +273,8 @@ Não há barramento; os eventos abaixo existem como **registros persistidos** (a
 | `charging_started` | `audit_log.charging.start` + linha em `charging_sessions` | 🟡 |
 | `charging_finished` | `audit_log.charging.stop` + notificação `charging` + `wallet_ledger` | 🟡 |
 | `flexibility_event_created` | `charging_sessions.flex_accepted = 1` (+ crédito no ledger) | 🟡 |
-| `demand_peak_detected` | apenas o nível vermelho automático calculado sob demanda | 🔵 |
+| `demand_peak_detected` | notificação `demand_peak` aos gestores (carga ≥ 85 %) gerada pelo job `manager-alerts` | 🟡 |
+| `price_critical` (vermelho automático sem sinal) | notificação `price_critical` aos gestores | 🟡 |
 | `charger_failure_detected` | conector `indisponivel` simulado; sem telemetria real | 🔵 |
 
 **Payload real de publicação de sinal** (`POST /api/v1/manager/signals`):
@@ -256,9 +283,9 @@ Não há barramento; os eventos abaixo existem como **registros persistidos** (a
   "startsAt": "2026-09-26T10:00:00-03:00", "endsAt": "2026-09-26T12:00:00-03:00",
   "title": "Janela verde: excedente solar",
   "message": "Energia mais barata nas próximas horas: recarregue agora e ganhe créditos extras por kWh.",
-  "notifyConsumers": true }
+  "notifyConsumers": true, "origin": "flexia" }
 ```
-resposta `201`: `{ "signal": { "id": "sig_…", "status": "agendado|ativo", "multiplier": 0.88, "creditBonusKwh": 0.15, … }, "notifiedConsumers": 1 }`.
+resposta `201`: `{ "signal": { "id": "sig_…", "status": "agendado|ativo", "multiplier": 0.88, "creditBonusKwh": 0.15, "origin": "flexia", "approvedBy": "usr_…", … }, "notifiedConsumers": 1 }`. Se violar um guard rail: `400 { "error": { "code": "bad_request", "message": "Guard rail: sinal verde não pode aumentar o preço" } }`; se sobrepor outro sinal: `409`.
 
 **Payload real de notificação ao consumidor** (`GET /api/v1/notifications`):
 ```json
@@ -355,9 +382,9 @@ A gamificação é o mecanismo de incentivo à **resposta da demanda**. O consum
 | **Logs de auditoria** | ✅ | `audit_log` (§5), `GET /manager/audit`; e-mails desconhecidos registrados só como hash |
 | **Privacidade / LGPD** | 🟡 | minimização (região, veículo, histórico de sessões); **gestores só veem agregados**; localização GPS fica no navegador e só é usada para calcular distâncias; markdown da FlexIA renderizado **sem `innerHTML`**; não há endpoints de exportação/exclusão de dados do titular nem registro de consentimento 🔵 |
 | **Retenção** | 🟡 | job horário remove sessões expiradas, notificações lidas com > 60 dias e PLD com > 30 dias (`index.ts`, `market.ts`); `audit_log` sem política de retenção 🔵 |
-| **FlexIA** | ✅ | ferramentas somente-leitura, entrada validada por schema, única ação de escrita é *proposta* com aprovação humana |
+| **FlexIA e decisões automatizadas** | ✅ | ferramentas somente-leitura, entrada validada por schema; a única "escrita" é *proposta*, com **aprovação humana**, **guard rails** no servidor, **alertas** aos gestores e **auditoria** com origem e responsável ([§7.1](#71-governança-do-sinal-de-preço-a-ia-não-decide-sozinha)). Nenhum dado pessoal de consumidor é exposto às ferramentas |
 | **Rastreabilidade das ações** | ✅ | [§5](#5-rastreabilidade-e-auditabilidade-taesa) |
-| **Testes de segurança automatizados** | ✅ | `test/api.test.ts`: CSRF, sessão obrigatória, portal errado, papel insuficiente, flags do cookie |
+| **Testes de segurança automatizados** | ✅ | `test/api.test.ts`: CSRF, sessão obrigatória, portal errado, papel insuficiente, flags do cookie, **guard rails** (faixa, coerência, duração, sobreposição) e **alertas com cooldown** |
 
 Em produção: `NODE_ENV=production`, `COOKIE_SECURE=true`, `ALLOWED_ORIGINS`, HTTPS, e **trocar/remover as contas de demonstração**.
 
@@ -376,10 +403,11 @@ Classificação: **MVP funcional integrado** (aplicação completa e testada) so
 | Banco persistente | ✅ | SQLite WAL, 19 tabelas, migrações versionadas (`src/db/index.ts`), seed idempotente |
 | FlexIA | ✅/🟡 | `src/flexia/` (9 ferramentas, Claude + motor local), tela `/gestor/flexia`; previsões simuladas |
 | Rio Flex (frontend) | ✅ | `artifacts/rio-flex` (2 portais, mapa, gráficos, PWA); build de produção e *code-splitting* por rota |
-| API REST | ✅ | 43 endpoints ([§17](#17-api-implementada)) |
+| API REST | ✅ | 44 endpoints ([§17](#17-api-implementada)) |
 | Kafka / microserviços | 🔵 | — |
 | IoT | 🟡 | sessão e ocupação simuladas (`services/charging.ts`, `stations.ts`); telemetria real 🔵 |
-| Testes | ✅ | 12 testes de integração passando (`pnpm --filter @workspace/api-server test`) |
+| Guard rails e alertas aos gestores | ✅ | `GUARDRAILS`, `createSignal`, `evaluateManagerAlerts`; grupo de testes *guard rails do sinal de preço* |
+| Testes | ✅ | 16 testes de integração passando (`pnpm --filter @workspace/api-server test`) |
 | Tipagem | ✅ | `pnpm typecheck` (frontend + API) sem erros |
 | Documentação | ✅ | este README, diagramas Mermaid, `.env.example` |
 
@@ -391,10 +419,10 @@ Classificação: **MVP funcional integrado** (aplicação completa e testada) so
 
 | Critério | Como a solução atende | Evidência no projeto |
 |---|---|---|
-| **Maturidade Técnica** | MVP integrado: dados reais de estações, banco persistente com migrações, API REST, dois portais, FlexIA com ferramentas, simulação de recarga, testes e build de produção. Estado de cada parte declarado ([§13](#13-maturidade-técnica-do-mvp)). Documentação com bounded contexts, casos de uso, sequência e ER ([§15](#15-diagramas)). | `artifacts/api-server/src/**`, `artifacts/rio-flex/src/**`, `test/api.test.ts` (12 ✔), `pnpm typecheck`, §15 |
+| **Maturidade Técnica** | MVP integrado: dados reais de estações, banco persistente com migrações, API REST, dois portais, FlexIA com ferramentas, simulação de recarga, testes e build de produção. Estado de cada parte declarado ([§13](#13-maturidade-técnica-do-mvp)). Documentação com bounded contexts, casos de uso, sequência e ER ([§15](#15-diagramas)). | `artifacts/api-server/src/**`, `artifacts/rio-flex/src/**`, `test/api.test.ts` (16 ✔), `pnpm typecheck`, §15 |
 | **Integração** | API REST versionada; `MarketDataProvider` como ponto de troca para o PLD da CCEE; importação de CSV/manifesto de terceiros; job de ingestão; eventos mapeados para registros existentes. Kafka, MQTT/WebSocket, OCPP/OCPI **planejados** e declarados como tal. | `src/services/market.ts` (interface + job), `src/db/seed.ts`, `src/routes/*.ts`, `src/index.ts`, [§8](#8-integração) e [§17](#17-api-implementada) |
-| **Segurança e Conformidade** | scrypt, sessão httpOnly/SameSite, CSRF, RBAC por portal, bloqueio por tentativas, zod, helmet, rate limit, auditoria, minimização e dados agregados para gestores, retenção parcial. Lacunas (TLS no deploy, criptografia em repouso, direitos do titular, IoT) declaradas. | `src/services/auth.ts`, `src/middleware/security.ts`, `src/lib/crypto.ts`, `audit_log`, `GET /manager/audit`, `test/api.test.ts` (grupo *autenticação e segurança*), [§12](#12-segurança-e-conformidade) |
-| **Rastreabilidade (Taesa)** | Lineage estação → banco → coleta (URL, data, SHA-256) → fonte; manifesto do snapshot com hash e validações; `processing_version` e `provenance` nas respostas de preço; PLD persistido com origem; auditoria de ações; determinismo que permite reproduzir números simulados. Normas com vigência e `model_version` **planejados**. | `GET /manager/lineage/stations/:id`, `GET /manager/lineage/datasets`, tabelas `dataset_snapshots` e `source_records`, `data/carregados_rj/manifesto.json` e `validacao.json`, `src/services/lineage.ts`, `market_prices`, `price_signals`, `audit_log`, teste *rastreabilidade* |
+| **Segurança e Conformidade** | scrypt, sessão httpOnly/SameSite, CSRF, RBAC por portal, bloqueio por tentativas, zod, helmet, rate limit, auditoria, minimização e dados agregados para gestores, retenção parcial. **IA sem poder de decisão:** proposta → aprovação humana → guard rails no servidor → alertas aos gestores → auditoria com origem. Lacunas (TLS no deploy, criptografia em repouso, direitos do titular, IoT) declaradas. | `src/services/auth.ts`, `src/middleware/security.ts`, `src/lib/crypto.ts`, `GUARDRAILS` + `createSignal` (`src/services/signals.ts`), `evaluateManagerAlerts`, `GET /manager/guardrails`, `audit_log`, `GET /manager/audit`, `test/api.test.ts` (grupo *autenticação e segurança*), [§12](#12-segurança-e-conformidade) |
+| **Rastreabilidade (Taesa)** | Lineage estação → banco → coleta (URL, data, SHA-256) → fonte; manifesto do snapshot com hash e validações; `processing_version` e `provenance` nas respostas de preço; PLD persistido com origem; auditoria de ações com **origem (manual/FlexIA) e gestor responsável** por cada sinal; determinismo que permite reproduzir números simulados. Normas com vigência e `model_version` **planejados**. | `GET /manager/lineage/stations/:id`, `GET /manager/lineage/datasets`, tabelas `dataset_snapshots` e `source_records`, `data/carregados_rj/manifesto.json` e `validacao.json`, `src/services/lineage.ts`, `market_prices`, `price_signals`, `audit_log`, teste *rastreabilidade* |
 
 ---
 
@@ -492,31 +520,32 @@ flowchart LR
   G4 -. "propõe" .-> G3
 ```
 
-### 15.4 Sequência — sinal de preço do gestor até o consumidor
+### 15.4 Sequência — sinal de preço: a IA propõe, o humano aprova, o servidor limita
 ```mermaid
 sequenceDiagram
   autonumber
   actor Gestor
-  participant FX as FlexIA
+  participant FX as FlexIA (somente leitura)
   participant API as API /manager
-  participant SIG as signals.ts
+  participant GR as Guard rails (createSignal)
   participant DB as SQLite
-  participant PRC as pricing.ts
+  actor Outros as Demais gestores
   actor Motorista
   Gestor->>FX: "Proponha um sinal para a Região dos Lagos"
-  FX->>PRC: consultar_preco_energia(regiao)
-  PRC-->>FX: série 24 h + melhores janelas
-  FX-->>Gestor: proposta (não publica)
-  Gestor->>API: POST /manager/signals (aprova)
-  API->>SIG: createSignal(...)
-  SIG->>DB: INSERT price_signals + audit_log + notifications
-  SIG->>PRC: invalida cache de preço
-  Motorista->>API: GET /prices/{regiao}/now
-  API->>PRC: priceAt(regiao, agora)
-  PRC->>DB: sinal ativo da região
-  PRC-->>Motorista: preço ×0,88, nível verde, +crédito/kWh
-  Motorista->>API: GET /notifications
-  API-->>Motorista: "Janela verde…"
+  FX->>FX: consulta preço, rede e clima (ferramentas)
+  FX-->>Gestor: PROPOSTA (não publicada)
+  Gestor->>API: POST /manager/signals (Aprovar e publicar, origin=flexia)
+  API->>GR: valida faixa, duração, coerência, sobreposição
+  alt viola algum guard rail
+    GR-->>Gestor: 400/409 com a regra violada
+  else válido
+    GR->>DB: INSERT price_signals (origin, created_by) + audit_log
+    GR->>DB: notificações aos consumidores da região
+    GR->>DB: notificações aos demais gestores (manager_signal)
+    DB-->>Outros: alerta "sinal publicado por <gestor>"
+    Motorista->>API: GET /prices/{regiao}/now
+    API-->>Motorista: preço ajustado, nível, bônus, provenance
+  end
 ```
 
 ### 15.5 Sequência — recarga com flexibilidade
@@ -588,6 +617,20 @@ flowchart LR
   GLD -. "snapshot_id + processing_version" .-> LIN
 ```
 
+### 15.9 Camadas de controle da decisão de preço
+```mermaid
+flowchart LR
+  D["Dados rastreados<br/>(provenance, lineage)"] --> IA["FlexIA<br/>analisa e PROPÕE"]
+  IA --> H["Gestor<br/>revisa e APROVA"]
+  H --> G["Guard rails<br/>faixa · duração · coerência · sem sobreposição"]
+  G -->|válido| P["Publicação<br/>+ audit_log (origem, responsável)"]
+  G -->|violação| X["Rejeição 400/409"]
+  P --> A["Alertas aos demais gestores"]
+  P --> C["Consumidores"]
+  R["Regra determinística<br/>nível automático"] --> G2["Mesma faixa de multiplicadores"]
+  R -. "vermelho sem sinal" .-> A
+```
+
 ---
 
 ## 16. Como rodar
@@ -603,7 +646,7 @@ pnpm dev:web      # Frontend em http://localhost:5173 (proxy /api → :5000; se 
 Outros comandos:
 ```bash
 pnpm typecheck                              # frontend + API
-pnpm --filter @workspace/api-server test    # 12 testes de integração
+pnpm --filter @workspace/api-server test    # 16 testes de integração
 pnpm db:reset                               # limpa e repopula o banco (dados em artifacts/api-server/data/rioflex.db)
 pnpm build                                  # build de produção do frontend
 ```
@@ -637,9 +680,9 @@ Prefixo `/api/v1`; JSON; cookie de sessão; `X-Requested-With: RioFlex` em méto
 | `GET /notifications` · `POST /notifications/read-all` · `POST /notifications/:id/read` | logado | Notificações |
 | `GET /manager/overview` · `/manager/grid/:region` | gestor | Operação agregada |
 | `GET/POST /manager/signals` · `DELETE /manager/signals/:id` | gestor | Sinais de preço |
-| `GET /manager/knowledge` · `GET /manager/audit` | gestor | Regulação; auditoria |
+| `GET /manager/knowledge` · `GET /manager/audit` · `GET /manager/guardrails` | gestor | Regulação; auditoria; limites de segurança do sinal |
 | `GET /manager/lineage/datasets` · `GET /manager/lineage/stations/:id` | gestor | **Rastreabilidade** |
-| `GET /manager/flexia/status` · `GET/DELETE /manager/flexia/conversations[/:id]` · `POST /manager/flexia/chat` | gestor | FlexIA |
+| `GET /manager/flexia/status` · `GET/DELETE /manager/flexia/conversations[/:id]` · `POST /manager/flexia/chat` | gestor | FlexIA (não publica nada) |
 
 **Dados reais × simulados:** estações/conectores/preço publicado = **reais** (snapshot 22/09/2026); PLD, ofertas (5 comercializadoras **fictícias**), demanda/geração, clima e disponibilidade = **simulados**. Tarifas do mock **não são homologadas**.
 
@@ -656,7 +699,7 @@ Uma tela por cena, usuário **motorista** (com um corte rápido para o gestor). 
 | **13–19 s** | **Alertas**: criar alerta "DC até R$ 2,20 + janela verde". | "Cria um alerta e é avisado quando vale a pena." |
 | **19–27 s** | **Mapa** (828 estações) → tocar em um posto → **Iniciar** → sessão → **Aceitar modulação (+R$ 2,50)**. | "Escolhe um posto compatível, inicia e ajuda a rede reduzindo a potência no pico." |
 | **27–31 s** | **Recibo** e **Carteira** com o crédito. | "E recebe créditos por isso." |
-| **31–40 s** | Corte para **Gestor** → **FlexIA**: "Proponha um sinal para a Região dos Lagos" → **Publicar sinal** → (opcional) `GET /manager/lineage/stations/…` mostrando URL + SHA-256. | "O gestor pergunta à FlexIA, publica o sinal para os consumidores e cada dado tem origem, data e hash rastreáveis." |
+| **31–40 s** | Corte para **Gestor** → **FlexIA**: "Proponha um sinal para a Região dos Lagos" → **Aprovar e publicar** → (opcional) `GET /manager/lineage/stations/…` mostrando URL + SHA-256. | "A FlexIA só propõe: o gestor aprova, o servidor aplica os limites de segurança, os outros gestores são alertados e cada dado tem origem, data e hash rastreáveis." |
 
 Dica de gravação: deixe o gestor já logado em outra aba e o sinal da FlexIA pré-carregado; a sessão de recarga é acelerada (`CHARGING_SIM_SPEED`), então a modulação e o recibo cabem em poucos segundos.
 
@@ -664,9 +707,10 @@ Dica de gravação: deixe o gestor já logado em outra aba e o sinal da FlexIA p
 
 ## 19. Limitações e próximos passos
 - Preço, rede e clima são **simulados**; comercializadoras são fictícias; não há cobrança/pagamento nem comando real de carregadores.
+- Governança: aprovação em duas etapas (*four-eyes*), limites por perfil de gestor e limites configuráveis pela interface não existem (hoje: um gestor aprova, guard rails fixos no código).
 - Não implementados: Cavuca agendado para ONS/ANEEL/CCEE/EPE/INMET, Data Lake em camadas, seleção automática da versão mais válida, normas com vigência, `model_version` e métricas de previsão, Kafka/microserviços, MQTT/WebSocket, OCPP/OCPI, telemetria e identidade de dispositivos IoT, criptografia em repouso, direitos do titular (LGPD), pontos para reserva/prioridade.
 - Abertura do mercado livre para baixa tensão: confirmar o marco regulatório vigente antes de qualquer oferta comercial.
 - SQLite atende o protótipo; para múltiplas instâncias, migrar para PostgreSQL mantendo as migrações.
 - `lib/api-client-react`, `replit.md` e scripts de deploy vieram do template original e não são usados pelo fluxo atual.
 
-Histórico do projeto original: `JORNADA_DO_USUARIO.md` e `RIO_FLEX_LOVABLE_MASTER_PROMPT.md`.
+Histórico do projeto original: `JORNADA_DO_USUARIO.md` e o prompt de origem (`RIO_FLEX_LOVABLE_MASTER_PROMPT.md`, disponível no histórico do git).

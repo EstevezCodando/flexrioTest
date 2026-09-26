@@ -266,6 +266,11 @@ const MIGRATIONS: { id: number; sql: string }[] = [
     CREATE INDEX idx_source_records_station ON source_records(station_id);
     `,
   },
+  {
+    // Quem propôs o sinal (manual ou FlexIA); created_by continua sendo o gestor que APROVOU/publicou.
+    id: 4,
+    sql: `ALTER TABLE price_signals ADD COLUMN origin TEXT NOT NULL DEFAULT 'manual' CHECK (origin IN ('manual','flexia'));`,
+  },
 ];
 
 function openDatabase(): DatabaseSync {

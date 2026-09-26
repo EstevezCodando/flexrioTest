@@ -3,9 +3,11 @@ import { CHARGE_TYPE_INFO, type ChargeType } from '../domain/reference.ts';
 import { newId } from '../lib/crypto.ts';
 import { badRequest, notFound } from '../lib/http.ts';
 import { isoLocal, nowEpoch } from '../lib/util.ts';
-import { notify } from './notifications.ts';
+import { GUARDRAILS } from '../domain/reference.ts';
+import { gridAt } from './grid.ts';
+import { notify, notifyMany } from './notifications.ts';
 import { priceAt } from './pricing.ts';
-import { region } from './regions.ts';
+import { region, regions } from './regions.ts';
 import { getStationRaw } from './stations.ts';
 
 type AlertRow = {
@@ -121,5 +123,44 @@ export function evaluateAlerts(): number {
       fired++;
     }
   });
+  return fired;
+}
+
+/**
+ * Alertas operacionais para os gestores (independentes da IA): pico de demanda regional e preço
+ * crítico sem sinal publicado. Com cooldown por (tipo, região) para não gerar ruído.
+ */
+export function evaluateManagerAlerts(): number {
+  const now = nowEpoch();
+  const managers = all<{ id: string }>("SELECT id FROM users WHERE role = 'manager'").map((m) => m.id);
+  if (managers.length === 0) return 0;
+  let fired = 0;
+  const recent = (kind: string, regionId: string) =>
+    !!get(
+      'SELECT 1 FROM notifications WHERE kind = ? AND created_at > ? AND data_json LIKE ? LIMIT 1',
+      kind, now - GUARDRAILS.alertCooldownSeconds, `%"regionId":"${regionId}"%`,
+    );
+  for (const r of regions()) {
+    const grid = gridAt(r, now);
+    if (grid.loadFactorPct >= GUARDRAILS.loadAlertPct && !recent('demand_peak', r.id)) {
+      notifyMany(managers, {
+        kind: 'demand_peak',
+        title: `Pico de demanda em ${r.name}`,
+        body: `Carga em ${grid.loadFactorPct}% da capacidade (${grid.regionalDemandMw} MW). Avalie publicar um sinal vermelho.`,
+        data: { regionId: r.id, loadFactorPct: grid.loadFactorPct },
+      });
+      fired++;
+    }
+    const p = priceAt(r.id, now);
+    if (p.signal.level === 'vermelho' && p.signal.source === 'automatico' && !recent('price_critical', r.id)) {
+      notifyMany(managers, {
+        kind: 'price_critical',
+        title: `Preço crítico em ${r.name} sem sinal do operador`,
+        body: `O nível vermelho está sendo aplicado automaticamente (×${p.signal.multiplier}). Revise e, se necessário, publique um sinal com mensagem aos consumidores.`,
+        data: { regionId: r.id, energyCostKwh: p.best.totalKwh },
+      });
+      fired++;
+    }
+  }
   return fired;
 }

@@ -125,3 +125,18 @@ export const TARIFF = {
   peakFactor: 1.9,
   intermediateFactor: 1.25,
 } as const;
+
+/**
+ * Guard rails do sinal de preço. São aplicados no servidor a QUALQUER sinal — venha de um
+ * gestor digitando ou de uma proposta da FlexIA — e não podem ser contornados pela IA.
+ */
+export const GUARDRAILS = {
+  multiplierMin: 0.7,
+  multiplierMax: 1.5,
+  creditBonusMaxKwh: 0.5,
+  maxDurationHours: 24,
+  /** Alerta operacional aos gestores quando o fator de carga regional passa deste valor (%). */
+  loadAlertPct: 85,
+  /** Não repetir o mesmo alerta operacional (região + tipo) dentro desta janela. */
+  alertCooldownSeconds: 3 * 3600,
+} as const;

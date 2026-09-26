@@ -164,3 +164,60 @@ describe('rastreabilidade', () => {
     assert.equal((await fetch(`${base}/manager/lineage/datasets`, { headers: { cookie } })).status, 403);
   });
 });
+
+describe('guard rails do sinal de preço', () => {
+  async function publish(cookie: string, over: Record<string, unknown>) {
+    const now = Date.now();
+    const body = {
+      regionId: 'serra', level: 'verde',
+      startsAt: new Date(now - 60_000).toISOString(), endsAt: new Date(now + 3_600_000).toISOString(),
+      title: 'Teste guard rail', message: 'Mensagem de teste dos limites de segurança.', notifyConsumers: false,
+      ...over,
+    };
+    return fetch(`${base}/manager/signals`, { method: 'POST', headers: { ...H, cookie }, body: JSON.stringify(body) });
+  }
+
+  it('rejeita multiplicador fora da faixa, incoerente com o nível, bônus indevido e duração excessiva', async () => {
+    const { cookie } = await login(config.seed.managerEmail, config.seed.managerPassword, 'manager');
+    assert.equal((await publish(cookie, { multiplier: 3, level: 'vermelho' })).status, 400, 'fora da faixa');
+    assert.equal((await publish(cookie, { multiplier: 1.3, level: 'verde' })).status, 400, 'verde não encarece');
+    assert.equal((await publish(cookie, { multiplier: 0.8, level: 'vermelho' })).status, 400, 'vermelho não barateia');
+    assert.equal((await publish(cookie, { level: 'vermelho', creditBonusKwh: 0.2 })).status, 400, 'bônus só no verde');
+    const long = await publish(cookie, { endsAt: new Date(Date.now() + 48 * 3600_000).toISOString() });
+    assert.equal(long.status, 400, 'duração > 24 h');
+    assert.match((await json(long)).error.message, /Guard rail/);
+  });
+
+  it('não permite dois sinais sobrepostos na mesma região e registra a origem FlexIA', async () => {
+    const { cookie } = await login(config.seed.managerEmail, config.seed.managerPassword, 'manager');
+    const first = await publish(cookie, { origin: 'flexia' });
+    assert.equal(first.status, 201);
+    const created = await json(first);
+    assert.equal(created.signal.origin, 'flexia');
+    assert.equal((await publish(cookie, {})).status, 409);
+  });
+
+  it('apenas gestor publica sinal — consumidor recebe 403, mesmo com payload válido', async () => {
+    const { cookie } = await login(config.seed.consumerEmail, config.seed.consumerPassword, 'consumer');
+    assert.equal((await publish(cookie, { regionId: 'norte' })).status, 403);
+  });
+
+  it('gera alerta operacional aos gestores em pico e não repete dentro do cooldown', async () => {
+    const { evaluateManagerAlerts } = await import('../src/services/alerts.ts');
+    const { GUARDRAILS } = await import('../src/domain/reference.ts');
+    const g = GUARDRAILS as { loadAlertPct: number };
+    const original = g.loadAlertPct;
+    try {
+      // força o limiar abaixo do fator de carga simulado (~60–70%) para exercitar o caminho de alerta
+      (g as { loadAlertPct: number }).loadAlertPct = 1;
+      const first = evaluateManagerAlerts();
+      assert.ok(first > 0, 'dispara alertas');
+      assert.equal(evaluateManagerAlerts(), 0, 'cooldown evita repetição');
+    } finally {
+      (g as { loadAlertPct: number }).loadAlertPct = original;
+    }
+    const { cookie } = await login(config.seed.managerEmail, config.seed.managerPassword, 'manager');
+    const n = await fetch(`${base}/notifications`, { headers: { cookie } }).then(json);
+    assert.ok(n.items.some((i: { kind: string }) => i.kind === 'demand_peak'));
+  });
+});

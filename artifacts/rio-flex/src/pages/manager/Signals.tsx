@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Megaphone, XCircle } from 'lucide-react';
 import { ManagerShell } from '@/components/layout/ManagerShell';
 import { Button } from '@/components/common/Button';
@@ -7,7 +7,7 @@ import { ErrorBox, LevelBadge, Loading } from '@/components/common/ui';
 import { useMeta } from '@/hooks/queries';
 import { api } from '@/lib/api';
 import { dateTimeOf, LEVEL_HINT } from '@/lib/format';
-import type { SignalDto, SignalLevel } from '@/types/api';
+import type { Guardrails, SignalDto, SignalLevel } from '@/types/api';
 import { useSignals } from './hooks';
 
 /** Converte "AAAA-MM-DDTHH:mm" (input local do RJ) para ISO com fuso -03:00. */
@@ -24,6 +24,7 @@ export default function ManagerSignalsPage() {
   const { data: meta } = useMeta();
   const [showPast, setShowPast] = useState(false);
   const { data: signals, isLoading } = useSignals(showPast);
+  const { data: guard } = useQuery({ queryKey: ['mgr-guardrails'], queryFn: () => api.get<Guardrails>('/manager/guardrails'), staleTime: 3600_000 });
   const [level, setLevel] = useState<SignalLevel>('verde');
   const [error, setError] = useState<unknown>(null);
   const [result, setResult] = useState<string | null>(null);
@@ -69,6 +70,11 @@ export default function ManagerSignalsPage() {
         <div className="rf-grid rf-grid-2">
           <form className="rf-card rf-stack" onSubmit={onSubmit}>
             <h3>Novo sinal</h3>
+            {guard && (
+              <div className="rf-tiny rf-card" style={{ padding: 10 }}>
+                <b className="rf-strong">Guard rails do servidor:</b> multiplicador entre {guard.multiplierMin} e {guard.multiplierMax} · duração máx. {guard.maxDurationHours} h · bônus máx. R$ {guard.creditBonusMaxKwh}/kWh (só no verde) · verde não encarece, vermelho não barateia · um sinal por região e janela. Valem também para propostas da FlexIA.
+              </div>
+            )}
             <div className="rf-field">
               <label className="rf-label" htmlFor="s-region">Região</label>
               <select id="s-region" name="regionId" className="rf-select" defaultValue="capital">
@@ -121,7 +127,7 @@ export default function ManagerSignalsPage() {
             {signals?.map((s) => (
               <div key={s.id} className="rf-connector-row" style={{ alignItems: 'flex-start' }}>
                 <div>
-                  <div className="rf-row"><LevelBadge level={s.level} label={s.level} /><b className="rf-strong" style={{ fontSize: 13 }}>{s.title}</b></div>
+                  <div className="rf-row"><LevelBadge level={s.level} label={s.level} /><b className="rf-strong" style={{ fontSize: 13 }}>{s.title}</b><span className={`rf-badge ${s.origin === 'flexia' ? 'purple' : 'gray'}`}>{s.origin === 'flexia' ? 'proposta FlexIA · aprovada por gestor' : 'manual'}</span></div>
                   <div className="rf-tiny" style={{ marginTop: 4 }}>{s.regionId} · {dateTimeOf(s.startsAt)} → {dateTimeOf(s.endsAt)} · <b>{s.status}</b> · ×{s.multiplier} · +R$ {s.creditBonusKwh.toFixed(2)}/kWh</div>
                   <div className="rf-small" style={{ marginTop: 4 }}>{s.message}</div>
                 </div>

@@ -3,11 +3,14 @@ import { Bot, Megaphone } from 'lucide-react';
 import { ManagerShell } from '@/components/layout/ManagerShell';
 import { Button } from '@/components/common/Button';
 import { ErrorBox, LevelBadge, Loading } from '@/components/common/ui';
+import { useNotifications } from '@/hooks/queries';
 import { dateTimeOf, money, num } from '@/lib/format';
 import { useOverview } from './hooks';
 
 export default function ManagerOverviewPage() {
   const { data, isLoading, error } = useOverview();
+  const { data: notes } = useNotifications();
+  const ops = notes?.items.filter((n) => ['demand_peak', 'price_critical', 'manager_signal'].includes(n.kind)).slice(0, 5) ?? [];
 
   return (
     <ManagerShell>
@@ -34,6 +37,20 @@ export default function ManagerOverviewPage() {
               <div className="rf-kpi"><span>Recargas (7 dias)</span><strong>{data.totals.sessions7d}</strong><small>{num(data.totals.energy7dKwh, 1)} kWh · {data.totals.activeSessions} ativas</small></div>
               <div className="rf-kpi"><span>Eventos de flexibilidade</span><strong style={{ color: '#b98cff' }}>{data.totals.flexEvents7d}</strong><small>modulações aceitas (7 dias)</small></div>
               <div className="rf-kpi"><span>Preço publicado (mediana)</span><strong>{data.totals.publishedPrices.median ? money(data.totals.publishedPrices.median) : '—'}</strong><small>{data.totals.priceConflicts} cadastros com conflito</small></div>
+            </div>
+
+            <div className="rf-card">
+              <h3>Alertas operacionais {notes?.unread ? `(${notes.unread} novos)` : ''}</h3>
+              {ops.length === 0 && <p className="rf-small">Sem alertas. O sistema avisa quando a carga regional passa de 85% ou quando o preço fica crítico sem sinal do operador.</p>}
+              {ops.map((n) => (
+                <div key={n.id} className="rf-wallet-history-item">
+                  <div>
+                    <div className="rf-strong" style={{ fontSize: 13 }}>{n.title}</div>
+                    <div className="rf-small">{n.body}</div>
+                  </div>
+                  <span className="rf-tiny">{dateTimeOf(n.createdAt)}</span>
+                </div>
+              ))}
             </div>
 
             <div className="rf-card">

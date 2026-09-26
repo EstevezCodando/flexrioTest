@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { all, get } from '../db/index.ts';
-import { SIGNAL_LEVELS } from '../domain/reference.ts';
+import { GUARDRAILS, SIGNAL_LEVELS } from '../domain/reference.ts';
 import { chat, deleteConversation, flexiaStatus, getConversation, listConversations } from '../flexia/agent.ts';
 import { KNOWLEDGE, searchKnowledge } from '../flexia/knowledge.ts';
 import { handler, parse } from '../lib/http.ts';
@@ -82,8 +82,9 @@ const signalSchema = z.object({
   endsAt: z.string().datetime({ offset: true }),
   title: z.string().trim().min(3).max(80),
   message: z.string().trim().min(10).max(280),
-  multiplier: z.number().min(0.5).max(2).optional(),
-  creditBonusKwh: z.number().min(0).max(1).optional(),
+  multiplier: z.number().optional(),
+  creditBonusKwh: z.number().min(0).optional(),
+  origin: z.enum(['manual', 'flexia']).default('manual'),
   notifyConsumers: z.boolean().default(true),
 });
 
@@ -101,6 +102,8 @@ managerRouter.delete('/signals/:id', handler((req, res) => {
   cancelSignal(id, req.user!.id, req.ip);
   res.status(204).end();
 }));
+
+managerRouter.get('/guardrails', (_req, res) => res.json(GUARDRAILS));
 
 managerRouter.get('/knowledge', handler((req, res) => {
   const q = parse(z.object({ q: z.string().max(120).optional() }), req.query);

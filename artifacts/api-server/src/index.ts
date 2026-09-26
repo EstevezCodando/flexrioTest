@@ -2,7 +2,7 @@ import { createApp } from './app.ts';
 import { config } from './config.ts';
 import { run } from './db/index.ts';
 import { importProvenanceIfMissing, seedIfEmpty } from './db/seed.ts';
-import { evaluateAlerts } from './services/alerts.ts';
+import { evaluateAlerts, evaluateManagerAlerts } from './services/alerts.ts';
 import { ingestMarketData } from './services/market.ts';
 import { clearPricingCaches } from './services/pricing.ts';
 import { setSignalsChangedHook } from './services/signals.ts';
@@ -29,6 +29,10 @@ every(15 * 60_000, 'ingest-market', ingestMarketData);
 every(60_000, 'alerts', () => {
   const n = evaluateAlerts();
   if (n) console.log(`[job:alerts] ${n} alerta(s) disparado(s)`);
+});
+every(60_000, 'manager-alerts', () => {
+  const n = evaluateManagerAlerts();
+  if (n) console.log(`[job:manager-alerts] ${n} alerta(s) operacional(is) para gestores`);
 });
 every(60 * 60_000, 'cleanup', () => {
   const now = Math.floor(Date.now() / 1000);

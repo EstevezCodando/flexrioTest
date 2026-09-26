@@ -24,7 +24,7 @@ function ProposalCard({ p }: { p: SignalProposal }) {
   const publish = useMutation({
     mutationFn: () =>
       api.post<{ notifiedConsumers: number }>('/manager/signals', {
-        regionId: p.regionId, level: p.level, startsAt: p.startsAt, endsAt: p.endsAt, title: p.title, message: p.message, notifyConsumers: true,
+        regionId: p.regionId, level: p.level, startsAt: p.startsAt, endsAt: p.endsAt, title: p.title, message: p.message, notifyConsumers: true, origin: 'flexia',
       }),
     onSuccess: (r) => {
       setDone(`Publicado — ${r.notifiedConsumers} consumidor(es) notificado(s).`);
@@ -34,12 +34,13 @@ function ProposalCard({ p }: { p: SignalProposal }) {
   return (
     <div className="rf-proposal">
       <div className="rf-row" style={{ marginBottom: 6 }}>
-        <Megaphone size={14} color="#b98cff" /><b className="rf-strong" style={{ fontSize: 13 }}>Proposta de sinal (aguardando sua aprovação)</b>
+        <Megaphone size={14} color="#b98cff" /><b className="rf-strong" style={{ fontSize: 13 }}>Proposta da FlexIA — não publicada. Requer aprovação de um gestor.</b>
       </div>
       <div className="rf-row"><LevelBadge level={p.level} label={p.level} /><span className="rf-small">{p.regionName} · {dateTimeOf(p.startsAt)} → {dateTimeOf(p.endsAt)}</span></div>
       <div className="rf-small" style={{ margin: '6px 0' }}><b className="rf-strong">{p.title}</b> — {p.message}</div>
+      <div className="rf-tiny" style={{ marginBottom: 6 }}>Ao publicar, o servidor ainda aplica os guard rails (limites de preço, duração e coerência) e registra você como responsável.</div>
       {done ? <div className="rf-success">{done}</div> : (
-        <button type="button" className="rf-btn purple small" disabled={publish.isPending} onClick={() => publish.mutate()}>Publicar sinal</button>
+        <button type="button" className="rf-btn purple small" disabled={publish.isPending} onClick={() => publish.mutate()}>Aprovar e publicar</button>
       )}
       <ErrorBox error={publish.error} />
     </div>
