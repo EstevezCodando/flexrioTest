@@ -9,7 +9,7 @@
 .rf-small { font-size: 12px; color: #98a6b3; }
 .rf-tiny { font-size: 11px; color: #738291; }
 .rf-strong { color: #f4f7f9; font-weight: 700; }
-.rf-mono { font-family: var(--app-font-mono); }
+.rf-mono { font-family: var(--app-font-mono); font-variant-numeric: tabular-nums; }
 
 .rf-badge.green { color: #4ae3a5; }
 .rf-badge.red { color: #ff6b6b; background: rgba(255,107,107,.1); border-color: rgba(255,107,107,.25); }
@@ -29,8 +29,26 @@
 .rf-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
 .rf-kpi { background: #11161b; border: 1px solid #27313a; border-radius: 14px; padding: 14px 16px; }
 .rf-kpi span { font-size: 11px; color: #98a6b3; text-transform: uppercase; letter-spacing: .05em; }
-.rf-kpi strong { display: block; font-size: 22px; font-weight: 800; letter-spacing: -.03em; margin: 6px 0 2px; color: #f4f7f9; }
+.rf-kpi strong { display: block; font-size: 22px; font-weight: 800; letter-spacing: -.03em; margin: 6px 0 2px; color: #f4f7f9; font-variant-numeric: tabular-nums; }
 .rf-kpi small { font-size: 11px; color: #66727e; }
+
+/* Números que se comparam entre si (tabelas, KPIs) não devem "pular" de largura ao trocar. */
+.rf-tabular { font-variant-numeric: tabular-nums; }
+
+/* Selo de frescor do dado — "atualizado há Xmin", âmbar quando o dado está velho. */
+.rf-freshness { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #66727e; }
+.rf-freshness.stale { color: #f7c65c; }
+.rf-freshness .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ae3a5; box-shadow: 0 0 6px #4ae3a5; }
+.rf-freshness.stale .dot { background: #f7c65c; box-shadow: 0 0 6px #f7c65c; }
+
+/* Painel de alertas de preço: barra colorida por nível, com legenda e anotações. */
+.rf-alert-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+.rf-alert-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: #98a6b3; }
+.rf-alert-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.rf-alert-region-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.rf-alert-region-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; border: 1px solid transparent; cursor: pointer; background: #11161b; color: #98a6b3; }
+.rf-alert-region-pill.active { background: #1a232a; color: #f4f7f9; border-color: #33404b; }
+.rf-alert-region-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 
 .rf-charge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
 .rf-charge-card { background: #0e141a; border: 1px solid #1f2b36; border-radius: 12px; padding: 14px; }

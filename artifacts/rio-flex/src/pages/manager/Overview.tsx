@@ -6,6 +6,7 @@ import { ErrorBox, LevelBadge, Loading } from '@/components/common/ui';
 import { useNotifications } from '@/hooks/queries';
 import { dateTimeOf, money, num } from '@/lib/format';
 import { useOverview } from './hooks';
+import { Freshness, PriceAlertsPanel } from './PriceAlertsPanel';
 
 export default function ManagerOverviewPage() {
   const { data, isLoading, error } = useOverview();
@@ -17,9 +18,10 @@ export default function ManagerOverviewPage() {
       <div className="rf-page">
         <div className="rf-page-head">
           <div>
-            <span className="rf-eyebrow">Visão geral {data && `· ${dateTimeOf(data.generatedAt)}`}</span>
+            <span className="rf-eyebrow">Visão geral</span>
             <h1 className="rf-title">Operação da rede de recarga</h1>
             <p className="rf-subtitle">Preço, demanda e uso dos carregadores por região. Dados agregados — sem informações individuais de consumidores.</p>
+            {data && <Freshness iso={data.generatedAt} />}
           </div>
           <div className="rf-row">
             <Button href="/gestor/sinais" className="secondary small"><Megaphone size={13} /> Publicar sinal</Button>
@@ -38,6 +40,8 @@ export default function ManagerOverviewPage() {
               <div className="rf-kpi"><span>Eventos de flexibilidade</span><strong style={{ color: '#b98cff' }}>{data.totals.flexEvents7d}</strong><small>modulações aceitas (7 dias)</small></div>
               <div className="rf-kpi"><span>Preço publicado (mediana)</span><strong>{data.totals.publishedPrices.median ? money(data.totals.publishedPrices.median) : '—'}</strong><small>{data.totals.priceConflicts} cadastros com conflito</small></div>
             </div>
+
+            <PriceAlertsPanel />
 
             <div className="rf-card">
               <h3>Alertas operacionais {notes?.unread ? `(${notes.unread} novos)` : ''}</h3>
