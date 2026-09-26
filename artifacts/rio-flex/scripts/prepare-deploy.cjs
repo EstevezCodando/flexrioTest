@@ -44,6 +44,12 @@
       'auth',
       'onboarding',
       'receipt',
+      'gestor',
+      'gestor/login',
+      'gestor/rede',
+      'gestor/sinais',
+      'gestor/flexia',
+      'gestor/regulacao',
     ];
 
     for (const r of knownRoutes) {
