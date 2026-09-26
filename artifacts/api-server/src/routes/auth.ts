@@ -43,7 +43,11 @@ function setSessionCookie(res: Response, token: string) {
   res.cookie(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: config.cookieSecure,
-    sameSite: 'strict',
+    // SameSite=None exige Secure=true. Front (S3) e API (Lambda Function URL)
+    // são origens diferentes nesta implantação, então em produção (HTTPS)
+    // o cookie precisa ser enviado cross-site; em dev (HTTP local, mesma
+    // origem via proxy do Vite) 'strict' continua correto e mais seguro.
+    sameSite: config.cookieSecure ? 'none' : 'strict',
     path: '/api',
     maxAge: config.sessionTtlHours * 3600 * 1000,
   });

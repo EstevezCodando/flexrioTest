@@ -7,6 +7,8 @@ dist/
 build/
 /public/
 /dist/
+dist-lambda/
+dist-lambda.zip
 
 # Logs & cache
 *.log

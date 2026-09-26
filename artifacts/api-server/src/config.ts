@@ -2,7 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const here = path.dirname(fileURLToPath(import.meta.url));
+// `import.meta.url` fica vazio quando este módulo é empacotado em CommonJS (build:lambda:
+// o esbuild com --format=cjs não consegue preencher import.meta), e fileURLToPath(undefined)
+// lançaria aqui mesmo. Nesse caso o próprio bundler CJS já provê `__dirname` de verdade.
+const here = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 export const ROOT_DIR = path.resolve(here, '..');
 
 function int(name: string, fallback: number): number {

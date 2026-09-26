@@ -74,9 +74,13 @@ export function createApp() {
     // Não comprimir streams SSE (a compressão bufferiza e atrasa os tokens da FlexIA).
     filter: (req, res) => !String(res.getHeader('Content-Type') ?? '').includes('text/event-stream') && compression.filter(req, res),
   }));
+  // express.json() precisa rodar antes de apiHelmet/globalLimiter: sob o Lambda Function URL
+  // (@codegenie/serverless-express), rodar o rate limiter antes do parser de JSON faz o
+  // corpo chegar às rotas como Buffer bruto em vez de objeto — mesmo em requests normais,
+  // fora do Lambda. Não reproduz com Docker/EC2 (servidor HTTP real), só nesse ambiente.
+  app.use(express.json({ limit: '32kb' }));
   app.use('/api', apiHelmet);
   app.use('/api', globalLimiter);
-  app.use(express.json({ limit: '32kb' }));
   app.use(cookieParser());
 
   // CORS restrito às origens configuradas (em dev o Vite faz proxy; em produção front e API são a mesma origem).
