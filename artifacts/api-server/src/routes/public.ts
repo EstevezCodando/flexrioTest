@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { z } from 'zod';
+import { config } from '../config.ts';
 import { CHARGE_TYPE_INFO, CHARGE_TYPES, SIGNAL_INFO } from '../domain/reference.ts';
 import { handler, parse } from '../lib/http.ts';
 import { nowEpoch } from '../lib/util.ts';
@@ -18,12 +19,14 @@ const bool = z.enum(['true', 'false', '1', '0']).transform((v) => v === 'true' |
 export const metaRouter = Router();
 
 metaRouter.get('/meta', (_req, res) => {
-  res.set('Cache-Control', 'private, max-age=3600');
+  res.set('Cache-Control', 'no-cache'); // revalida por ETag: mudanças de configuração (ex.: token do mapa) chegam na hora
   res.json({
     chargeTypes: CHARGE_TYPES.map((id) => ({ id, ...CHARGE_TYPE_INFO[id] })),
     signalLevels: Object.entries(SIGNAL_INFO).map(([id, v]) => ({ id, ...v })),
     regions: regions().map((r) => ({ id: r.id, name: r.name, distributor: r.distributor, submarket: r.submarket, lat: r.lat, lng: r.lng })),
     dataset: { snapshot: 'carregados_rj_2026-09-22', source: 'https://carregados.com.br', stats: stationsStats() },
+    // Token público do Mapbox vem do .env da API (não fica no código nem no bundle do frontend).
+    map: config.mapboxToken ? { provider: 'mapbox', token: config.mapboxToken } : { provider: 'carto', token: null },
   });
 });
 

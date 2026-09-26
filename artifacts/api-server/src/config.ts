@@ -60,6 +60,8 @@ export const config = {
     anthropicApiKey: process.env.ANTHROPIC_API_KEY?.trim() || null,
     model: process.env.FLEXIA_MODEL?.trim() || 'claude-opus-5',
   },
+  /** Token público do Mapbox (pk.*). Vazio = mapa com tiles CARTO. Entregue ao front via /meta. */
+  mapboxToken: (process.env.MAPBOX_TOKEN?.trim() || '').startsWith('pk.') ? process.env.MAPBOX_TOKEN!.trim() : null,
   /** Contas de demonstração com senha padrão só são aceitas em produção se explicitamente liberadas. */
   demoAccounts: process.env.DEMO_ACCOUNTS === 'true',
   seed: {

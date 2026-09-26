@@ -33,7 +33,7 @@ const webHelmet = helmet({
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
       fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-      imgSrc: ["'self'", 'data:', 'https://*.basemaps.cartocdn.com'],
+      imgSrc: ["'self'", 'data:', 'https://*.basemaps.cartocdn.com', 'https://api.mapbox.com'],
       connectSrc: ["'self'"],
       workerSrc: ["'self'"],
       manifestSrc: ["'self'"],

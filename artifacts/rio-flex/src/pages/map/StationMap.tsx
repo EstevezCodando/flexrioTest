@@ -9,6 +9,8 @@ type Props = {
   center: { lat: number; lng: number; zoom: number };
   user?: { lat: number; lng: number } | null;
   onSelect: (id: number) => void;
+  /** Token público do Mapbox (vem de /meta). Sem token, usa tiles CARTO. */
+  mapboxToken?: string | null;
 };
 
 function colorFor(m: StationMarker): string {
@@ -17,8 +19,18 @@ function colorFor(m: StationMarker): string {
   return m.dc ? '#4ae3a5' : '#55a7ff';
 }
 
+/** Estilos do Mapbox como tiles raster (512 px) — funciona com o Leaflet sem biblioteca extra. */
+function mapboxLayer(style: string, token: string) {
+  return L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/${style}/tiles/512/{z}/{x}/{y}@2x?access_token=${token}`, {
+    tileSize: 512,
+    zoomOffset: -1,
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noopener">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+  });
+}
+
 /** Mapa Leaflet com renderização em canvas — suporta as ~830 estações sem travar. */
-export function StationMap({ markers, selectedId, center, user, onSelect }: Props) {
+export function StationMap({ markers, selectedId, center, user, onSelect, mapboxToken }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const layer = useRef<L.LayerGroup | null>(null);
@@ -29,18 +41,30 @@ export function StationMap({ markers, selectedId, center, user, onSelect }: Prop
   useEffect(() => {
     if (!el.current || map.current) return;
     map.current = L.map(el.current, { preferCanvas: true, zoomControl: true }).setView([center.lat, center.lng], center.zoom);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      attribution: '&copy; OpenStreetMap &copy; CARTO',
-    }).addTo(map.current);
+    if (mapboxToken) {
+      const escuro = mapboxLayer('dark-v11', mapboxToken).addTo(map.current);
+      L.control
+        .layers(
+          { 'Escuro': escuro, 'Ruas': mapboxLayer('streets-v12', mapboxToken), 'Satélite': mapboxLayer('satellite-streets-v12', mapboxToken) },
+          undefined,
+          { position: 'topright' },
+        )
+        .addTo(map.current);
+    } else {
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap &copy; CARTO',
+      }).addTo(map.current);
+    }
     layer.current = L.layerGroup().addTo(map.current);
     userLayer.current = L.layerGroup().addTo(map.current);
     return () => {
       map.current?.remove();
       map.current = null;
     };
+    // O mapa é recriado se o token chegar depois (meta carregada após a montagem).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mapboxToken]);
 
   useEffect(() => {
     map.current?.setView([center.lat, center.lng], center.zoom);
@@ -65,7 +89,7 @@ export function StationMap({ markers, selectedId, center, user, onSelect }: Prop
         .on('click', () => onSelectRef.current(m.id))
         .addTo(group);
     }
-  }, [markers, selectedId]);
+  }, [markers, selectedId, mapboxToken]);
 
   useEffect(() => {
     const group = userLayer.current;
@@ -76,7 +100,7 @@ export function StationMap({ markers, selectedId, center, user, onSelect }: Prop
         .bindTooltip('Você está aqui')
         .addTo(group);
     }
-  }, [user]);
+  }, [user, mapboxToken]);
 
   return <div ref={el} className="rf-leaflet" role="application" aria-label="Mapa de eletropostos do Rio de Janeiro" />;
 }

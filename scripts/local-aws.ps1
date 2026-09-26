@@ -80,7 +80,7 @@ if ($Dev) {
   Write-Host "== 2. modo desenvolvimento: API :5000 + Vite (hot reload)" -ForegroundColor Cyan
   Remove-Item Env:NODE_ENV -ErrorAction SilentlyContinue
   Start-Process -NoNewWindow -FilePath "powershell" -ArgumentList "-NoProfile", "-Command", "Set-Location '$Web'; npx vite --config vite.config.ts"
-  Push-Location $Api; try { node --import tsx --watch src/index.ts } finally { Pop-Location }
+  Push-Location $Api; try { node --env-file-if-exists=.env --import tsx --watch src/index.ts } finally { Pop-Location }
   exit $LASTEXITCODE
 }
 
@@ -98,4 +98,4 @@ $env:WEB_DIST = Join-Path $Web "dist"
 $env:DB_PATH = Join-Path $Api "data\rioflex.db"
 Write-Host "   motorista: /login   gestor: /gestor/login   FlexIA: /gestor/flexia   prontidão: /api/ready"
 Push-Location $Api
-try { node --import tsx src/index.ts } finally { Pop-Location }
+try { node --env-file-if-exists=.env --import tsx src/index.ts } finally { Pop-Location }

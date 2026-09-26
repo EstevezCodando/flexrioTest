@@ -749,6 +749,8 @@ pnpm db:reset                               # limpa e repopula o banco (dados em
 pnpm build                                  # build de produção do frontend
 ```
 
+**Mapa (Mapbox):** defina `MAPBOX_TOKEN` (token público `pk.`) em `artifacts/api-server/.env`, arquivo ignorado pelo git. A API entrega o token ao mapa em tempo de execução via `GET /api/v1/meta`, então ele não fica no código nem no bundle compilado. O mapa oferece os estilos Escuro, Ruas e Satélite; sem token, usa os tiles CARTO. Por ser um token público, ele fica visível no navegador: restrinja-o às URLs do sistema no painel do Mapbox.
+
 Configuração: copie `artifacts/api-server/.env.example` para `.env` (`PORT`, `DB_PATH`, `ALLOWED_ORIGINS`, `SESSION_TTL_HOURS`, `COOKIE_SECURE`, `CHARGING_SIM_SPEED`, `ANTHROPIC_API_KEY`, `FLEXIA_MODEL`).
 
 **Contas de demonstração (somente local; criadas pelo seed):**

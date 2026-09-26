@@ -32,6 +32,7 @@ export type Meta = {
   signalLevels: { id: SignalLevel; label: string; multiplier: number; creditBonusKwh: number }[];
   regions: RegionMeta[];
   dataset: { snapshot: string; source: string; stats: StationsStats };
+  map?: { provider: 'mapbox' | 'carto'; token: string | null };
 };
 
 export type StationsStats = {

@@ -114,8 +114,8 @@ export default function MapPage() {
 
         {view === 'map' && (
           <>
-            {markers ? (
-              <StationMap markers={shownMarkers} selectedId={selectedId} center={center} user={user} onSelect={setSelectedId} />
+            {markers && meta ? (
+              <StationMap markers={shownMarkers} selectedId={selectedId} center={center} user={user} onSelect={setSelectedId} mapboxToken={meta?.map?.token ?? null} />
             ) : <Loading text="Carregando estações..." />}
             <div className="rf-map-legend">
               <span><i style={{ background: '#4ae3a5' }} />DC livre</span>
