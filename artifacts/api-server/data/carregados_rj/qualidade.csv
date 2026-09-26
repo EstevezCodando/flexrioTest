@@ -1,0 +1,1455 @@
+﻿snapshot_id;local_id;codigo;observacao
+carregados_rj_2026-09-22;773;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;773;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;773;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;768;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;768;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;768;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;768;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;777;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;778;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;778;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;778;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;4190;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4190;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;728;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;728;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;4189;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4189;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;5625;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5625;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;804;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;804;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;804;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4213;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4213;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6556;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;837;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;837;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1325957;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1325957;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1325957;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;821;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;821;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;821;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;8992;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8502;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4150;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1113;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1113;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1113;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;9233;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4097;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1076;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5719;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5719;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;831;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;831;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;831;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1122;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10125;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1098;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1057;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4162;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4162;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10560;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10560;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;767;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;767;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;767;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;5681;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;7271;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1566918;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;888;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;888;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;834;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;834;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1679059;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4483;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1119;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1119;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8298;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164804;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164804;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164804;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1129;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8501;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8501;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1107;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1107;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1107;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;884846;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884846;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;736;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;736;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4105;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4105;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4105;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;818;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;802;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;802;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;802;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;9234;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8990;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;839;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;839;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10163;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10163;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;9229;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1461709;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1461709;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1041;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;8509;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8509;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;6312;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6312;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1143;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1143;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1145;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1145;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10024;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10024;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1106;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1106;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4211;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4211;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4211;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;5682;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5682;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164824;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164824;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;9574;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1630658;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1630658;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9894;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;9583;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9583;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164813;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;813;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;813;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10664;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1566919;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;6269;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;6269;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;8995;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8995;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;514374;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;514374;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;846;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;846;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;563468;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;6566;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6566;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5637;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1905272;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10446;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10446;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;563470;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;563470;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356439;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4552;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4552;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9215;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;298985;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;9115;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;757;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139501;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8503;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9674;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9674;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164841;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164808;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164808;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2072470;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072470;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;847;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;847;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;10666;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10667;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10667;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;870;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;870;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;870;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;861;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;861;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4185;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4185;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4185;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;10170;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;8506;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8506;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8506;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1080;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4053;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4053;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;7233;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7233;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7233;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;5854;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8989;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8989;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075801;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075801;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1024;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1024;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1024;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1055;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1055;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2073313;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073313;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2075152;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075152;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10162;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10162;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;858;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;858;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;858;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;8508;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8508;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1630653;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1630653;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;810;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;810;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;810;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;663901;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10164;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10164;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;853;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;853;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1088;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;814;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;814;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;814;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;814;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;854;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;854;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;854;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;793;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;793;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5583;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5583;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;9228;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4657;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4657;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4049;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;851;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;851;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9231;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5786;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5786;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;819;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;819;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8510;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8510;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075259;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075259;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1905295;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1905295;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;625497;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625497;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4164;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4164;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4299;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4299;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782960;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139532;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139532;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1461703;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1461703;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4894;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4894;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6395;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6395;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1079;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1079;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1079;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;4268;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4268;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4268;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;1630654;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1430848;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1430848;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5895;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5895;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5895;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1078;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1078;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4199;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4199;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;840;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;840;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1060;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1060;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1060;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;6265;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6265;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4281;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9237;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9237;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8186;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8186;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;820;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;820;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;8187;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8187;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2072022;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073790;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073790;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;841;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;832;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;832;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5615;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5615;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6478;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6478;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9582;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9582;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;514359;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;514359;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4176;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075551;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075551;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072789;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072789;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6574;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6574;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;6574;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1566920;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4306;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4306;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1146;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1146;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;356453;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356453;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073531;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073531;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2073531;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2073676;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10053;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;806;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;806;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7318;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7318;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5863;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5863;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4782;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4782;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1034;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1034;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782977;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782977;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;782977;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;1243157;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1243157;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164831;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164831;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2075902;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075902;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;164843;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164843;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1022;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1022;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;787;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4903;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;865;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;865;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884848;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884848;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1128;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4102;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;1071;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1071;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4278;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4278;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4200;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1325958;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1325958;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073303;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073303;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9232;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9232;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9232;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;8505;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8505;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073110;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073110;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073110;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4307;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4307;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4135;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4135;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1243174;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;866;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9421;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9421;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;884;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1054;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1054;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4272;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4272;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1049;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1049;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1049;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4243;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4243;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1031;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1031;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1031;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;6030;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6030;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5277;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5277;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1075;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1075;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1506973;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1506973;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073791;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9108;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9108;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072609;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;894;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;894;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;830;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;830;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075690;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075690;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1059;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1059;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075017;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075017;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074606;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074606;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073109;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073109;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4944;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4944;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10112;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10112;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9575;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;8994;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2072018;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072018;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074607;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074607;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356465;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4996;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4996;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4283;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4283;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1123;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1123;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4328;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4328;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;514365;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;514365;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10119;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9580;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9580;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9222;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9222;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4285;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4285;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1109;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1109;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074603;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074603;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1194789;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1194789;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1194789;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1114;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1114;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10665;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10665;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10055;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10055;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6413;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6413;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;879;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1051;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1051;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1051;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2076726;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;883;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;883;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4273;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4273;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;940921;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;940921;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1047;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1047;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356435;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356435;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;735;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;735;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4900;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4900;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4061;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4061;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1035;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139520;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139520;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073675;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10434;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6514;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6514;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1050;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1050;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;817;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;817;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4395;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1430849;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1430849;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074037;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074037;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4288;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4288;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6037;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6037;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074605;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074605;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072322;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;246333;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;246333;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073536;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073536;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4238;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4238;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6052;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6052;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;6114;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6114;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1063;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1063;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1056;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1056;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4064;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4064;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;874;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;874;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9419;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9419;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884860;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884860;DESCRICAO_DIVERGENTE;Descrição de custo difere do campo estruturado por kWh.
+carregados_rj_2026-09-22;563458;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;563458;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4047;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4047;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6495;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4830;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4830;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1029;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1029;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4197;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4197;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6266;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6266;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075846;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075846;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076433;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076433;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8709;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8709;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9236;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9236;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;885111;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;885111;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076136;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4927;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;889;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072790;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072790;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9413;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9413;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1096;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1096;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;747;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;747;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4214;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4214;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1243170;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1243170;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;842;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;842;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4264;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;4101;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4101;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4101;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2075939;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1094;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1094;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10871;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10871;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072019;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073031;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073031;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073031;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;8521;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8521;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;792;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;792;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076785;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076785;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8998;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8998;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4127;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4127;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4050;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4050;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1115;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1115;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10672;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10672;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1083;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1083;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8993;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8993;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356434;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4198;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4198;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5350;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5350;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4170;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4170;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1141;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4204;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4204;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1035626;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1035626;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1091;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1091;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663893;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;663893;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5721;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5721;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4098;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4098;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1506976;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1506976;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10023;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10023;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073535;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;2074644;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5475;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5475;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1116;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1116;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1116;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2074604;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074604;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075778;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075778;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5107;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5107;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4902;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4902;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4802;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4802;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4062;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;409091;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;409091;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;409091;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;10674;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10674;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1033;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1033;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;940906;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;940906;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4468;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4468;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4468;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2072255;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072255;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4121;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4121;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9586;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9586;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073270;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1038;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1038;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4361;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5471;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9416;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9416;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5248;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4111;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4111;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4143;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4143;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;409075;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;409075;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4222;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4222;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;246331;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;246331;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884873;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;884873;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4100;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4100;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884843;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;884843;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782990;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;782990;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;771;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;771;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;771;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;2073532;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073532;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076578;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076578;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1045;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1035374;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5003;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074036;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074036;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076018;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076018;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073032;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075015;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075015;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4873;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356450;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356450;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;940937;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;940937;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164833;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164833;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164833;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1027;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1027;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;812;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;812;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356471;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1085;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1085;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4349;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4228;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4228;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10558;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10558;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072951;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072951;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1044;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1044;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5352;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5352;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5352;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;5244;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5244;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9414;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9414;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4252;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4252;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5005;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5005;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4106;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4106;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;871;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;871;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4219;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4219;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8183;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8183;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8705;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8672;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8672;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9117;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9117;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782978;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;782978;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073224;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073224;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4287;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4287;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139517;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8189;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9590;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9590;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1194786;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1194786;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7729;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7729;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2071913;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2071913;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1657235;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1657235;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074182;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7784;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7784;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10437;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10437;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7770;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7770;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4275;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4275;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9968;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9968;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;8647;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8647;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5689;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4229;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4229;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4065;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4065;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5213;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5213;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5213;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;2076605;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076605;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663897;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;663897;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4125;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4125;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1325946;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1325946;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984887;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984887;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4217;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4217;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4063;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4063;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356441;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356441;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073530;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073530;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4304;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4304;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;2076612;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076612;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4177;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4177;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4054;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4054;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9238;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9238;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4291;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4291;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4291;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1142;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1142;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;10451;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4260;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4260;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;781;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;781;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2077223;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076949;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076949;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1020;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8182;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8182;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7778;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7778;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076218;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076218;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7791;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7791;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072017;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072017;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4955;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4955;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9891;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9891;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6858;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6858;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4126;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4126;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9224;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9224;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4119;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4312;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4312;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663894;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;663894;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663894;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;867;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;867;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4145;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4145;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782971;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;782971;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139524;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139524;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4353;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4353;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663895;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;756;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;756;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8707;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8707;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782991;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;782991;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1069;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1069;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1126;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1243160;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1243160;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2076747;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076747;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4300;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4300;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1040;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1040;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4237;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4237;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139516;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8194;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8194;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;5363;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5363;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;762;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;762;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8191;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8191;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5823;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4397;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4397;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4124;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4124;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4134;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4134;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4134;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4989;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4989;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4992;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4992;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139535;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139535;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;827;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;827;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075016;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075016;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6428;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;6428;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075384;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075384;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5570;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5570;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7735;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7735;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625478;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625478;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5376;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5376;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5383;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5383;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;940903;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;940903;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6019;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;1074;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1074;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;761;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;761;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1461707;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1461707;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10435;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10435;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9963;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9963;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072150;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072150;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9969;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9969;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7133;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7133;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7792;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072534;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;807;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;807;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072148;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072148;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2077125;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2077125;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1325943;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1325943;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9225;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9225;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8192;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8192;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7731;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7731;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074608;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074608;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356737;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356737;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8195;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984890;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984890;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984890;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;164832;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164832;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625489;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625489;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356451;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356451;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1090;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1090;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1090;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;1090;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;5367;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5367;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1132;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1132;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139513;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139513;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4282;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4282;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4282;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;4282;NOME_INDICA_OBRA;"Nome indica construção/futuro; verificar operação, sem concluir apenas pelo nome."
+carregados_rj_2026-09-22;4999;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4999;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5008;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5008;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5010;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5010;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10108;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10108;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984888;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984888;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4993;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4993;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4292;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4292;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5348;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5348;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4122;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4122;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8764;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8764;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4269;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4269;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1112;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1112;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1089;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1089;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5000;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5000;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356454;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356454;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5006;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5006;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625505;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625505;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356447;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356447;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5552;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5552;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1321483;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4994;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4994;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9587;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9587;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10679;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10679;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984905;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984905;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5002;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5002;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074291;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074291;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5554;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5554;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356455;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356455;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8997;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8997;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;848;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4997;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4997;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10671;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10671;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984902;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984902;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5349;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5349;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10118;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10118;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5377;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5377;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5382;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5382;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356466;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356466;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4248;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4248;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5385;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5385;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2071915;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2071915;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625482;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625482;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9227;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9227;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073674;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073674;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075262;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075262;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625494;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625494;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4995;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4995;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10114;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10114;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9015;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9015;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4158;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4158;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4157;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4157;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5007;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5007;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10764;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10764;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9415;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9415;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10104;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10104;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625506;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625506;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10106;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10106;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164815;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164815;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1125;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1125;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1124;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1124;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4250;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4250;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1136;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1136;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4254;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4254;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5004;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5004;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9216;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9216;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984889;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984889;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5358;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5358;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5359;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5359;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5361;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5366;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5366;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9009;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9009;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5001;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5001;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164838;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164838;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5357;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5357;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9217;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9217;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625491;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625491;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5375;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5375;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4998;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4998;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5384;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5384;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5364;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5364;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1037;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1037;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139503;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139503;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5009;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5009;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5378;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5378;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5380;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5380;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10110;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10110;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5381;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5381;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164837;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164837;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5356;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5356;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4123;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4123;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984892;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984892;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9589;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9589;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074952;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074952;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074952;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;5267;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5267;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7790;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7790;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10761;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076990;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076990;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;563454;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;563454;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1053;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1053;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076448;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076448;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075863;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075863;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1026;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1026;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9223;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9223;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072469;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072469;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9001;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9001;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073975;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073975;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9017;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9017;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;684532;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;684532;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;884842;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;884842;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4311;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7769;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7769;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4027;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4027;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984899;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984899;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1243162;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1243162;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1066;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1066;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073768;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073768;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;10760;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10760;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4359;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4359;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10103;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10103;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1043;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1043;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2074641;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2074641;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9591;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9591;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1095;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1095;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;836;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;836;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9573;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9573;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9893;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9893;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;940913;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;940913;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8645;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8645;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1121;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5360;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5360;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8766;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8766;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164835;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164835;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164836;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;164836;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8711;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8711;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9008;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9008;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10109;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10109;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5365;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5365;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5821;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5821;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10559;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10559;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1062;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1062;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1081;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1081;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10790;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10436;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10436;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2076261;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2076261;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5524;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5524;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4613;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4613;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8999;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8999;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;408992;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;408992;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;507030;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;507030;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5045;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5045;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9966;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9966;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9000;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9000;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4120;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4120;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1370749;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1370749;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9007;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9007;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9010;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9010;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9011;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9011;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10763;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10763;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356467;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356467;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4293;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4293;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4346;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4346;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625484;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625484;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8996;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1035609;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1035609;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9411;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9411;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625481;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625481;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10105;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10105;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1139523;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1139523;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8193;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8193;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9003;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9003;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356449;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;356449;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1100;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1100;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625485;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625485;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10052;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10052;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10054;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10054;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9002;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9002;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1035614;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1035614;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1461705;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1461705;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625479;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625479;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;298993;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;298993;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9219;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9219;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;940910;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;940910;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1048;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1048;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;514362;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;514362;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625483;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625483;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663905;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;663905;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663905;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;2072788;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072788;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8765;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8765;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073223;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073223;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9218;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9218;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9005;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10107;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10107;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1070;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1070;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4036;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4036;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5180;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8986;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;8986;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;356478;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5822;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5822;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782983;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;782983;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663883;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;663883;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;663883;MANUTENCAO_LISTAGEM;"Estado cadastral; sem telemetria ao vivo."
+carregados_rj_2026-09-22;10448;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10448;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1194742;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625508;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625508;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9214;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9214;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;984886;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;984886;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;1102;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1102;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9588;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9588;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10117;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10117;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2075715;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2075715;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;7788;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;7788;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6262;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;6262;GRATUITO_E_PAGO;Comodidade recarga gratuita diverge do preço estruturado positivo.
+carregados_rj_2026-09-22;409079;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;409079;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072117;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072117;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4337;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4337;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5508;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;797;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;797;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4108;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4108;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;8185;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5368;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5368;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4168;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;782966;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;782966;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9967;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9967;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9116;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9116;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4990;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4990;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5553;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5553;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;9006;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;9006;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;625492;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;625492;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2072254;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2072254;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;4375;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;4375;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073304;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073304;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;5499;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;5499;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;2073792;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;2073792;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;10873;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;10873;ATIVACAO_AUSENTE;Custo total não confirmado.
+carregados_rj_2026-09-22;164839;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1243178;PRECO_AUSENTE;Não interpretar ausência como gratuidade.
+carregados_rj_2026-09-22;1243178;ATIVACAO_AUSENTE;Custo total não confirmado.

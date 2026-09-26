@@ -1,0 +1,27 @@
+{
+  "locais": 828,
+  "detalhes": 828,
+  "municipios": 60,
+  "equipamentos": 1255,
+  "conectores": 1422,
+  "publicos": 468,
+  "manutencao": 59,
+  "conflito_gratuito_pago": 131,
+  "conflito_descricao_preco": 21,
+  "precos": {
+    "locais": 828,
+    "precos_informados": 277,
+    "precos_ausentes": 551,
+    "energia_gratuita": 20,
+    "precos_pagos": 257,
+    "media_inclui_zero": 2.1271548517668855,
+    "mediana_inclui_zero": 2.2,
+    "media_pagos": 2.2926921943168375,
+    "p25_pagos": 1.99,
+    "mediana_pagos": 2.3,
+    "p75_pagos": 2.5,
+    "maximo": 5.0
+  },
+  "sem_latlon": 0,
+  "snapshot": "carregados_rj_2026-09-22"
+}

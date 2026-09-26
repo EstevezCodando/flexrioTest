@@ -1,0 +1,18 @@
+﻿area;segmento;locais;precos_informados;precos_ausentes;energia_gratuita;precos_pagos;media_inclui_zero;mediana_inclui_zero;media_pagos;p25_pagos;mediana_pagos;p75_pagos;maximo
+Estado RJ;todos;828;277;551;20;257;2.1271548517668855;2.2;2.2926921943168375;1.99;2.3;2.5;5.0
+Estado RJ;publicos;468;236;232;18;218;2.169858757062288;2.3;2.3490214067279815;2.0;2.4800000000000004;2.5;4.0
+Estado RJ;publicos_pagos_filtrados;79;79;0;0;79;2.288101265822785;2.3;2.288101265822785;1.99;2.3;2.5;4.0
+Estado RJ;publicos_pagos_filtrados / DC presente;36;36;0;0;36;2.4486111111111115;2.5;2.4486111111111115;2.2800000000000002;2.5;2.5;3.3
+Estado RJ;publicos_pagos_filtrados / não classificado;4;4;0;0;4;2.7175000000000002;2.495;2.7175000000000002;2.0;2.495;3.2125000000000004;3.88
+Estado RJ;publicos_pagos_filtrados / somente AC identificado;39;39;0;0;39;2.0958974358974363;2.0;2.0958974358974363;1.795;2.0;2.3;4.0
+Rio de Janeiro;todos;449;107;342;6;101;2.0023286604364485;2.07;2.1212788778881193;1.9;2.07;2.47;5.0
+Rio de Janeiro;publicos;200;83;117;6;77;2.027309236948193;2.07;2.1852813852818187;1.99;2.09;2.5;2.99
+Rio de Janeiro;publicos_pagos_filtrados;31;31;0;0;31;2.1193548387096772;1.99;2.1193548387096772;1.8250000000000002;1.99;2.435;2.99
+Rio de Janeiro;publicos_pagos_filtrados / DC presente;11;11;0;0;11;2.303636363636364;2.47;2.303636363636364;2.14;2.47;2.5;2.5
+Rio de Janeiro;publicos_pagos_filtrados / não classificado;1;1;0;0;1;2.99;2.99;2.99;2.99;2.99;2.99;2.99
+Rio de Janeiro;publicos_pagos_filtrados / somente AC identificado;19;19;0;0;19;1.9668421052631573;1.98;1.9668421052631573;1.7650000000000001;1.98;2.035;2.5
+Maricá;todos;5;2;3;1;1;1.25;1.25;2.5;2.5;2.5;2.5;2.5
+Maricá;publicos;5;2;3;1;1;1.25;1.25;2.5;2.5;2.5;2.5;2.5
+Maricá;publicos_pagos_filtrados;0;0;0;0;0;;;;;;;
+Maricá;publicos_pagos_filtrados / DC presente;0;0;0;0;0;;;;;;;
+Maricá;publicos_pagos_filtrados / somente AC identificado;0;0;0;0;0;;;;;;;
