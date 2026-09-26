@@ -1,184 +1,137 @@
 import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
-import { Check, Zap } from 'lucide-react';
+import { Check, MapPin, Zap } from 'lucide-react';
 import { AppShell } from '@/components/layout/AppShell';
 import { Button } from '@/components/common/Button';
+import { ErrorBox, LevelBadge, Loading } from '@/components/common/ui';
 import { StopConfirmModal } from '@/pages/session/StopConfirmModal';
-import { money } from '@/lib/format';
+import { useActiveSession, useWallet } from '@/hooks/queries';
+import { api } from '@/lib/api';
+import { kwh, money } from '@/lib/format';
+import type { ChargingSession } from '@/types/api';
 
 export default function SessionPage() {
   const [, setLocation] = useLocation();
-  const [currentSoc, setCurrentSoc] = useState(52);
-  const [targetSoc] = useState(80);
-  const [energyDelivered, setEnergyDelivered] = useState(13.4);
-  const [currentCost, setCurrentCost] = useState(15.41);
-  const [elapsedMinutes, setElapsedMinutes] = useState(18);
-  const [remainingMinutes, setRemainingMinutes] = useState(14);
-  const [currentPowerKw, setCurrentPowerKw] = useState(60);
+  const qc = useQueryClient();
+  const { data: session, isLoading } = useActiveSession(true);
+  const { data: wallet } = useWallet();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [error, setError] = useState<unknown>(null);
 
-  // Evento inteligente de modulação ativa
-  const [hasVppChallenge, setHasVppChallenge] = useState(true);
-  const [vppAccepted, setVppAccepted] = useState(false);
+  const flex = useMutation({
+    mutationFn: (id: string) => api.post<ChargingSession>(`/me/charging/${id}/flex`),
+    onSuccess: (s) => qc.setQueryData(['charging-active'], s),
+    onError: setError,
+  });
+  const stop = useMutation({
+    mutationFn: ({ id, useCredits }: { id: string; useCredits: boolean }) =>
+      api.post<{ session: ChargingSession; amountDue: number; creditsUsed: number }>(`/me/charging/${id}/stop`, { useCredits }),
+    onSuccess: (r) => {
+      sessionStorage.setItem(`rf-receipt-${r.session.id}`, JSON.stringify({ amountDue: r.amountDue, creditsUsed: r.creditsUsed }));
+      ['charging-active', 'charging-history', 'wallet', 'notifications', 'markers'].forEach((k) => qc.invalidateQueries({ queryKey: [k] }));
+      setLocation(`/app/receipt/${r.session.id}`);
+    },
+    onError: setError,
+  });
 
-  // Diálogo de confirmação para encerrar recarga
-  const [isConfirmStopOpen, setIsConfirmStopOpen] = useState(false);
+  if (isLoading) return <AppShell><Loading /></AppShell>;
 
-  const simulateStep = () => {
-    setCurrentSoc((soc) => Math.min(targetSoc, soc + 5));
-    setEnergyDelivered((e) => Number((e + 2.25).toFixed(1)));
-    setCurrentCost((c) => Number((c + 2.58).toFixed(2)));
-    setElapsedMinutes((m) => m + 3);
-    setRemainingMinutes((m) => Math.max(0, m - 3));
-  };
+  if (!session) {
+    return (
+      <AppShell>
+        <div className="rf-card" style={{ maxWidth: 520, margin: '40px auto', textAlign: 'center' }}>
+          <Zap size={28} color="#4ae3a5" />
+          <h2 style={{ margin: '10px 0 6px' }}>Nenhuma recarga em andamento</h2>
+          <p className="rf-small">Escolha um posto no mapa, confira o preço e o tipo de carregamento e toque em <b>Iniciar</b> no conector livre.</p>
+          <Button href="/app/map" style={{ marginTop: 10 }}><MapPin size={14} /> Abrir mapa</Button>
+        </div>
+      </AppShell>
+    );
+  }
 
-  const handleAcceptModulation = () => {
-    setVppAccepted(true);
-    setHasVppChallenge(false);
-    setCurrentPowerKw(35);
-  };
-
-  const handleDismissModulation = () => {
-    setHasVppChallenge(false);
-  };
-
+  const s = session;
   return (
     <AppShell>
       <div className="rf-clean-session-container">
-        {/* Barra Superior da Sessão */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+        <div className="rf-between">
           <div>
-            <span className="rf-eyebrow">Etapa 3 • Sessão Ativa</span>
-            <h1 className="rf-title" style={{ fontSize: 22, margin: '2px 0 0' }}>Marina Flex Station</h1>
-            <p className="rf-subtitle">Conector CCS2 · Carga Rápida DC</p>
+            <span className="rf-eyebrow">Sessão ativa</span>
+            <h1 className="rf-title" style={{ fontSize: 22, margin: '2px 0 0' }}>{s.station.name}</h1>
+            <p className="rf-subtitle">{s.connector?.type} · {s.connector?.chargeTypeLabel} · preço travado em {money(s.priceKwh)}/kWh</p>
           </div>
-          <span className="rf-badge green" style={{ padding: '4px 10px' }}>
-            <span className="rf-uber-status-dot-green" style={{ display: 'inline-block', marginRight: 6 }} />
-            Carregando
-          </span>
+          <LevelBadge level={s.signalLevel} />
         </div>
 
-        {/* Medidor Circular Limpo */}
         <div className="rf-meter-card">
-          <div
-            className="rf-battery-circle"
-            style={{
-              background: `conic-gradient(#4ae3a5 0% ${currentSoc}%, #1e2935 ${currentSoc}% 100%)`,
-            }}
-          >
+          <div className="rf-battery-circle" style={{ background: `conic-gradient(#4ae3a5 0% ${s.soc}%, #1e2935 ${s.soc}% 100%)` }}>
             <div className="rf-battery-circle-inner">
-              <span className="rf-battery-soc">{currentSoc}%</span>
-              <span className="rf-battery-meta">meta: {targetSoc}%</span>
+              <span className="rf-battery-soc">{Math.round(s.soc)}%</span>
+              <span className="rf-battery-meta">meta: {s.targetSoc}%</span>
             </div>
           </div>
 
           <div style={{ width: '100%', maxWidth: 360, margin: '0 auto' }}>
             <div className="rf-progress" style={{ height: 6 }}>
-              <span style={{ width: `${currentSoc}%` }} />
+              <span style={{ width: `${((s.soc - s.startSoc) / Math.max(1, s.targetSoc - s.startSoc)) * 100}%` }} />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8', fontSize: 11, marginTop: 6 }}>
-              <span>Início: 32%</span>
-              <span>Faltam ~{remainingMinutes} min</span>
+            <div className="rf-between rf-tiny" style={{ marginTop: 6 }}>
+              <span>Início: {Math.round(s.startSoc)}%</span>
+              <span>{s.readyToFinish ? 'Meta atingida!' : `Faltam ~${s.remainingMin} min`}</span>
             </div>
           </div>
 
-          {/* EVENTO VPP INTELIGENTE */}
-          {hasVppChallenge && (
+          {s.flexOffer && (
             <div className="rf-smart-event-box" style={{ width: '100%', marginTop: 18 }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+              <div style={{ display: 'flex', gap: 10 }}>
                 <Zap size={20} color="#4ae3a5" style={{ flexShrink: 0, marginTop: 2 }} />
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#f8fafc' }}>
-                    Oportunidade Rio Flex: Demanda na Cidade
-                  </div>
-                  <p style={{ margin: '4px 0 10px', fontSize: 12, color: '#cbd5e1', lineHeight: 1.4 }}>
-                    Pico iminente na rede elétrica. Se aceitar modular temporariamente de 60 kW para 35 kW por 10 min, você ganha <b>+ R$ 2,50 adicionais em créditos</b>. Sua meta de 80% será mantida.
+                  <div className="rf-strong" style={{ fontSize: 13 }}>Sinal da rede: oportunidade de flexibilidade</div>
+                  <p className="rf-small" style={{ margin: '4px 0 10px', lineHeight: 1.4 }}>
+                    {s.flexOffer.reason} Reduzindo de {s.powerKw} kW para {s.flexOffer.reducedPowerKw} kW você ganha <b>+{money(s.flexOffer.bonus)} em créditos</b>. A meta de {s.targetSoc}% é mantida; a recarga só demora um pouco mais.
                   </p>
-
-                  <div style={{ display: 'flex', gap: 8 }}>
-                    <button
-                      type="button"
-                      className="rf-btn primary small"
-                      onClick={handleAcceptModulation}
-                    >
-                      Aceitar (+ R$ 2,50)
-                    </button>
-                    <button
-                      type="button"
-                      className="rf-btn secondary small"
-                      onClick={handleDismissModulation}
-                    >
-                      Manter velocidade
-                    </button>
+                  <div className="rf-row">
+                    <button type="button" className="rf-btn small" disabled={flex.isPending} onClick={() => flex.mutate(s.id)}>Aceitar (+{money(s.flexOffer.bonus)})</button>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {vppAccepted && (
-            <div
-              style={{
-                width: '100%',
-                marginTop: 18,
-                background: 'rgba(74, 227, 165, 0.12)',
-                border: '1px solid #4ae3a5',
-                borderRadius: 12,
-                padding: '12px 14px',
-                fontSize: 12,
-                color: '#f8fafc',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-              }}
-            >
-              <Check size={16} color="#4ae3a5" />
-              <span>
-                <b>Modulação ativa:</b> Potência ajustada para 35 kW. <b>+ R$ 2,50 garantidos</b> na sua carteira ao concluir a sessão.
-              </span>
+          {s.flexAccepted && (
+            <div className="rf-success" style={{ width: '100%', marginTop: 18, display: 'flex', gap: 8, alignItems: 'center' }}>
+              <Check size={16} /> Modulação ativa: potência em {s.powerKw} kW. Créditos garantidos ao concluir.
             </div>
           )}
 
-          {/* 4 Métricas em Linguagem Natural */}
           <div className="rf-session-grid" style={{ width: '100%', marginTop: 18 }}>
-            <div className="rf-session-stat-box">
-              <span>Energia Carregada</span>
-              <strong>{energyDelivered.toFixed(1).replace('.', ',')} kWh</strong>
-            </div>
-            <div className="rf-session-stat-box">
-              <span>Potência Agora</span>
-              <strong>{currentPowerKw} kW</strong>
-            </div>
-            <div className="rf-session-stat-box">
-              <span>Tempo de Recarga</span>
-              <strong>{elapsedMinutes} min</strong>
-            </div>
-            <div className="rf-session-stat-box">
-              <span>Custo até Agora</span>
-              <strong style={{ color: '#4ae3a5' }}>{money(currentCost)}</strong>
-            </div>
+            <div className="rf-session-stat-box"><span>Energia</span><strong>{kwh(s.energyKwh)}</strong></div>
+            <div className="rf-session-stat-box"><span>Potência</span><strong>{s.powerKw} kW</strong></div>
+            <div className="rf-session-stat-box"><span>Tempo (simulado)</span><strong>{s.elapsedMin} min</strong></div>
+            <div className="rf-session-stat-box"><span>Custo até agora</span><strong style={{ color: '#4ae3a5' }}>{money(s.cost)}</strong></div>
           </div>
 
-          {/* Ações da Sessão */}
+          <ErrorBox error={error} />
           <div style={{ display: 'flex', gap: 10, width: '100%', marginTop: 16 }}>
-            <Button className="secondary full" onClick={simulateStep}>
-              <Zap size={14} />
-              Simular +5% Bateria
-            </Button>
-            <Button className="danger full" onClick={() => setIsConfirmStopOpen(true)}>
-              Encerrar Recarga
+            <Button className={s.readyToFinish ? 'full' : 'danger full'} onClick={() => setConfirmOpen(true)}>
+              {s.readyToFinish ? 'Concluir e ver recibo' : 'Encerrar recarga'}
             </Button>
           </div>
+          <div className="rf-tiny" style={{ marginTop: 8 }}>A simulação é acelerada para demonstração (ver CHARGING_SIM_SPEED).</div>
         </div>
       </div>
 
-      {/* Diálogo de Confirmação */}
       <StopConfirmModal
-        isOpen={isConfirmStopOpen}
-        onClose={() => setIsConfirmStopOpen(false)}
-        onConfirm={() => setLocation('/app/receipt')}
-        currentSoc={currentSoc}
-        remainingMinutes={remainingMinutes}
-        targetSoc={targetSoc}
+        isOpen={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={(useCredits) => stop.mutate({ id: s.id, useCredits })}
+        currentSoc={Math.round(s.soc)}
+        remainingMinutes={s.remainingMin}
+        targetSoc={s.targetSoc}
+        readyToFinish={s.readyToFinish}
+        estimatedCost={s.cost}
+        walletBalance={wallet?.balance ?? 0}
+        busy={stop.isPending}
       />
     </AppShell>
   );

@@ -1,86 +1,154 @@
-import { Navigation, PlugZap, X } from 'lucide-react';
-import type { ChargingStation } from '@/types/station';
-import { Button } from '@/components/common/Button';
-import { money } from '@/lib/format';
+import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useLocation } from 'wouter';
+import { AlertTriangle, ExternalLink, Navigation, PlugZap, X } from 'lucide-react';
+import { ErrorBox, LevelBadge, Loading } from '@/components/common/ui';
+import { useAuth } from '@/context/AuthContext';
+import { useStation } from '@/hooks/queries';
+import { api } from '@/lib/api';
+import { CHARGE_LABEL, LEVEL_COLOR, money, POST_LABEL } from '@/lib/format';
 
-type StationDetailModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  station: ChargingStation;
-  onConnect: () => void;
-};
+const STATUS_LABEL = { disponivel: 'Disponível', ocupado: 'Ocupado', indisponivel: 'Indisponível' } as const;
+const STATION_STATUS = { operacional: 'Operacional', manutencao: 'Em manutenção', inativa: 'Inativa', em_obra: 'Em obra / futura' } as const;
 
-export function StationDetailModal({ isOpen, onClose, station, onConnect }: StationDetailModalProps) {
-  if (!isOpen) return null;
+type Props = { stationId: number | null; onClose: () => void; origin?: { lat: number; lng: number } | null };
+
+export function StationDetailModal({ stationId, onClose, origin }: Props) {
+  const [, setLocation] = useLocation();
+  const { user } = useAuth();
+  const qc = useQueryClient();
+  const { data: s, isLoading, error } = useStation(stationId, origin);
+  const [startError, setStartError] = useState<unknown>(null);
+
+  const start = useMutation({
+    mutationFn: (connectorId: number) => api.post('/me/charging', { stationId, connectorId }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['charging-active'] });
+      setLocation('/app/session');
+    },
+    onError: setStartError,
+  });
+
+  if (stationId === null) return null;
+  const vehicleConnector = user?.vehicle?.connector ?? 'CCS2';
 
   return (
     <div className="rf-modal-overlay" onClick={onClose}>
-      <div className="rf-modal-box" onClick={(e) => e.stopPropagation()}>
+      <div className="rf-modal-box" style={{ maxWidth: 640 }} onClick={(e) => e.stopPropagation()}>
         <div className="rf-modal-header">
           <div>
-            <span className="rf-badge blue" style={{ fontSize: 10, padding: '2px 8px', marginBottom: 6 }}>
-              {station.operator}
-            </span>
-            <h3 style={{ margin: 0, fontSize: 18, color: '#f8fafc' }}>{station.name}</h3>
-            <p style={{ margin: '3px 0 0', fontSize: 12, color: '#94a3b8' }}>{station.address}</p>
+            {s && (
+              <div className="rf-row" style={{ marginBottom: 6 }}>
+                {s.network && <span className="rf-badge blue">{s.network}</span>}
+                <span className={`rf-badge ${s.status === 'operacional' ? '' : 'gray'}`}>{STATION_STATUS[s.status]}</span>
+                {!s.isPublic && <span className="rf-badge yellow">acesso restrito</span>}
+              </div>
+            )}
+            <h3 style={{ margin: 0, fontSize: 18, color: '#f8fafc' }}>{s?.name ?? 'Carregando...'}</h3>
+            {s && <p className="rf-small" style={{ margin: '3px 0 0' }}>{s.address} · {s.regionName}{s.distanceKm !== null ? ` · ${s.distanceKm.toFixed(1).replace('.', ',')} km` : ''}</p>}
           </div>
-          <button
-            type="button"
-            className="rf-modal-close"
-            onClick={onClose}
-            title="Fechar"
-          >
-            <X size={18} />
-          </button>
+          <button type="button" className="rf-modal-close" onClick={onClose} title="Fechar"><X size={18} /></button>
         </div>
 
-        <div style={{ fontSize: 13, color: '#cbd5e1', lineHeight: 1.5, marginBottom: 16 }}>
-          {station.specs.description}
-        </div>
+        {isLoading && <Loading />}
+        <ErrorBox error={error} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
-          <div style={{ background: '#0e141a', padding: 10, borderRadius: 10, border: '1px solid #1f2b36' }}>
-            <span style={{ fontSize: 10, color: '#64748b', textTransform: 'uppercase' }}>Potência Máxima</span>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#f8fafc' }}>{station.specs.maxPowerKw} kW DC</div>
-          </div>
-          <div style={{ background: '#0e141a', padding: 10, borderRadius: 10, border: '1px solid #1f2b36' }}>
-            <span style={{ fontSize: 10, color: '#64748b', textTransform: 'uppercase' }}>Tarifa Atual</span>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#4ae3a5' }}>{money(station.pricePerKwh)}/kWh</div>
-          </div>
-        </div>
+        {s && (
+          <div className="rf-stack">
+            {/* Custo de energia e sinal */}
+            <div className="rf-connector-row" style={{ alignItems: 'flex-start', flexDirection: 'column', gap: 6 }}>
+              <div className="rf-between" style={{ width: '100%' }}>
+                <span className="rf-eyebrow">Energia agora</span>
+                <LevelBadge level={s.energyNow.signal.level} />
+              </div>
+              <div className="rf-small">
+                Custo da energia <b className="rf-strong">{money(s.energyNow.breakdown.custoEnergiaKwh)}/kWh</b> · PLD {money(s.energyNow.pldMwh)}/MWh ·
+                posto {POST_LABEL[s.energyNow.tariffPost]} · melhor oferta: {s.energyNow.supplier}
+              </div>
+              <div className="rf-tiny">
+                energia {money(s.energyNow.breakdown.energiaKwh)} + fio {money(s.energyNow.breakdown.fioKwh)} + encargos {money(s.energyNow.breakdown.encargosKwh)} + tributos {money(s.energyNow.breakdown.tributosKwh)}
+              </div>
+            </div>
 
-        <div style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', marginBottom: 8 }}>
-            Comodidades no Local
-          </div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {station.specs.amenities.map((item) => (
-              <span key={item} className="rf-badge" style={{ fontSize: 11, background: '#141c24' }}>
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
+            {/* Tipos de recarga disponíveis */}
+            <div>
+              <div className="rf-eyebrow" style={{ marginBottom: 8 }}>Tipos de carregamento e preço Rio Flex</div>
+              <div className="rf-charge-grid">
+                {s.chargeTypes.map((t) => (
+                  <div key={t} className="rf-charge-card">
+                    <div className="rf-strong">{CHARGE_LABEL[t]}</div>
+                    <div className="price">{money(s.prices[t] ?? 0)}<span className="rf-small">/kWh</span></div>
+                  </div>
+                ))}
+              </div>
+              {s.publishedPriceKwh !== null && (
+                <div className="rf-tiny" style={{ marginTop: 6 }}>
+                  Preço publicado na base pública: {money(s.publishedPriceKwh)}/kWh{s.activationFee ? ` + ativação ${money(s.activationFee)}` : ''}
+                  {s.priceConflict && ' · ⚠ divergência entre descrição e preço na fonte'}
+                </div>
+              )}
+            </div>
 
-        <div style={{ display: 'flex', gap: 10 }}>
-          <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${station.latitude},${station.longitude}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rf-btn secondary full"
-          >
-            <Navigation size={14} />
-            Navegar até lá
-          </a>
+            {/* Previsão curta */}
+            <div>
+              <div className="rf-eyebrow" style={{ marginBottom: 6 }}>Próximas horas</div>
+              <div style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 46 }}>
+                {s.forecast.slice(0, 24).map((f) => {
+                  const p = f.prices[s.chargeTypes[s.chargeTypes.length - 1]] ?? 0;
+                  return (
+                    <div key={f.localTime} title={`${f.localHour}h · ${money(p)}`} style={{ flex: 1, height: `${Math.min(100, (p / 4) * 100)}%`, background: LEVEL_COLOR[f.level], borderRadius: 3, opacity: 0.85 }} />
+                  );
+                })}
+              </div>
+              <div className="rf-between rf-tiny"><span>{s.forecast[0]?.localHour}h</span><span>+24h</span></div>
+            </div>
 
-          <Button
-            className="primary full"
-            onClick={onConnect}
-          >
-            <PlugZap size={14} />
-            Já estou no local / Conectar
-          </Button>
-        </div>
+            {/* Conectores */}
+            <div className="rf-stack">
+              <div className="rf-eyebrow">Conectores ({s.connectors.available}/{s.connectors.total} livres)</div>
+              {s.connectorsDetail.length === 0 && <div className="rf-small">A fonte não detalha conectores deste local.</div>}
+              {s.connectorsDetail.map((c) => {
+                const compatible = c.current === 'AC' || c.type.toUpperCase().includes(vehicleConnector.toUpperCase().replace('CCS2', 'CCS'));
+                return (
+                  <div key={c.id} className="rf-connector-row">
+                    <div>
+                      <div className="rf-strong" style={{ fontSize: 13 }}>
+                        <span className={`rf-status-dot ${c.status}`} style={{ marginRight: 8 }} />
+                        {c.type} · {c.current} · {c.powerKw} kW{!c.powerKnown && ' (estimado)'}
+                      </div>
+                      <div className="rf-tiny">{c.chargeTypeLabel} · {STATUS_LABEL[c.status]} · {money(c.priceKwh)}/kWh{!compatible && ' · incompatível com seu veículo'}</div>
+                    </div>
+                    {user?.role === 'consumer' && c.status === 'disponivel' && compatible && (
+                      <button type="button" className="rf-btn small" disabled={start.isPending} onClick={() => start.mutate(c.id)}>
+                        <PlugZap size={13} /> Iniciar
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <ErrorBox error={startError} />
+
+            {s.quality.length > 0 && (
+              <div className="rf-tiny" style={{ display: 'flex', gap: 6 }}>
+                <AlertTriangle size={12} color="#f7c65c" style={{ flexShrink: 0 }} />
+                Qualidade do cadastro: {s.quality.map((q) => q.note ?? q.code).join(' · ')}
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: 10 }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}`} target="_blank" rel="noopener noreferrer" className="rf-btn secondary full">
+                <Navigation size={14} /> Navegar até lá
+              </a>
+              {s.sourceUrl && (
+                <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" className="rf-btn secondary">
+                  <ExternalLink size={14} /> Fonte
+                </a>
+              )}
+            </div>
+            <div className="rf-tiny">Base: {s.snapshotId} · disponibilidade simulada.</div>
+          </div>
+        )}
       </div>
     </div>
   );

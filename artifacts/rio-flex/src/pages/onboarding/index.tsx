@@ -3,17 +3,33 @@ import { useLocation } from 'wouter';
 import { ArrowRight, Check } from 'lucide-react';
 import { Brand } from '@/components/common/Brand';
 import { Button } from '@/components/common/Button';
+import { ErrorBox } from '@/components/common/ui';
+import { useAuth } from '@/context/AuthContext';
+import { carOptions, toVehicle } from '@/data/vehicles';
+import { api } from '@/lib/api';
+import type { User } from '@/types/api';
 
 export default function OnboardingPage() {
   const [, setLocation] = useLocation();
-  const [selectedModel, setSelectedModel] = useState('BYD Dolphin GS');
+  const { setUser } = useAuth();
+  const [selected, setSelected] = useState(carOptions[0].model);
+  const [soc, setSoc] = useState(50);
+  const [error, setError] = useState<unknown>(null);
+  const [busy, setBusy] = useState(false);
 
-  const models = [
-    { name: 'BYD Dolphin GS', battery: '44,9 kWh', plug: 'CCS2 (DC 80 kW)' },
-    { name: 'GWM Ora 03 Skin', battery: '48,0 kWh', plug: 'CCS2 (DC 64 kW)' },
-    { name: 'Volvo EX30 Core', battery: '51,0 kWh', plug: 'CCS2 (DC 134 kW)' },
-    { name: 'Renault Kwid E-Tech', battery: '26,8 kWh', plug: 'CCS2 (DC 30 kW)' },
-  ];
+  async function save() {
+    const car = carOptions.find((c) => c.model === selected)!;
+    setBusy(true);
+    try {
+      const r = await api.patch<{ user: User }>('/auth/me', { vehicle: toVehicle(car, soc) });
+      setUser(r.user);
+      setLocation('/app');
+    } catch (err) {
+      setError(err);
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <div className="rf-onboarding">
@@ -21,37 +37,31 @@ export default function OnboardingPage() {
         <Brand light />
         <div className="rf-card" style={{ marginTop: 24 }}>
           <h1 className="rf-title" style={{ fontSize: 26 }}>Qual é o seu carro elétrico?</h1>
-          <p className="rf-subtitle">Personalizamos as recomendações de recarga para o conector e autonomia do seu modelo.</p>
+          <p className="rf-subtitle">Usamos o conector, a potência máxima e a bateria para mostrar só os carregadores compatíveis e estimar custo e tempo.</p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, margin: '20px 0' }}>
-            {models.map((m) => (
+            {carOptions.map((m) => (
               <button
-                key={m.name}
+                key={m.model}
                 type="button"
-                onClick={() => setSelectedModel(m.name)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '12px 16px',
-                  borderRadius: 12,
-                  background: selectedModel === m.name ? 'rgba(74, 227, 165, 0.1)' : '#11171d',
-                  border: `1px solid ${selectedModel === m.name ? '#4ae3a5' : '#222e39'}`,
-                  color: '#f8fafc',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                }}
+                onClick={() => setSelected(m.model)}
+                className={`rf-charge-card ${selected === m.model ? 'active' : ''}`}
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#f8fafc', cursor: 'pointer', textAlign: 'left' }}
               >
                 <div>
-                  <div style={{ fontWeight: 600 }}>{m.name}</div>
-                  <div style={{ fontSize: 12, color: '#94a3b8' }}>Bateria {m.battery} · Conector {m.plug}</div>
+                  <div style={{ fontWeight: 600 }}>{m.mfg} {m.model}</div>
+                  <div className="rf-small">Bateria {m.battery} kWh · CCS2 até {m.dc} kW · AC até {m.ac} kW · ~{m.range} km</div>
                 </div>
-                {selectedModel === m.name && <Check size={18} color="#4ae3a5" />}
+                {selected === m.model && <Check size={18} color="#4ae3a5" />}
               </button>
             ))}
           </div>
 
-          <Button className="full" onClick={() => setLocation('/app')}>
+          <label className="rf-label" htmlFor="soc">Carga atual da bateria: <b>{soc}%</b></label>
+          <input id="soc" type="range" min={5} max={95} value={soc} onChange={(e) => setSoc(Number(e.target.value))} style={{ width: '100%', marginBottom: 16 }} />
+
+          <ErrorBox error={error} />
+          <Button className="full" onClick={save} disabled={busy}>
             Continuar para o Rio Flex <ArrowRight size={16} />
           </Button>
         </div>

@@ -1,229 +1,86 @@
 import { useState } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { AppShell } from '@/components/layout/AppShell';
-import { UseCreditsModal } from '@/pages/wallet/UseCreditsModal';
-import { money } from '@/lib/format';
-import type { WalletActivity, WalletLedgerEntry } from '@/types/wallet';
-
-const activities: WalletActivity[] = [
-  {
-    id: 1,
-    date: 'Hoje, 14:32',
-    station: 'Marina Flex Station',
-    energyKwh: 21.7,
-    cost: 24.92,
-    bonusText: '+ R$ 4,00',
-    event: 'Janela Solar Rio Flex (100% fora do pico)',
-  },
-  {
-    id: 2,
-    date: '12 set 2026',
-    station: 'COPPE / UFRJ Eletroposto Solar',
-    energyKwh: 18.2,
-    cost: 17.83,
-    bonusText: '+ R$ 4,50',
-    event: 'Excedente Fotovoltaico Local COPPE',
-  },
-  {
-    id: 3,
-    date: '04 set 2026',
-    station: 'Shopping RioSul',
-    energyKwh: 16.8,
-    cost: 20.50,
-    bonusText: '+ R$ 2,50',
-    event: 'Deslocamento de Pico Vespertino',
-  },
-  {
-    id: 4,
-    date: '28 ago 2026',
-    station: 'Copacabana Atlântica',
-    energyKwh: 14.1,
-    cost: 16.63,
-    bonusText: '+ R$ 3,00',
-    event: 'Bônus Solar Fluminense',
-  },
-];
-
-const ledger: WalletLedgerEntry[] = [
-  { id: 'm1', date: 'Hoje, 14:35', desc: 'Bônus de flexibilidade Marina Flex', amount: '+ R$ 4,00', type: 'credit' },
-  { id: 'm2', date: '12 set 2026', desc: 'Bônus excedente solar COPPE/UFRJ', amount: '+ R$ 4,50', type: 'credit' },
-  { id: 'm3', date: '08 set 2026', desc: 'Abatimento automático em recarga', amount: '- R$ 10,00', type: 'debit' },
-  { id: 'm4', date: '04 set 2026', desc: 'Bônus evento de resposta de demanda', amount: '+ R$ 2,50', type: 'credit' },
-  { id: 'm5', date: '28 ago 2026', desc: 'Bônus solar Copacabana', amount: '+ R$ 3,00', type: 'credit' },
-];
+import { LevelBadge, Loading } from '@/components/common/ui';
+import { useChargingHistory, useWallet } from '@/hooks/queries';
+import { dateTimeOf, kwh, money } from '@/lib/format';
 
 export default function WalletPage() {
-  const [walletTab, setWalletTab] = useState<'activity' | 'ledger'>('activity');
-  const [isUseCreditsModalOpen, setIsUseCreditsModalOpen] = useState(false);
-  const [isCo2TooltipOpen, setIsCo2TooltipOpen] = useState(false);
+  const [tab, setTab] = useState<'activity' | 'ledger'>('activity');
+  const [co2Open, setCo2Open] = useState(false);
+  const { data: wallet, isLoading } = useWallet();
+  const { data: history } = useChargingHistory();
 
   return (
     <AppShell>
       <div className="rf-wallet-container">
         <div>
-          <span className="rf-eyebrow">Etapa 4 • Saldo & Impacto</span>
+          <span className="rf-eyebrow">Saldo & impacto</span>
           <h1 className="rf-title" style={{ fontSize: 24, margin: '2px 0 0' }}>Minha Carteira Rio Flex</h1>
-          <p className="rf-subtitle">Créditos acumulados por carregar nos momentos mais inteligentes para a cidade.</p>
+          <p className="rf-subtitle">Créditos que você ganha ao carregar nas janelas verdes ou aceitar modular a potência nos picos.</p>
         </div>
 
-        {/* Card Principal: Saldo de Créditos */}
-        <div className="rf-wallet-balance-card">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
-              SEUS CRÉDITOS ACUMULADOS
-            </span>
-            <span className="rf-badge purple">Flexibilidade Ativa</span>
-          </div>
-
-          <div className="rf-wallet-balance-num">
-            224 créditos <span style={{ fontSize: 20, color: '#94a3b8', fontWeight: 500 }}>(≈ R$ 22,40)</span>
-          </div>
-
-          <p style={{ margin: 0, fontSize: 12, color: '#cbd5e1', lineHeight: 1.4 }}>
-            Créditos gerados pela sua participação na flexibilidade da rede elétrica. Aplicáveis como desconto direto na sua próxima recarga ou na conta parceira.
-          </p>
-
-          <div style={{ marginTop: 14 }}>
-            <button
-              type="button"
-              className="rf-btn primary small"
-              onClick={() => setIsUseCreditsModalOpen(true)}
-            >
-              Usar créditos acumulados
-            </button>
-          </div>
-        </div>
-
-        {/* Grade Compacta de Impacto Energético */}
-        <div className="rf-compact-impact-grid">
-          <div className="rf-compact-impact-card">
-            <span style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Energia Flexibilizada
-            </span>
-            <div style={{ fontSize: 22, fontWeight: 800, color: '#4ae3a5', margin: '4px 0 2px' }}>
-              42,8 kWh
+        {isLoading && <Loading />}
+        {wallet && (
+          <>
+            <div className="rf-wallet-balance-card">
+              <div className="rf-between">
+                <span className="rf-tiny" style={{ textTransform: 'uppercase', fontWeight: 700 }}>Seus créditos</span>
+                <span className="rf-badge purple">1 crédito = R$ 0,01</span>
+              </div>
+              <div className="rf-wallet-balance-num">
+                {wallet.credits} créditos <span style={{ fontSize: 20, color: '#94a3b8', fontWeight: 500 }}>(≈ {money(wallet.balance)})</span>
+              </div>
+              <p className="rf-small" style={{ margin: 0 }}>Use-os para abater o valor ao encerrar uma recarga.</p>
             </div>
-            <div style={{ fontSize: 11, color: '#64748b' }}>consumidos fora da ponta</div>
-          </div>
 
-          <div className="rf-compact-impact-card">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                CO₂ Evitado
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsCo2TooltipOpen(!isCo2TooltipOpen)}
-                style={{ background: 'transparent', border: 'none', color: '#38bdf8', cursor: 'pointer', padding: 0 }}
-                title="Como calculamos o CO2 evitado?"
-              >
-                <HelpCircle size={12} />
-              </button>
+            <div className="rf-kpis">
+              <div className="rf-kpi"><span>Energia flexível</span><strong style={{ color: '#4ae3a5' }}>{kwh(wallet.stats.flexibleEnergyKwh)}</strong><small>de {kwh(wallet.stats.energyKwh)} no total</small></div>
+              <div className="rf-kpi">
+                <span className="rf-between">CO₂ evitado <button type="button" onClick={() => setCo2Open(!co2Open)} style={{ background: 'none', border: 0, color: '#38bdf8', cursor: 'pointer' }} title="Como calculamos"><HelpCircle size={12} /></button></span>
+                <strong style={{ color: '#38bdf8' }}>{wallet.stats.co2AvoidedKg.toFixed(1).replace('.', ',')} kg</strong><small>estimativa ilustrativa</small>
+              </div>
+              <div className="rf-kpi"><span>Recargas</span><strong style={{ color: '#c084fc' }}>{wallet.stats.sessions}</strong><small>{money(wallet.stats.totalSpent)} gastos</small></div>
             </div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: '#38bdf8', margin: '4px 0 2px' }}>
-              17,4 kg
-            </div>
-            <div style={{ fontSize: 11, color: '#64748b' }}>substituição fóssil</div>
-          </div>
+            {co2Open && (
+              <div className="rf-small rf-card" style={{ padding: 12 }}>
+                Estimativa ilustrativa: 0,4 kg de CO₂ por kWh deslocado para janelas verdes, representando geração térmica marginal evitada. Um cálculo real usaria o fator de emissão horário do SIN.
+              </div>
+            )}
 
-          <div className="rf-compact-impact-card">
-            <span style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Sessões Premiadas
-            </span>
-            <div style={{ fontSize: 22, fontWeight: 800, color: '#c084fc', margin: '4px 0 2px' }}>
-              6 sessões
-            </div>
-            <div style={{ fontSize: 11, color: '#64748b' }}>100% de adesão</div>
-          </div>
-        </div>
+            <div className="rf-card">
+              <div className="rf-between" style={{ marginBottom: 12 }}>
+                <h3 style={{ margin: 0 }}>Extrato & histórico</h3>
+                <div className="rf-segmented-toggle">
+                  <button type="button" className={`rf-segmented-btn ${tab === 'activity' ? 'active' : ''}`} onClick={() => setTab('activity')}>Recargas ({history?.length ?? 0})</button>
+                  <button type="button" className={`rf-segmented-btn ${tab === 'ledger' ? 'active' : ''}`} onClick={() => setTab('ledger')}>Movimentações</button>
+                </div>
+              </div>
 
-        {isCo2TooltipOpen && (
-          <div style={{ background: '#111822', border: '1px solid #263848', borderRadius: 10, padding: 12, fontSize: 12, color: '#cbd5e1' }}>
-            <b>Fator de Emissão ONS/SIN:</b> O CO₂ evitado é calculado considerando as termelétricas a gás e carvão que deixaram de ser despachadas durante os horários em que seu veículo consumiu excedente solar.
-          </div>
+              {tab === 'activity' && history?.map((h) => (
+                <div className="rf-wallet-history-item" key={h.id}>
+                  <div>
+                    <div className="rf-strong" style={{ fontSize: 13 }}>{h.station.name}</div>
+                    <div className="rf-tiny" style={{ marginTop: 2 }}>{dateTimeOf(h.startedAt)} · {kwh(h.energyKwh)} · {money(h.priceKwh)}/kWh · total {money(h.cost)}</div>
+                    <div style={{ marginTop: 4 }}><LevelBadge level={h.signalLevel} label={h.signalLevel} /> {h.flexAccepted && <span className="rf-badge purple">modulação aceita</span>}</div>
+                  </div>
+                  {h.credits > 0 && <span className="rf-badge">+ {money(h.credits)}</span>}
+                </div>
+              ))}
+
+              {tab === 'ledger' && wallet.ledger.map((l) => (
+                <div className="rf-wallet-history-item" key={l.id}>
+                  <div>
+                    <div className="rf-strong" style={{ fontSize: 13 }}>{l.description}</div>
+                    <div className="rf-tiny" style={{ marginTop: 2 }}>{dateTimeOf(l.createdAt)}</div>
+                  </div>
+                  <span className={`rf-badge ${l.type === 'credit' ? '' : 'red'}`}>{l.type === 'credit' ? '+' : '−'} {money(Math.abs(l.amount))}</span>
+                </div>
+              ))}
+            </div>
+          </>
         )}
-
-        {/* Histórico Transparente em 2 Abas */}
-        <div className="rf-card" style={{ padding: 18 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: 14 }}>
-            <h3 style={{ margin: 0, fontSize: 16, color: '#f8fafc' }}>Extrato & Histórico</h3>
-
-            <div className="rf-segmented-toggle">
-              <button
-                type="button"
-                className={`rf-segmented-btn ${walletTab === 'activity' ? 'active' : ''}`}
-                onClick={() => setWalletTab('activity')}
-              >
-                Atividade ({activities.length})
-              </button>
-              <button
-                type="button"
-                className={`rf-segmented-btn ${walletTab === 'ledger' ? 'active' : ''}`}
-                onClick={() => setWalletTab('ledger')}
-              >
-                Movimentações
-              </button>
-            </div>
-          </div>
-
-          {/* Aba 1: Atividade de Recarga */}
-          {walletTab === 'activity' && (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {activities.map((item) => (
-                <div className="rf-wallet-history-item" key={item.id}>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 13, color: '#f8fafc' }}>{item.station}</div>
-                    <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>
-                      {item.date} · {item.energyKwh} kWh · Total pago: {money(item.cost)}
-                    </div>
-                    <div style={{ fontSize: 11, color: '#38bdf8', marginTop: 2 }}>
-                      {item.event}
-                    </div>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <span className="rf-badge green" style={{ fontSize: 11, padding: '3px 8px' }}>
-                      {item.bonusText}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Aba 2: Movimentações Financeiras de Créditos */}
-          {walletTab === 'ledger' && (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {ledger.map((item) => (
-                <div className="rf-wallet-history-item" key={item.id}>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 13, color: '#f8fafc' }}>{item.desc}</div>
-                    <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{item.date}</div>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <span
-                      className="rf-badge"
-                      style={{
-                        fontSize: 11,
-                        padding: '3px 8px',
-                        color: item.type === 'credit' ? '#4ae3a5' : '#f43f5e',
-                        borderColor: item.type === 'credit' ? 'rgba(74, 227, 165, 0.3)' : 'rgba(244, 63, 94, 0.3)',
-                      }}
-                    >
-                      {item.amount}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
-
-      {/* Modal de Uso de Créditos */}
-      <UseCreditsModal
-        isOpen={isUseCreditsModalOpen}
-        onClose={() => setIsUseCreditsModalOpen(false)}
-      />
     </AppShell>
   );
 }
