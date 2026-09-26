@@ -156,10 +156,10 @@ async function seedUsers() {
     const sid = newId('chg');
     run(
       `INSERT INTO charging_sessions (id, user_id, station_id, connector_id, status, started_at, ended_at, start_soc, target_soc,
-        battery_kwh, power_kw, price_kwh, signal_level, flex_accepted, energy_kwh, cost, credits)
-       VALUES (?, ?, ?, ?, 'completed', ?, ?, 30, 80, 44.9, ?, ?, ?, ?, ?, ?, ?)`,
+        battery_kwh, power_kw, price_kwh, signal_level, flex_accepted, energy_kwh, cost, credits, initial_soc, initial_started_at)
+       VALUES (?, ?, ?, ?, 'completed', ?, ?, 30, 80, 44.9, ?, ?, ?, ?, ?, ?, ?, 30, ?)`,
       sid, consumerId, conn.station_id, conn.id, start, start + 40 * 60, Math.min(conn.power_kw, 80), h.price, h.level,
-      h.level === 'amarelo' ? 1 : 0, h.kwh, Math.round(h.kwh * h.price * 100) / 100, h.credits,
+      h.level === 'amarelo' ? 1 : 0, h.kwh, Math.round(h.kwh * h.price * 100) / 100, h.credits, start,
     );
     run('INSERT INTO wallet_ledger (id, user_id, amount_cents, description, ref, created_at) VALUES (?, ?, ?, ?, ?, ?)',
       newId('led'), consumerId, Math.round(h.credits * 100), h.desc, sid, start + 40 * 60);

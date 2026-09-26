@@ -225,6 +225,15 @@ const MIGRATIONS: { id: number; sql: string }[] = [
     CREATE INDEX idx_audit_time ON audit_log(created_at DESC);
     `,
   },
+  {
+    // SOC e horário originais da sessão (os campos start_* passam a marcar o segmento atual após modulação).
+    id: 2,
+    sql: `
+    ALTER TABLE charging_sessions ADD COLUMN initial_soc REAL;
+    ALTER TABLE charging_sessions ADD COLUMN initial_started_at INTEGER;
+    UPDATE charging_sessions SET initial_soc = start_soc, initial_started_at = started_at WHERE initial_soc IS NULL;
+    `,
+  },
 ];
 
 function openDatabase(): DatabaseSync {

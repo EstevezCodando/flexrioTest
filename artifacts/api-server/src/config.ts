@@ -19,7 +19,7 @@ export const config = {
   port: int('PORT', 5000),
   dbPath: path.resolve(ROOT_DIR, process.env.DB_PATH ?? './data/rioflex.db'),
   datasetDir: path.resolve(ROOT_DIR, process.env.DATASET_DIR ?? './data/carregados_rj'),
-  allowedOrigins: (process.env.ALLOWED_ORIGINS ?? 'http://localhost:3000')
+  allowedOrigins: (process.env.ALLOWED_ORIGINS ?? 'http://localhost:5173,http://127.0.0.1:5173')
     .split(',')
     .map((o) => o.trim())
     .filter(Boolean),
@@ -33,6 +33,11 @@ export const config = {
     consumerPassword: process.env.SEED_CONSUMER_PASSWORD ?? 'RioFlex@2026',
     managerEmail: process.env.SEED_MANAGER_EMAIL ?? 'gestora@rioflex.dev',
     managerPassword: process.env.SEED_MANAGER_PASSWORD ?? 'Gestor@2026',
+  },
+  /** Em desenvolvimento, aceita qualquer origem localhost (o Vite pode subir em porta dinâmica). */
+  isAllowedOrigin(origin: string): boolean {
+    if ((this.allowedOrigins as readonly string[]).includes(origin)) return true;
+    return !isProd && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
   },
   /** Fuso do RJ: UTC-3, sem horário de verão desde 2019. */
   tzOffsetHours: -3,

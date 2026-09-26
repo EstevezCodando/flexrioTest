@@ -45,7 +45,9 @@ export default function MapPage() {
       () => undefined,
       { timeout: 8000 },
     );
-  useEffect(locate, []);
+  useEffect(() => {
+    locate();
+  }, []);
 
   const { data: list, isFetching } = useStations({
     q: q || undefined,

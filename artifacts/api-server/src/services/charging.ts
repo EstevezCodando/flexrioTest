@@ -32,6 +32,8 @@ type SessionRow = {
   energy_kwh: number | null;
   cost: number | null;
   credits: number | null;
+  initial_soc: number | null;
+  initial_started_at: number | null;
 };
 
 /** Estado simulado da sessão no instante `now` (a simulação é acelerada por CHARGING_SIM_SPEED). */
@@ -67,9 +69,9 @@ function toDto(s: SessionRow) {
       ? { id: connector.id, type: connector.type_name, current: connector.current, chargeType: connector.charge_type,
           chargeTypeLabel: CHARGE_TYPE_INFO[connector.charge_type].label }
       : null,
-    startedAt: isoLocal(s.started_at),
+    startedAt: isoLocal(s.initial_started_at ?? s.started_at),
     endedAt: s.ended_at ? isoLocal(s.ended_at) : null,
-    startSoc: s.start_soc,
+    startSoc: s.initial_soc ?? s.start_soc,
     targetSoc: s.target_soc,
     soc: s.status === 'active' ? p.soc : s.target_soc,
     powerKw: s.power_kw,
@@ -79,7 +81,9 @@ function toDto(s: SessionRow) {
     energyKwh: s.status === 'active' ? p.energyKwh : s.energy_kwh ?? 0,
     cost: s.status === 'active' ? round(p.energyKwh * s.price_kwh, 2) : s.cost ?? 0,
     credits: s.credits ?? 0,
-    elapsedMin: p.elapsedMin,
+    elapsedMin: s.status === 'active'
+      ? Math.round((((nowEpoch() - (s.initial_started_at ?? s.started_at)) * config.chargingSimSpeed) / 60))
+      : Math.round(((s.ended_at ?? s.started_at) - (s.initial_started_at ?? s.started_at)) / 60),
     remainingMin: p.remainingMin,
     readyToFinish: p.done,
     // Oferta de modulação: aparece quando a rede está pressionada e a recarga é DC.
@@ -123,10 +127,10 @@ export function startSession(userId: string, input: { stationId: number; connect
   const id = newId('chg');
   run(
     `INSERT INTO charging_sessions (id, user_id, station_id, connector_id, status, started_at, start_soc, target_soc, battery_kwh,
-      power_kw, price_kwh, signal_level, energy_kwh, cost, credits)
-     VALUES (?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, ?, ?, 0, 0, 0)`,
+      power_kw, price_kwh, signal_level, energy_kwh, cost, credits, initial_soc, initial_started_at)
+     VALUES (?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, ?, ?)`,
     id, userId, input.stationId, input.connectorId, nowEpoch(), vehicle.soc, targetSoc, vehicle.batteryKwh, power,
-    price.consumerPrices[connector.chargeType], price.signal.level,
+    price.consumerPrices[connector.chargeType], price.signal.level, vehicle.soc, nowEpoch(),
   );
   refreshActiveConnectors();
   audit(userId, 'charging.start', `${id} station=${input.stationId}`, ip);

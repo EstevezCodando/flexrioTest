@@ -35,6 +35,8 @@ function detectRegion(text: string): string | undefined {
   return undefined;
 }
 
+const PRODUCT: Record<string, string> = { convencional: 'convencional', incentivada_50: 'incentivada 50%', incentivada_100: 'incentivada 100%' };
+const SOURCE: Record<string, string> = { automatico: 'automático', gestor: 'publicado por gestor' };
 const brl = (n: number) => `R$ ${n.toFixed(2).replace('.', ',')}`;
 const LEVEL_EMOJI: Record<string, string> = { verde: '🟢', amarelo: '🟡', vermelho: '🔴' };
 
@@ -64,7 +66,7 @@ export function localAnswer(question: string, defaultRegion = 'capital') {
       parts.push(
         '### Regulação e normas relacionadas\n' +
           r.resultados
-            .map((k: any) => `**${k.title}** (${k.authority})\n${k.summary}\n_Por que importa:_ ${k.relevance}`)
+            .map((k: any) => `**${k.title}** (${k.authority})\n${k.summary}\n**No Rio Flex:** ${k.relevance}`)
             .join('\n\n') +
           `\n\n> ${r.aviso}`,
       );
@@ -79,8 +81,8 @@ export function localAnswer(question: string, defaultRegion = 'capital') {
       const priciest = [...p.serie].sort((x: any, y: any) => y.custo_kwh - x.custo_kwh)[0];
       parts.push(
         `### Preço da energia — ${regionName}\n` +
-          `Agora: PLD **${brl(a.pld_mwh)}/MWh**, posto **${a.posto_tarifario.replace('_', ' ')}**, sinal ${LEVEL_EMOJI[a.sinal.level]} **${a.sinal.level}** (${a.sinal.source}).\n` +
-          `Melhor oferta do mercado livre: **${a.melhor_oferta.supplierName}** (${a.melhor_oferta.product}) → custo **${brl(a.melhor_oferta.totalKwh)}/kWh** ` +
+          `Agora: PLD **${brl(a.pld_mwh)}/MWh**, posto **${a.posto_tarifario.replace('_', ' ')}**, sinal ${LEVEL_EMOJI[a.sinal.level]} **${a.sinal.level}** (${SOURCE[a.sinal.source] ?? a.sinal.source}).\n` +
+          `Melhor oferta do mercado livre: **${a.melhor_oferta.supplierName}** (${PRODUCT[a.melhor_oferta.product] ?? a.melhor_oferta.product}) → custo **${brl(a.melhor_oferta.totalKwh)}/kWh** ` +
           `(energia ${brl(a.melhor_oferta.energyKwh)} + fio ${brl(a.melhor_oferta.wireKwh)} + encargos ${brl(a.melhor_oferta.chargesKwh)} + tributos ${brl(a.melhor_oferta.taxesKwh)}).\n` +
           `Preço ao consumidor: AC lenta ${brl(a.precos_consumidor.ac_lenta)} · DC rápida ${brl(a.precos_consumidor.dc_rapida)} · DC ultra ${brl(a.precos_consumidor.dc_ultrarrapida)} por kWh.\n` +
           `Nas próximas 24 h: mais barato às **${cheapest.hora}h** (${brl(cheapest.custo_kwh)}/kWh), mais caro às **${priciest.hora}h** (${brl(priciest.custo_kwh)}/kWh).\n` +
@@ -144,6 +146,6 @@ export function localAnswer(question: string, defaultRegion = 'capital') {
 
   const text =
     parts.join('\n\n') +
-    '\n\n_Resposta gerada pelo motor local da FlexIA com dados simulados. Configure ANTHROPIC_API_KEY para respostas em linguagem natural mais completas._';
+    '\n\n> Resposta do motor local da FlexIA com dados simulados. Configure `ANTHROPIC_API_KEY` na API para respostas em linguagem natural mais completas.';
   return { text, toolsUsed: [...new Set(toolsUsed)], proposal };
 }

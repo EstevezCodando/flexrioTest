@@ -13,10 +13,10 @@ const regionParam = z.string().refine(isRegion, 'região inválida');
 const coerceNum = (min: number, max: number) => z.coerce.number().min(min).max(max);
 const bool = z.enum(['true', 'false', '1', '0']).transform((v) => v === 'true' || v === '1');
 
-/** Endpoints de consulta (exigem sessão, mas servem consumidor e gestor). */
-export const catalogRouter = Router();
+/** Dados de referência não sensíveis — públicos (usados no cadastro, antes do login). */
+export const metaRouter = Router();
 
-catalogRouter.get('/meta', (_req, res) => {
+metaRouter.get('/meta', (_req, res) => {
   res.set('Cache-Control', 'private, max-age=3600');
   res.json({
     chargeTypes: CHARGE_TYPES.map((id) => ({ id, ...CHARGE_TYPE_INFO[id] })),
@@ -25,6 +25,9 @@ catalogRouter.get('/meta', (_req, res) => {
     dataset: { snapshot: 'carregados_rj_2026-09-22', source: 'https://carregados.com.br', stats: stationsStats() },
   });
 });
+
+/** Endpoints de consulta (exigem sessão, mas servem consumidor e gestor). */
+export const catalogRouter = Router();
 
 catalogRouter.get('/regions/nearest', handler((req, res) => {
   const q = parse(z.object({ lat: coerceNum(-90, 90), lng: coerceNum(-180, 180) }), req.query);
@@ -52,7 +55,7 @@ catalogRouter.get('/stations', handler((req, res) => {
     }),
     req.query,
   );
-  res.set('Cache-Control', 'private, max-age=30');
+  res.set('Cache-Control', 'private, no-cache');
   res.json(
     listStations({
       regionId: q.region, q: q.q, chargeType: q.chargeType, connectorType: q.connector, availableOnly: q.available,
@@ -64,7 +67,7 @@ catalogRouter.get('/stations', handler((req, res) => {
 
 catalogRouter.get('/stations/markers', handler((req, res) => {
   const q = parse(z.object({ region: regionParam.optional() }), req.query);
-  res.set('Cache-Control', 'private, max-age=60');
+  res.set('Cache-Control', 'private, no-cache');
   res.json(stationMarkers(q.region));
 }));
 
@@ -78,7 +81,7 @@ catalogRouter.get('/stations/:id', handler((req, res) => {
 catalogRouter.get('/prices/:region/now', handler((req, res) => {
   const { region: id } = parse(z.object({ region: regionParam }), req.params);
   const p = priceAt(id, nowEpoch());
-  res.set('Cache-Control', 'private, max-age=60');
+  res.set('Cache-Control', 'private, no-cache');
   res.json({
     region: { id, name: region(id).name, distributor: region(id).distributor, submarket: region(id).submarket },
     ...p,
@@ -93,7 +96,7 @@ catalogRouter.get('/prices/:region/now', handler((req, res) => {
 catalogRouter.get('/prices/:region/forecast', handler((req, res) => {
   const { region: id } = parse(z.object({ region: regionParam }), req.params);
   const q = parse(z.object({ hours: z.coerce.number().int().min(1).max(48).default(24) }), req.query);
-  res.set('Cache-Control', 'private, max-age=60');
+  res.set('Cache-Control', 'private, no-cache');
   res.json({
     region: id,
     points: priceSeries(id, q.hours).map((p) => ({
@@ -113,7 +116,7 @@ catalogRouter.get('/prices/:region/forecast', handler((req, res) => {
 /** Comparativo do melhor preço agora em todas as regiões. */
 catalogRouter.get('/prices', handler((_req, res) => {
   const now = nowEpoch();
-  res.set('Cache-Control', 'private, max-age=60');
+  res.set('Cache-Control', 'private, no-cache');
   res.json(
     regions().map((r) => {
       const p = priceAt(r.id, now);
@@ -127,7 +130,7 @@ catalogRouter.get('/market/pld', handler((req, res) => {
     z.object({ submarket: z.enum(['SE', 'S', 'NE', 'N']).default('SE'), hours: z.coerce.number().int().min(1).max(48).default(24) }),
     req.query,
   );
-  res.set('Cache-Control', 'private, max-age=300');
+  res.set('Cache-Control', 'private, no-cache');
   res.json({ submarket: q.submarket, source: 'mock-ccee-v1', points: getPldSeries(q.submarket, nowEpoch(), q.hours) });
 }));
 

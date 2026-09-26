@@ -10,7 +10,7 @@ import {
 import { authRouter } from './routes/auth.ts';
 import { consumerRouter, notificationsRouter } from './routes/consumer.ts';
 import { managerRouter } from './routes/manager.ts';
-import { catalogRouter } from './routes/public.ts';
+import { catalogRouter, metaRouter } from './routes/public.ts';
 
 export function createApp() {
   const app = express();
@@ -27,7 +27,7 @@ export function createApp() {
   // CORS restrito às origens configuradas (em dev o Vite faz proxy e a origem é a mesma).
   app.use((req, res, next) => {
     const origin = req.get('origin');
-    if (origin && config.allowedOrigins.includes(origin)) {
+    if (origin && config.isAllowedOrigin(origin)) {
       res.set({
         'Access-Control-Allow-Origin': origin,
         'Access-Control-Allow-Credentials': 'true',
@@ -46,8 +46,14 @@ export function createApp() {
   app.get('/api/health', (_req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
   const api = express.Router();
+  // Respostas dependem do usuário da sessão: nada de cache por padrão (rotas de catálogo sobrescrevem).
+  api.use((_req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+  });
   api.use(loadUser, csrfGuard);
   api.use('/auth', authRouter);
+  api.use('/', metaRouter);
   api.use('/notifications', requireAuth, notificationsRouter);
   api.use('/me', requireRole('consumer'), consumerRouter);
   api.use('/manager', requireRole('manager'), managerRouter);

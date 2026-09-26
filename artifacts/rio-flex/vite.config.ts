@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
-const rawPort = process.env.PORT || '3000';
+const rawPort = process.env.PORT || '5173';
 const port = Number(rawPort);
 
 if (Number.isNaN(port) || port <= 0) {
@@ -59,8 +59,15 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    // Em desenvolvimento a API roda em outra porta; o proxy mantém mesma origem (cookies SameSite=Strict).
+    proxy: {
+      '/api': { target: process.env.API_URL || 'http://localhost:5000', changeOrigin: false },
+    },
   },
   preview: {
+    proxy: {
+      '/api': { target: process.env.API_URL || 'http://localhost:5000', changeOrigin: false },
+    },
     port,
     host: '0.0.0.0',
     allowedHosts: true,

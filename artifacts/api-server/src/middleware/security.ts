@@ -52,7 +52,7 @@ export function csrfGuard(req: Request, _res: Response, next: NextFunction) {
   if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
   if (req.get('x-requested-with') !== 'RioFlex') return next(forbidden('Requisição sem cabeçalho de origem da aplicação'));
   const origin = req.get('origin');
-  if (origin && !config.allowedOrigins.includes(origin)) return next(forbidden('Origem não permitida'));
+  if (origin && !config.isAllowedOrigin(origin)) return next(forbidden('Origem não permitida'));
   next();
 }
 
