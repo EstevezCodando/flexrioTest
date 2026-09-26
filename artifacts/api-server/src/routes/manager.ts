@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { all, get } from '../db/index.ts';
 import { GUARDRAILS, SIGNAL_LEVELS } from '../domain/reference.ts';
-import { chat, deleteConversation, flexiaStatus, getConversation, listConversations } from '../flexia/agent.ts';
+import { chat, chatStream, deleteConversation, flexiaStatus, getConversation, listConversations } from '../flexia/agent.ts';
 import { KNOWLEDGE, searchKnowledge } from '../flexia/knowledge.ts';
 import { handler, parse } from '../lib/http.ts';
 import { isoLocal, nowEpoch } from '../lib/util.ts';
@@ -143,4 +143,39 @@ managerRouter.post('/flexia/chat', flexiaLimiter, handler(async (req, res) => {
     req.body,
   );
   res.json(await chat(req.user!.id, body, req.user!.regionId ?? 'capital'));
+}));
+
+/**
+ * Chat em streaming (Server-Sent Events): o gestor vê a rota escolhida, as ferramentas em uso e o texto
+ * chegando token a token. Se o gestor fechar a aba, a chamada ao modelo é cancelada (AbortController).
+ */
+managerRouter.post('/flexia/chat/stream', flexiaLimiter, handler(async (req, res) => {
+  const body = parse(
+    z.object({ conversationId: z.string().regex(/^cnv_[A-Za-z0-9_-]{6,20}$/).optional(), message: z.string().trim().min(2).max(2000) }),
+    req.body,
+  );
+  res.status(200).set({
+    'Content-Type': 'text/event-stream; charset=utf-8',
+    'Cache-Control': 'no-store',
+    Connection: 'keep-alive',
+    'X-Accel-Buffering': 'no',
+  });
+  res.flushHeaders();
+  const abort = new AbortController();
+  res.on('close', () => {
+    if (!res.writableEnded) abort.abort();
+  });
+  const send = (e: { type: string }) => {
+    if (!res.writableEnded) res.write(`event: ${e.type}\ndata: ${JSON.stringify(e)}\n\n`);
+  };
+  // Mantém a conexão viva atrás de proxies durante ferramentas demoradas do data lake.
+  const ping = setInterval(() => !res.writableEnded && res.write(': ping\n\n'), 15_000);
+  try {
+    await chatStream(req.user!.id, body, req.user!.regionId ?? 'capital', send, abort.signal);
+  } catch (err) {
+    send({ type: 'error', message: err instanceof Error && 'status' in err ? err.message : 'Falha ao responder.' } as { type: string });
+  } finally {
+    clearInterval(ping);
+    res.end();
+  }
 }));

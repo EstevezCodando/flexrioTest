@@ -54,3 +54,43 @@ export function qs(params: Record<string, string | number | boolean | undefined 
   if (!entries.length) return '';
   return '?' + new URLSearchParams(entries.map(([k, v]) => [k, String(v)])).toString();
 }
+
+export type StreamEvent = { type: string; [k: string]: unknown };
+
+/**
+ * POST com resposta em Server-Sent Events (usado pelo chat da FlexIA). EventSource não aceita POST
+ * nem cabeçalhos, então lemos o corpo em streaming e separamos os eventos por linha em branco.
+ */
+export async function streamPost(path: string, body: unknown, onEvent: (e: StreamEvent) => void, signal?: AbortSignal): Promise<void> {
+  const res = await fetch(BASE + path, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream', 'X-Requested-With': 'RioFlex' },
+    body: JSON.stringify(body),
+    signal,
+  });
+  if (!res.ok || !res.body) {
+    const data = await res.json().catch(() => null);
+    throw new ApiError(res.status, data?.error?.message ?? `Erro ${res.status}`, data?.error?.code);
+  }
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  for (;;) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let sep: number;
+    while ((sep = buffer.indexOf('\n\n')) >= 0) {
+      const block = buffer.slice(0, sep);
+      buffer = buffer.slice(sep + 2);
+      const data = block.split('\n').filter((l) => l.startsWith('data:')).map((l) => l.slice(5).trim()).join('');
+      if (!data) continue;
+      try {
+        onEvent(JSON.parse(data));
+      } catch {
+        /* bloco incompleto */
+      }
+    }
+  }
+}

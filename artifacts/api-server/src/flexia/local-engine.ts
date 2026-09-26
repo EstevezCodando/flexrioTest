@@ -10,14 +10,14 @@ import { runTool, type SignalProposal } from './tools.ts';
 
 const INTENTS: Record<string, string[]> = {
   regulacao: ['regula', 'aneel', 'lei', 'norma', 'protocolo', 'ocpp', 'ocpi', 'openadr', 'iso', 'iec', 'nbr', 'lgpd', 'resolu', 'ren', 'tarifa branca', 'bandeira', 'incentivad', 'portaria', 'ccee', 'ons', 'v2g', 'abnt', 'plug and charge'],
-  preco: ['preco', 'pld', 'custo', 'tarifa', 'oferta', 'comercializ', 'mercado', 'kwh', 'barat', 'caro'],
+  preco: ['preco', 'janela', 'melhor horario', 'pld', 'custo', 'tarifa', 'oferta', 'comercializ', 'mercado', 'kwh', 'barat', 'caro'],
   rede: ['demanda', 'carga', 'geracao', 'rede', 'pico', 'renovav', 'hidr', 'termic', 'solar', 'eolic'],
   clima: ['clima', 'tempo', 'temperatura', 'chuva', 'nublad', 'irradia', 'vento', 'calor'],
   estacoes: ['estac', 'eletroposto', 'carregador', 'conector', 'manutenc', 'ponto de recarga', 'base'],
-  sinal: ['sinal', 'comunicad', 'janela', 'publicar', 'propor', 'recomend', 'avisar', 'notific', 'campanha', 'deslocar'],
+  sinal: ['comunicad', 'publicar', 'propor', 'proponha', 'avisar', 'avise', 'notific', 'campanha', 'criar sinal', 'crie um sinal', 'emitir sinal'],
 };
 
-function detectRegion(text: string): string | undefined {
+export function detectRegion(text: string): string | undefined {
   const t = normalizeText(text);
   const aliases: Record<string, string[]> = {
     capital: ['capital', 'rio de janeiro', 'cidade do rio', 'zona sul', 'zona norte', 'zona oeste', 'centro do rio', 'barra da tijuca'],

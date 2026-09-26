@@ -184,7 +184,7 @@ async function seedUsers() {
   );
 }
 
-export async function seedIfEmpty(log = console.log): Promise<void> {
+export async function seedIfEmpty(log: (m: string) => void = console.log): Promise<void> {
   const hasStations = get<{ n: number }>('SELECT COUNT(*) AS n FROM stations')?.n ?? 0;
   if (hasStations > 0) return;
   log('[seed] Banco vazio — importando referência e base carregados_rj...');
@@ -230,7 +230,7 @@ type ManifestEntry = {
  * Importa o manifesto de proveniência da coleta (URL, data, hashes por página) para o banco,
  * de forma idempotente. É o elo "estação exibida → fonte original" da rastreabilidade.
  */
-export function importProvenanceIfMissing(log = console.log): void {
+export function importProvenanceIfMissing(log: (m: string) => void = console.log): void {
   const manifestPath = path.join(config.datasetDir, 'manifesto.json');
   if (!fs.existsSync(manifestPath)) return;
   const raw = fs.readFileSync(manifestPath);

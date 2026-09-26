@@ -293,7 +293,7 @@ export type FlexiaMessage = {
   id?: number;
   role: 'user' | 'assistant';
   content: string;
-  meta?: { engine: 'claude' | 'local'; toolsUsed: string[]; proposal?: SignalProposal; note?: string } | null;
+  meta?: { engine: 'agentcore' | 'claude' | 'local'; route?: 'operacional' | 'setor' | 'misto'; toolsUsed: string[]; proposal?: SignalProposal; note?: string; ms?: number } | null;
   createdAt?: string;
 };
 

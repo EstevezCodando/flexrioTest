@@ -2,6 +2,7 @@ import type { ErrorRequestHandler, NextFunction, Request, Response } from 'expre
 import { ipKeyGenerator, rateLimit } from 'express-rate-limit';
 import { config } from '../config.ts';
 import { forbidden, HttpError, unauthorized } from '../lib/http.ts';
+import { errorFields, log } from '../lib/logger.ts';
 import { toPublicUser, userFromToken, type PublicUser, type Role } from '../services/auth.ts';
 
 export const SESSION_COOKIE = 'rf_session';
@@ -48,11 +49,20 @@ export const requireRole =
  *  2) cabeçalho customizado obrigatório (formulários cross-site não conseguem enviá-lo sem preflight CORS);
  *  3) se houver Origin, ele precisa estar na lista permitida.
  */
+/** Front e API servidos pelo mesmo host (produção): a origem do navegador é o próprio host. */
+function sameHost(origin: string, host: string | undefined): boolean {
+  try {
+    return !!host && new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
 export function csrfGuard(req: Request, _res: Response, next: NextFunction) {
   if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
   if (req.get('x-requested-with') !== 'RioFlex') return next(forbidden('Requisição sem cabeçalho de origem da aplicação'));
   const origin = req.get('origin');
-  if (origin && !config.isAllowedOrigin(origin)) return next(forbidden('Origem não permitida'));
+  if (origin && !config.isAllowedOrigin(origin) && !sameHost(origin, req.get('host'))) return next(forbidden('Origem não permitida'));
   next();
 }
 
@@ -92,6 +102,6 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
     res.status(status).json({ error: { code: 'bad_request', message: 'Requisição inválida' } });
     return;
   }
-  console.error(`[erro] ${req.method} ${req.path}`, err);
+  log.error('http.unhandled', { method: req.method, path: req.path, requestId: res.locals.requestId, ...errorFields(err) });
   res.status(500).json({ error: { code: 'internal', message: 'Erro interno. Tente novamente.' } });
 };

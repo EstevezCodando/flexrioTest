@@ -1,5 +1,5 @@
 // Rio Flex Service Worker
-const CACHE_NAME = 'rioflex-v2';
+const CACHE_NAME = 'rioflex-v3';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
@@ -41,6 +41,11 @@ self.addEventListener('fetch', (event) => {
 
   // Bypass external maps embed or analytics
   if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // NUNCA cachear a API: as respostas dependem do usuário da sessão (dados pessoais e de papel).
+  if (url.pathname.startsWith('/api/')) {
     return;
   }
 

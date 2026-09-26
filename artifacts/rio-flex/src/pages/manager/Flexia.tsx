@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Bot, Megaphone, Plus, Send, Trash2 } from 'lucide-react';
+import { Bot, Megaphone, Plus, Send, Square, Trash2 } from 'lucide-react';
 import { ManagerShell } from '@/components/layout/ManagerShell';
 import { ErrorBox, LevelBadge, Markdown } from '@/components/common/ui';
-import { api } from '@/lib/api';
+import { api, streamPost, type StreamEvent } from '@/lib/api';
 import { dateTimeOf } from '@/lib/format';
 import type { FlexiaMessage, SignalProposal } from '@/types/api';
 
@@ -15,6 +15,8 @@ const SUGGESTIONS = [
   'Quais protocolos usar para modular a potência dos carregadores (OCPP, OpenADR)?',
   'Resumo das estações da Baixada: conectores DC e problemas de cadastro.',
 ];
+
+const ENGINE_LABEL: Record<string, string> = { agentcore: 'FlexIA AWS', claude: 'Claude', local: 'Rio Flex (local)' };
 
 type Conversation = { id: string; title: string; updatedAt: string };
 
@@ -54,21 +56,53 @@ export default function FlexiaPage() {
   const [input, setInput] = useState('');
   const endRef = useRef<HTMLDivElement>(null);
 
-  const { data: status } = useQuery({ queryKey: ['flexia-status'], queryFn: () => api.get<{ engine: string; model: string | null; tools: string[] }>('/manager/flexia/status') });
+  const { data: status } = useQuery({ queryKey: ['flexia-status'], queryFn: () => api.get<{ engine: string; model: string | null; runtime: string | null; routing: string; tools: string[] }>('/manager/flexia/status') });
   const { data: conversations } = useQuery({ queryKey: ['flexia-convs'], queryFn: () => api.get<Conversation[]>('/manager/flexia/conversations') });
 
-  const send = useMutation({
-    mutationFn: (message: string) =>
-      api.post<{ conversationId: string; reply: { content: string; meta: FlexiaMessage['meta'] } }>('/manager/flexia/chat', {
-        conversationId: conversationId ?? undefined,
-        message,
-      }),
-    onSuccess: (r) => {
-      setConversationId(r.conversationId);
-      setMessages((m) => [...m, { role: 'assistant', content: r.reply.content, meta: r.reply.meta }]);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<unknown>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  /** Atualiza a última mensagem do assistente (a que está sendo transmitida). */
+  const patchLast = (fn: (m: FlexiaMessage) => FlexiaMessage) =>
+    setMessages((all) => {
+      const copy = [...all];
+      copy[copy.length - 1] = fn(copy[copy.length - 1]);
+      return copy;
+    });
+
+  async function sendStream(message: string) {
+    setPending(true);
+    setError(null);
+    const abort = new AbortController();
+    abortRef.current = abort;
+    setMessages((m) => [...m, { role: 'user', content: message }, { role: 'assistant', content: '', meta: { engine: 'local', toolsUsed: [] } }]);
+    try {
+      await streamPost('/manager/flexia/chat/stream', { conversationId: conversationId ?? undefined, message }, (e: StreamEvent) => {
+        if (e.type === 'meta') {
+          setConversationId(e.conversationId as string);
+          patchLast((m) => ({ ...m, meta: { ...m.meta!, engine: e.engine as 'local', route: e.route as 'setor' } }));
+        } else if (e.type === 'tool') {
+          patchLast((m) => ({ ...m, meta: { ...m.meta!, toolsUsed: [...new Set([...(m.meta?.toolsUsed ?? []), e.name as string])] } }));
+        } else if (e.type === 'delta') {
+          patchLast((m) => ({ ...m, content: m.content + (e.text as string) }));
+        } else if (e.type === 'proposal') {
+          patchLast((m) => ({ ...m, meta: { ...m.meta!, proposal: e.proposal as SignalProposal } }));
+        } else if (e.type === 'done') {
+          patchLast((m) => ({ ...m, meta: e.meta as FlexiaMessage['meta'] }));
+        } else if (e.type === 'error') {
+          setError(new Error(e.message as string));
+        }
+      }, abort.signal);
+    } catch (err) {
+      if (!abort.signal.aborted) setError(err);
+    } finally {
+      setPending(false);
+      abortRef.current = null;
       qc.invalidateQueries({ queryKey: ['flexia-convs'] });
-    },
-  });
+    }
+  }
+
   const remove = useMutation({
     mutationFn: (id: string) => api.del(`/manager/flexia/conversations/${id}`),
     onSuccess: (_d, id) => {
@@ -79,14 +113,13 @@ export default function FlexiaPage() {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, send.isPending]);
+  }, [messages, pending]);
 
   function submit(text = input) {
     const msg = text.trim();
-    if (!msg || send.isPending) return;
-    setMessages((m) => [...m, { role: 'user', content: msg }]);
+    if (!msg || pending) return;
     setInput('');
-    send.mutate(msg);
+    void sendStream(msg);
   }
 
   async function open(id: string) {
@@ -118,7 +151,7 @@ export default function FlexiaPage() {
           </div>
           {status && (
             <span className="rf-badge purple">
-              <Bot size={12} /> {status.engine === 'claude' ? `Claude · ${status.model}` : 'motor local (sem chave de API)'} · {status.tools.length} ferramentas
+              <Bot size={12} /> {status.engine === 'agentcore' ? `FlexIA AWS (AgentCore · ${status.runtime})` : status.engine === 'claude' ? `Claude · ${status.model}` : 'motor local'} + {status.tools.length} ferramentas Rio Flex
             </span>
           )}
         </div>
@@ -151,25 +184,32 @@ export default function FlexiaPage() {
               )}
               {messages.map((m, i) => (
                 <div key={i} className={`rf-msg ${m.role}`}>
-                  {m.role === 'assistant' ? <Markdown text={m.content} /> : m.content}
+                  {m.role === 'assistant'
+                    ? (m.content ? <Markdown text={m.content} /> : <span className="rf-typing"><span /><span /><span /></span>)
+                    : m.content}
                   {m.meta?.proposal && <ProposalCard p={m.meta.proposal} />}
                   {m.meta && (
                     <div className="rf-msg-meta">
-                      <span className="rf-badge gray">{m.meta.engine === 'claude' ? 'Claude' : 'motor local'}</span>
+                      <span className={`rf-badge ${m.meta.engine === 'agentcore' ? 'purple' : 'gray'}`}>{ENGINE_LABEL[m.meta.engine] ?? m.meta.engine}</span>
+                      {m.meta.route && <span className="rf-badge blue">rota: {m.meta.route}</span>}
+                      {typeof m.meta.ms === 'number' && <span className="rf-tiny">{(m.meta.ms / 1000).toFixed(1).replace('.', ',')} s</span>}
                       {m.meta.toolsUsed.map((t) => <span key={t} className="rf-badge gray">{t}</span>)}
                       {m.meta.note && <span className="rf-tiny">{m.meta.note}</span>}
                     </div>
                   )}
                 </div>
               ))}
-              {send.isPending && <div className="rf-msg assistant"><span className="rf-typing"><span /><span /><span /></span> analisando dados...</div>}
-              {send.error && <ErrorBox error={send.error} />}
+              {error ? <ErrorBox error={error} /> : null}
               <div ref={endRef} />
             </div>
             <div className="rf-flexia-input">
               <textarea className="rf-input" placeholder="Pergunte à FlexIA... (Enter envia, Shift+Enter quebra linha)" value={input} maxLength={2000}
                 onChange={(e) => setInput(e.target.value)} onKeyDown={onKey} aria-label="Mensagem para a FlexIA" />
-              <button type="button" className="rf-btn purple" disabled={send.isPending || !input.trim()} onClick={() => submit()}><Send size={15} /></button>
+              {pending ? (
+                <button type="button" className="rf-btn secondary" title="Parar resposta" onClick={() => abortRef.current?.abort()}><Square size={15} /></button>
+              ) : (
+                <button type="button" className="rf-btn purple" disabled={!input.trim()} onClick={() => submit()}><Send size={15} /></button>
+              )}
             </div>
           </div>
         </div>

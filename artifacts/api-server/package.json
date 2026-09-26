@@ -8,11 +8,13 @@
     "start": "tsx --env-file-if-exists=.env src/index.ts",
     "db:seed": "tsx --env-file-if-exists=.env src/db/cli.ts seed",
     "db:reset": "tsx --env-file-if-exists=.env src/db/cli.ts reset",
-    "test": "tsx --test test/api.test.ts",
+    "db:backup": "tsx --env-file-if-exists=.env src/db/cli.ts backup",
+    "test": "tsx --test test/api.test.ts test/flexia.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
+    "@aws-sdk/client-bedrock-agentcore": "^3.1140.0",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
