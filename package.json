@@ -9,7 +9,9 @@
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
     "dev:api": "pnpm --filter @workspace/api-server run dev",
     "dev:web": "pnpm --filter @workspace/rio-flex run dev",
-    "db:reset": "pnpm --filter @workspace/api-server run db:reset"
+    "db:reset": "pnpm --filter @workspace/api-server run db:reset",
+    "local:aws": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/local-aws.ps1",
+    "flexia:check": "pnpm --filter @workspace/api-server run flexia:check"
   },
   "private": true,
   "dependencies": {

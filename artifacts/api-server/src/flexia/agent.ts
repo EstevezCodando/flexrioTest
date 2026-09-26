@@ -5,7 +5,7 @@ import { newId } from '../lib/crypto.ts';
 import { notFound } from '../lib/http.ts';
 import { errorFields, log } from '../lib/logger.ts';
 import { isoLocal, nowEpoch } from '../lib/util.ts';
-import { agentCoreSessionId, invokeFlexiaAgentCore } from './agentcore.ts';
+import { agentCoreSessionId, credentialSource, invokeFlexiaAgentCore } from './agentcore.ts';
 import { detectRegion, localAnswer } from './local-engine.ts';
 import { classify, operationalContext, type Route } from './router.ts';
 import { runTool, TOOLS, type SignalProposal } from './tools.ts';
@@ -278,6 +278,7 @@ export function flexiaStatus() {
     engine: b,
     model: b === 'claude' ? config.flexia.model : null,
     runtime: b === 'agentcore' ? config.flexia.runtimeArn?.split('/').pop() ?? null : null,
+    credentials: b === 'agentcore' ? credentialSource().replace(/arquivo .*[\/]/, 'arquivo …/') : null,
     routing: 'operacional → ferramentas Rio Flex · setor → FlexIA AWS · misto → FlexIA AWS com contexto operacional',
     tools: TOOLS.map((t) => t.name),
   };

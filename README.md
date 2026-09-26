@@ -762,6 +762,21 @@ Novos motoristas: `/signup`.
 
 ---
 
+## 16.0 Modo recomendado para testes e apresentação: Rio Flex local + FlexIA na AWS
+
+O Rio Flex roda **nesta máquina** (API + frontend + SQLite, modo produção, porta única `8080`). A **FlexIA** — AgentCore, data lake, Bedrock (Nemotron + Claude) — e o **acervo do Cavuca** (coleta agendada que grava os documentos no S3 lidos por `buscar_documentos`) rodam **na AWS**. O microserviço de busca ao vivo do Cavuca (`busca_profunda`) segue local ao projeto FlexIA; quando indisponível, a FlexIA responde pelo acervo indexado.
+
+```powershell
+.\scripts\local-aws.ps1                  # testa a FlexIA na AWS, compila o front se preciso e sobe http://localhost:8080
+.\scripts\local-aws.ps1 -SoVerificar     # só a conexão: primeiro token, tempo total e ferramentas usadas
+.\scripts\local-aws.ps1 -IgnorarFalhaAws # sobe mesmo sem AWS (setor cai no motor local, com aviso)
+.\scripts\local-aws.ps1 -Dev             # desenvolvimento: API :5000 + Vite com hot reload
+```
+
+- **Credenciais:** lidas do `.env` do projeto FlexIA (`C:\Desenvolvimento\Hackathon\FlexIA\.env`). As chaves temporárias **não** entram no ambiente nem no repositório do Rio Flex: a API **relê o arquivo a cada minuto** (`AWS_CREDENTIALS_ENV_FILE`). Quando as chaves do workshop expirarem, basta rodar `.\configurar.ps1 -SalvarCredenciais` na pasta da FlexIA — o Rio Flex em execução passa a usar as novas **sem reiniciar**.
+- **Diagnóstico:** `pnpm flexia:check` classifica a falha (credencial expirada, permissão, ARN/runtime, tempo limite) e mede a latência real; `GET /api/ready` e o selo no topo da tela da FlexIA mostram o motor ativo.
+- **Estado:** caminho local → AgentCore → fallback validado ao vivo (com credencial expirada, a pergunta de setor tentou a AWS e caiu no motor local em 0,8 s com aviso). A resposta real da AgentCore depende de credenciais renovadas.
+
 ## 16.1 Implantação na AWS
 
 **Por que este desenho.** A conta do workshop bloqueia `iam:PassRole` (sem ECS/Lambda/App Runner com role própria), CloudFront, API Gateway e RDS. O caminho que já funcionou para a FlexIA é a **instância do Code Editor comandada via Systems Manager** — o Rio Flex usa o mesmo, numa **imagem única** (API + frontend + SQLite em volume), com a **role da instância** para chamar a FlexIA. Numa conta sem essas restrições, a mesma imagem sobe em ECS Fargate/App Runner atrás de um ALB com HTTPS.

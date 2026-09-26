@@ -10,7 +10,8 @@
     "db:reset": "tsx --env-file-if-exists=.env src/db/cli.ts reset",
     "db:backup": "tsx --env-file-if-exists=.env src/db/cli.ts backup",
     "test": "tsx --test test/api.test.ts test/flexia.test.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "flexia:check": "tsx --env-file-if-exists=.env src/flexia/check.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

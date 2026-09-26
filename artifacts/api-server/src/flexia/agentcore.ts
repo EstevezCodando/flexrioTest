@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import fs from 'node:fs';
 import { BedrockAgentCoreClient, InvokeAgentRuntimeCommand } from '@aws-sdk/client-bedrock-agentcore';
 import { config } from '../config.ts';
 
@@ -15,11 +16,48 @@ import { config } from '../config.ts';
 
 export type AgentCoreEvent = { type: 'delta'; text: string } | { type: 'tool'; name: string };
 
+/**
+ * Credenciais relidas de um arquivo .env (ex.: o da FlexIA, atualizado pelo configurar.ps1). As chaves do
+ * workshop expiram em horas; com isto, renová-las no arquivo basta — sem reiniciar o Rio Flex. O SDK volta a
+ * pedir credenciais quando `expiration` passa, então o arquivo é relido no máximo a cada minuto.
+ */
+function envFileCredentials(file: string) {
+  return async () => {
+    const vars: Record<string, string> = {};
+    for (const line of fs.readFileSync(file, 'utf8').replace(/^﻿/, '').split(/\r?\n/)) {
+      const m = line.match(/^\s*(AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_SESSION_TOKEN)\s*=\s*(.+?)\s*$/);
+      if (m) vars[m[1]] = m[2].replace(/^["']|["']$/g, '');
+    }
+    if (!vars.AWS_ACCESS_KEY_ID || !vars.AWS_SECRET_ACCESS_KEY) {
+      throw Object.assign(new Error(`Sem AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY em ${file}`), { name: 'CredentialsProviderError' });
+    }
+    return {
+      accessKeyId: vars.AWS_ACCESS_KEY_ID,
+      secretAccessKey: vars.AWS_SECRET_ACCESS_KEY,
+      sessionToken: vars.AWS_SESSION_TOKEN || undefined,
+      expiration: new Date(Date.now() + 60_000),
+    };
+  };
+}
+
 let client: BedrockAgentCoreClient | null = null;
 function getClient(arn: string): BedrockAgentCoreClient {
+  const credFile = process.env.AWS_CREDENTIALS_ENV_FILE?.trim();
   // A região vem do próprio ARN: o runtime pode estar em região diferente da do restante da conta.
-  client ??= new BedrockAgentCoreClient({ region: arn.split(':')[3], maxAttempts: 2 });
+  // Sem arquivo de credenciais, vale a cadeia padrão (role da instância, variáveis, perfil).
+  client ??= new BedrockAgentCoreClient({
+    region: arn.split(':')[3],
+    maxAttempts: 2,
+    ...(credFile ? { credentials: envFileCredentials(credFile) } : {}),
+  });
   return client;
+}
+
+export function credentialSource(): string {
+  const f = process.env.AWS_CREDENTIALS_ENV_FILE?.trim();
+  if (f) return `arquivo ${f} (relido a cada minuto)`;
+  if (process.env.AWS_ACCESS_KEY_ID) return 'variáveis de ambiente';
+  return `cadeia padrão da AWS${process.env.AWS_PROFILE ? ` (perfil ${process.env.AWS_PROFILE})` : ' (role/perfil)'}`;
 }
 
 /** O runtime exige IDs de sessão com 33+ caracteres; derivamos um estável por conversa e usuário. */
