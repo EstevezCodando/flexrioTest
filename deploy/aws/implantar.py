@@ -33,7 +33,8 @@ RAIZ = Path(__file__).resolve().parents[2]
 AQUI = Path(__file__).resolve().parent
 USUARIO = "participant"
 PORTA = 8080
-REGIAO_SSM = "us-east-1"
+# Sobrescrevível: nesta conta/sandbox a instância do Code Editor está em us-west-2, não us-east-1.
+REGIAO_SSM = os.environ.get("RIOFLEX_REGIAO_SSM", "us-east-1")
 
 
 # ------------------------------------------------------------------ configuração
@@ -147,6 +148,19 @@ def verificar(_args) -> int:
             print(f"  AVISO FlexIA no AgentCore  não consegui consultar pelo seu usuário ({str(e)[:90]}); a instância testa abaixo")
     else:
         falha("FLEXIA_RUNTIME_ARN", "vazio — o Rio Flex usará o motor local")
+    teste_arn_script = (
+        "python3 - <<'PY'\n"
+        "import boto3,json\n"
+        f"arn='{arn}'\n"
+        "c=boto3.client('bedrock-agentcore',region_name=arn.split(':')[3])\n"
+        "try:\n"
+        "    r=c.invoke_agent_runtime(agentRuntimeArn=arn,runtimeSessionId='rioflex-verificacao-0000000000000000000',payload=json.dumps({'prompt':'Responda apenas: ok'}).encode())\n"
+        "    n=sum(1 for l in r['response'].iter_lines() if l)\n"
+        "    print('flexia_da_instancia: ok', n, 'eventos')\n"
+        "except Exception as e:\n"
+        "    print('flexia_da_instancia: FALHA', str(e)[:160])\n"
+        "PY"
+    ) if arn else "echo 'flexia_da_instancia: sem ARN'"
     codigo, saida, erro = remoto(f"""
 echo "docker: $(docker --version 2>/dev/null || echo ausente)"
 echo "docker_ok: $(docker info >/dev/null 2>&1 && echo sim || (sudo -n docker info >/dev/null 2>&1 && echo sudo || echo nao))"
@@ -154,7 +168,7 @@ echo "docker_ok: $(docker info >/dev/null 2>&1 && echo sim || (sudo -n docker in
 echo "node: $(node --version 2>/dev/null || echo ausente)"
 echo "disco_livre: $(df -h $HOME | awk 'NR==2{{print $4}}')"
 echo "identidade: $(aws sts get-caller-identity --query Arn --output text 2>/dev/null | awk -F: '{{print $NF}}')"
-{"python3 - <<'PY'\nimport boto3,json\narn='" + arn + "'\nc=boto3.client('bedrock-agentcore',region_name=arn.split(':')[3])\ntry:\n    r=c.invoke_agent_runtime(agentRuntimeArn=arn,runtimeSessionId='rioflex-verificacao-0000000000000000000',payload=json.dumps({'prompt':'Responda apenas: ok'}).encode())\n    n=sum(1 for l in r['response'].iter_lines() if l)\n    print('flexia_da_instancia: ok', n, 'eventos')\nexcept Exception as e:\n    print('flexia_da_instancia: FALHA', str(e)[:160])\nPY" if arn else "echo 'flexia_da_instancia: sem ARN'"}
+{teste_arn_script}
 """, timeout_s=300)
     print("\n  -- instância --")
     print("  " + saida.strip().replace("\n", "\n  "))
