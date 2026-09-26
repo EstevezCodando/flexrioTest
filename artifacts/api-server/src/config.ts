@@ -53,6 +53,17 @@ export const config = {
   /** Saltos de proxy confiáveis (ALB/NGINX = 1). 0 = conexão direta. */
   trustProxy: Number(process.env.TRUST_PROXY ?? (isProd ? 1 : 0)),
   sessionTtlHours: int('SESSION_TTL_HOURS', 12),
+  /**
+   * No Lambda, cada instância de execução tem seu próprio SQLite em /tmp: uma sessão criada
+   * numa instância não existe nas outras. 'dynamodb' guarda as sessões numa tabela
+   * compartilhada (única fonte de verdade) para que qualquer instância reconheça o login,
+   * permitindo requisições concorrentes reais em vez de forçar concurrency=1 no Lambda
+   * (que fazia qualquer chamada além da primeira levar 429 sem cabeçalhos de CORS).
+   */
+  sessionStore: (process.env.SESSION_STORE?.trim().toLowerCase() === 'dynamodb' ? 'dynamodb' : 'sqlite') as
+    | 'dynamodb'
+    | 'sqlite',
+  sessionsTable: process.env.SESSIONS_TABLE?.trim() || null,
   cookieSecure: process.env.COOKIE_SECURE ? process.env.COOKIE_SECURE === 'true' : isProd,
   chargingSimSpeed: int('CHARGING_SIM_SPEED', 30),
   logLevel: (process.env.LOG_LEVEL ?? (isProd ? 'info' : 'debug')) as 'debug' | 'info' | 'warn' | 'error',
@@ -96,6 +107,9 @@ export function validateConfig(): string[] {
     }
     if (usesDefaultPasswords) warnings.push('DEMO_ACCOUNTS=true: contas de demonstração com senha padrão ativas.');
     if (!config.cookieSecure) warnings.push('COOKIE_SECURE=false em produção: use apenas atrás de túnel/HTTPS confiável.');
+  }
+  if (config.sessionStore === 'dynamodb' && !config.sessionsTable) {
+    throw new Error('SESSION_STORE=dynamodb exige SESSIONS_TABLE.');
   }
   if (config.flexia.backend === 'agentcore' && !config.flexia.runtimeArn) {
     throw new Error('FLEXIA_BACKEND=agentcore exige FLEXIA_RUNTIME_ARN.');

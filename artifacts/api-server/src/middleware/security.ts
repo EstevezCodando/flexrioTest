@@ -18,10 +18,10 @@ declare global {
 }
 
 /** Resolve o usuário a partir do cookie httpOnly de sessão (token opaco, só o hash fica no banco). */
-export function loadUser(req: Request, _res: Response, next: NextFunction) {
+export async function loadUser(req: Request, _res: Response, next: NextFunction) {
   const token = req.cookies?.[SESSION_COOKIE];
   if (typeof token === 'string' && token.length >= 20 && token.length <= 100) {
-    const u = userFromToken(token);
+    const u = await userFromToken(token);
     if (u) {
       req.user = toPublicUser(u);
       req.sessionToken = token;

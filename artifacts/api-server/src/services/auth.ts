@@ -3,6 +3,7 @@ import { audit, get, run } from '../db/index.ts';
 import { getDummyHash, hashPassword, newId, newToken, sha256, verifyPassword } from '../lib/crypto.ts';
 import { conflict, HttpError } from '../lib/http.ts';
 import { nowEpoch } from '../lib/util.ts';
+import { createSession, deleteSession, findUserIdByToken } from './sessionStore.ts';
 
 export type Role = 'consumer' | 'manager';
 
@@ -84,11 +85,8 @@ export async function login(email: string, password: string, portal: Role, ip?: 
   }
 
   run('UPDATE users SET failed_attempts = 0, locked_until = NULL WHERE id = ?', user.id);
-  // Limpa sessões expiradas do usuário a cada login.
-  run('DELETE FROM auth_sessions WHERE user_id = ? AND expires_at < ?', user.id, now);
   const token = newToken();
-  run('INSERT INTO auth_sessions (token_hash, user_id, created_at, expires_at, ip, user_agent) VALUES (?, ?, ?, ?, ?, ?)',
-    sha256(token), user.id, now, now + config.sessionTtlHours * 3600, ip ?? null, userAgent?.slice(0, 200) ?? null);
+  await createSession(sha256(token), user.id, config.sessionTtlHours * 3600, ip, userAgent);
   audit(user.id, 'auth.login', portal, ip);
   return { token, user: toPublicUser(user) };
 }
@@ -106,16 +104,14 @@ export async function registerConsumer(input: { name: string; email: string; pas
   return login(input.email, input.password, 'consumer', ip);
 }
 
-export function userFromToken(token: string): UserRow | undefined {
-  return get<UserRow>(
-    `SELECT u.* FROM auth_sessions s JOIN users u ON u.id = s.user_id
-     WHERE s.token_hash = ? AND s.expires_at > ?`,
-    sha256(token), nowEpoch(),
-  );
+export async function userFromToken(token: string): Promise<UserRow | undefined> {
+  const userId = await findUserIdByToken(sha256(token));
+  if (!userId) return undefined;
+  return get<UserRow>('SELECT * FROM users WHERE id = ?', userId);
 }
 
-export function logout(token: string) {
-  run('DELETE FROM auth_sessions WHERE token_hash = ?', sha256(token));
+export async function logout(token: string) {
+  await deleteSession(sha256(token));
 }
 
 export function getUser(id: string): UserRow {

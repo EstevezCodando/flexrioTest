@@ -69,8 +69,8 @@ authRouter.post('/register', loginLimiter, handler(async (req, res) => {
   res.status(201).json({ user });
 }));
 
-authRouter.post('/logout', handler((req, res) => {
-  if (req.sessionToken) logout(req.sessionToken);
+authRouter.post('/logout', handler(async (req, res) => {
+  if (req.sessionToken) await logout(req.sessionToken);
   res.clearCookie(SESSION_COOKIE, { path: '/api' });
   res.status(204).end();
 }));
