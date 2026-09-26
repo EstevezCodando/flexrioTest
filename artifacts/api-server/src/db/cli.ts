@@ -1,4 +1,4 @@
-import { resetDatabase, seedIfEmpty } from './seed.ts';
+import { importProvenanceIfMissing, resetDatabase, seedIfEmpty } from './seed.ts';
 import { ingestMarketData } from '../services/market.ts';
 
 const cmd = process.argv[2];
@@ -9,6 +9,7 @@ if (cmd === 'reset') {
 }
 if (cmd === 'reset' || cmd === 'seed') {
   await seedIfEmpty();
+  importProvenanceIfMissing();
   const n = await ingestMarketData();
   console.log(`[db] ${n} preços horários de mercado ingeridos.`);
 } else {

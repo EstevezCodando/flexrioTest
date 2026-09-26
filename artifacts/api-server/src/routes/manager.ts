@@ -7,6 +7,7 @@ import { KNOWLEDGE, searchKnowledge } from '../flexia/knowledge.ts';
 import { handler, parse } from '../lib/http.ts';
 import { isoLocal, nowEpoch } from '../lib/util.ts';
 import { flexiaLimiter } from '../middleware/security.ts';
+import { datasetSnapshots, stationLineage } from '../services/lineage.ts';
 import { gridSeries, weatherSeries } from '../services/grid.ts';
 import { priceAt } from '../services/pricing.ts';
 import { isRegion, regions } from '../services/regions.ts';
@@ -104,6 +105,13 @@ managerRouter.delete('/signals/:id', handler((req, res) => {
 managerRouter.get('/knowledge', handler((req, res) => {
   const q = parse(z.object({ q: z.string().max(120).optional() }), req.query);
   res.json(q.q ? searchKnowledge(q.q, 10) : KNOWLEDGE);
+}));
+
+/** Rastreabilidade: manifestos dos snapshots importados e cadeia de lineage por estação. */
+managerRouter.get('/lineage/datasets', (_req, res) => res.json(datasetSnapshots()));
+managerRouter.get('/lineage/stations/:id', handler((req, res) => {
+  const { id } = parse(z.object({ id: z.coerce.number().int().positive() }), req.params);
+  res.json(stationLineage(id));
 }));
 
 managerRouter.get('/audit', (_req, res) => {

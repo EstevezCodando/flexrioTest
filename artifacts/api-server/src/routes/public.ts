@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { CHARGE_TYPE_INFO, CHARGE_TYPES, SIGNAL_INFO } from '../domain/reference.ts';
 import { handler, parse } from '../lib/http.ts';
 import { nowEpoch } from '../lib/util.ts';
+import { calcProvenance } from '../services/lineage.ts';
 import { getPldSeries } from '../services/market.ts';
 import { bestWindows, priceAt, priceSeries, quoteOffers } from '../services/pricing.ts';
 import { isRegion, nearestRegion, region, regions } from '../services/regions.ts';
@@ -89,6 +90,7 @@ catalogRouter.get('/prices/:region/now', handler((req, res) => {
     chargeTypes: CHARGE_TYPES.map((ct) => ({ id: ct, ...CHARGE_TYPE_INFO[ct], priceKwh: p.consumerPrices[ct] })),
     bestWindows: bestWindows(id, 'dc_rapida', 24),
     activeSignals: listSignals({ regionId: id }),
+    provenance: calcProvenance('price'),
     disclaimer: 'Valores simulados (mock). Arquitetura preparada para PLD da CCEE e ofertas reais de comercializadoras.',
   });
 }));
@@ -131,7 +133,7 @@ catalogRouter.get('/market/pld', handler((req, res) => {
     req.query,
   );
   res.set('Cache-Control', 'private, no-cache');
-  res.json({ submarket: q.submarket, source: 'mock-ccee-v1', points: getPldSeries(q.submarket, nowEpoch(), q.hours) });
+  res.json({ submarket: q.submarket, source: 'mock-ccee-v1', provenance: calcProvenance('price'), points: getPldSeries(q.submarket, nowEpoch(), q.hours) });
 }));
 
 catalogRouter.get('/signals', handler((req, res) => {

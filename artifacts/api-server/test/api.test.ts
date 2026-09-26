@@ -14,7 +14,7 @@ process.env.DB_PATH = path.join(tmp, 'test.db');
 process.env.CHARGING_SIM_SPEED = '3600';
 
 const { parseCsv } = await import('../src/lib/csv.ts');
-const { seedIfEmpty } = await import('../src/db/seed.ts');
+const { seedIfEmpty, importProvenanceIfMissing } = await import('../src/db/seed.ts');
 const { ingestMarketData } = await import('../src/services/market.ts');
 const { createApp } = await import('../src/app.ts');
 const { config } = await import('../src/config.ts');
@@ -32,6 +32,7 @@ async function login(email: string, password: string, portal: 'consumer' | 'mana
 
 before(async () => {
   await seedIfEmpty(() => undefined);
+  importProvenanceIfMissing(() => undefined);
   await ingestMarketData();
   server = createApp().listen(0);
   const port = (server.address() as { port: number }).port;
@@ -136,5 +137,30 @@ describe('recarga', () => {
     assert.ok(stop.session.energyKwh > 0);
     const second = await fetch(`${base}/me/charging/active`, { headers: { cookie } }).then(json);
     assert.equal(second.session, null);
+  });
+});
+
+describe('rastreabilidade', () => {
+  it('lineage da estação aponta URL, data e hash da coleta original', async () => {
+    const { cookie } = await login(config.seed.managerEmail, config.seed.managerPassword, 'manager');
+    const list = await fetch(`${base}/stations?limit=1`, { headers: { cookie } }).then(json);
+    const l = await fetch(`${base}/manager/lineage/stations/${list.items[0].id}`, { headers: { cookie } }).then(json);
+    const raw = l.chain.find((c: { step: string }) => c.step.startsWith('coleta'));
+    assert.match(raw.responseSha256, /^[0-9a-f]{64}$/);
+    assert.match(raw.sourceUrl, /^https:\/\//);
+    assert.ok(raw.retrievedAt);
+    assert.equal(l.snapshot.records, 828);
+  });
+
+  it('respostas de preço trazem versão de processamento e provedor de mercado', async () => {
+    const { cookie } = await login(config.seed.consumerEmail, config.seed.consumerPassword, 'consumer');
+    const p = await fetch(`${base}/prices/capital/now`, { headers: { cookie } }).then(json);
+    assert.equal(p.provenance.processingVersion, 'pricing-v1');
+    assert.equal(p.provenance.dataQuality, 'simulado');
+  });
+
+  it('lineage é restrito a gestores', async () => {
+    const { cookie } = await login(config.seed.consumerEmail, config.seed.consumerPassword, 'consumer');
+    assert.equal((await fetch(`${base}/manager/lineage/datasets`, { headers: { cookie } })).status, 403);
   });
 });

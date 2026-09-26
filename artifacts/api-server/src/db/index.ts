@@ -234,6 +234,38 @@ const MIGRATIONS: { id: number; sql: string }[] = [
     UPDATE charging_sessions SET initial_soc = start_soc, initial_started_at = started_at WHERE initial_soc IS NULL;
     `,
   },
+  {
+    // Rastreabilidade: um registro por página de origem coletada e um manifesto por snapshot.
+    id: 3,
+    sql: `
+    CREATE TABLE dataset_snapshots (
+      snapshot_id TEXT PRIMARY KEY,
+      source TEXT NOT NULL,
+      source_url TEXT NOT NULL,
+      tool TEXT NOT NULL,
+      collected_from TEXT,
+      collected_to TEXT,
+      records INTEGER NOT NULL,
+      summary_json TEXT,
+      validation_json TEXT,
+      manifest_sha256 TEXT NOT NULL,
+      imported_at INTEGER NOT NULL,
+      processing_version TEXT NOT NULL
+    );
+    CREATE TABLE source_records (
+      snapshot_id TEXT NOT NULL REFERENCES dataset_snapshots(snapshot_id),
+      station_id INTEGER NOT NULL,
+      url TEXT NOT NULL,
+      retrieved_at TEXT NOT NULL,
+      http_status INTEGER,
+      raw_extract_sha256 TEXT,
+      response_sha256 TEXT,
+      tool TEXT,
+      PRIMARY KEY (snapshot_id, station_id)
+    );
+    CREATE INDEX idx_source_records_station ON source_records(station_id);
+    `,
+  },
 ];
 
 function openDatabase(): DatabaseSync {

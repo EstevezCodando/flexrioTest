@@ -5,7 +5,10 @@ import { CHARGE_TYPE_INFO, REGIONS, SUPPLIERS, type ChargeType } from '../domain
 import { bool, num, readCsv } from '../lib/csv.ts';
 import { hashPassword, newId } from '../lib/crypto.ts';
 import { haversineKm, HOUR, hourStart, normalizeText, nowEpoch } from '../lib/util.ts';
+import { createHash } from 'node:crypto';
 import { all, db, get, run, transaction } from './index.ts';
+
+export const PROCESSING_VERSION = 'etl-import-v1';
 
 const DC_TYPES = /ccs|chademo|gb\/t \(fast\)|dc/i;
 
@@ -210,4 +213,54 @@ export function resetDatabase() {
     for (const t of tables) db.exec(`DELETE FROM "${t.name}"`);
   });
   db.exec('PRAGMA foreign_keys = ON');
+}
+
+type ManifestEntry = {
+  local_id: number;
+  arquivo: string;
+  sha256: string;
+  url: string;
+  coletado_em: string;
+  http_status: number;
+  sha256_resposta: string;
+  ferramenta: string;
+};
+
+/**
+ * Importa o manifesto de proveniência da coleta (URL, data, hashes por página) para o banco,
+ * de forma idempotente. É o elo "estação exibida → fonte original" da rastreabilidade.
+ */
+export function importProvenanceIfMissing(log = console.log): void {
+  const manifestPath = path.join(config.datasetDir, 'manifesto.json');
+  if (!fs.existsSync(manifestPath)) return;
+  const raw = fs.readFileSync(manifestPath);
+  const manifestHash = createHash('sha256').update(raw).digest('hex');
+  const snapshotId = get<{ snapshot_id: string }>('SELECT snapshot_id FROM stations LIMIT 1')?.snapshot_id;
+  if (!snapshotId) return;
+  if (get('SELECT 1 FROM dataset_snapshots WHERE snapshot_id = ? AND manifest_sha256 = ?', snapshotId, manifestHash)) return;
+
+  const entries = JSON.parse(raw.toString('utf8')) as ManifestEntry[];
+  const readJson = (name: string) => {
+    const f = path.join(config.datasetDir, name);
+    return fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : null;
+  };
+  const times = entries.map((e) => e.coletado_em).sort();
+  transaction(() => {
+    run(
+      `INSERT OR REPLACE INTO dataset_snapshots (snapshot_id, source, source_url, tool, collected_from, collected_to, records,
+        summary_json, validation_json, manifest_sha256, imported_at, processing_version)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      snapshotId, 'Carregados (cadastros públicos de estações de recarga)', 'https://carregados.com.br/estacoes?estado=rio+de+janeiro+%28rj%29',
+      entries[0]?.ferramenta ?? 'Cavuca', times[0] ?? null, times[times.length - 1] ?? null, entries.length,
+      readJson('resumo.json'), readJson('validacao.json'), manifestHash, Math.floor(Date.now() / 1000), PROCESSING_VERSION,
+    );
+    for (const e of entries) {
+      run(
+        `INSERT OR REPLACE INTO source_records (snapshot_id, station_id, url, retrieved_at, http_status, raw_extract_sha256, response_sha256, tool)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        snapshotId, e.local_id, e.url, e.coletado_em, e.http_status, e.sha256, e.sha256_resposta, e.ferramenta,
+      );
+    }
+  });
+  log(`[seed] Proveniência importada: ${entries.length} registros de origem (manifesto sha256 ${manifestHash.slice(0, 12)}…).`);
 }

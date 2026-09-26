@@ -4,6 +4,7 @@ import { notFound } from '../lib/http.ts';
 import { haversineKm, localHour, normalizeText, nowEpoch, noise, round } from '../lib/util.ts';
 import { gridAt } from './grid.ts';
 import { priceAt, priceSeries, type HourPrice } from './pricing.ts';
+import { stationProvenance } from './lineage.ts';
 import { region } from './regions.ts';
 
 type StationRow = {
@@ -293,6 +294,7 @@ export function stationDetail(id: number, origin?: { lat: number; lng: number })
     sourceUrl: s.source_url,
     snapshotId: s.snapshot_id,
     updatedAt: s.updated_at,
+    provenance: stationProvenance(s.id),
     quality: s.quality,
     connectorsDetail: s.connectors.map((c) => ({
       id: c.id,

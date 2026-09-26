@@ -1,7 +1,7 @@
 import { createApp } from './app.ts';
 import { config } from './config.ts';
 import { run } from './db/index.ts';
-import { seedIfEmpty } from './db/seed.ts';
+import { importProvenanceIfMissing, seedIfEmpty } from './db/seed.ts';
 import { evaluateAlerts } from './services/alerts.ts';
 import { ingestMarketData } from './services/market.ts';
 import { clearPricingCaches } from './services/pricing.ts';
@@ -9,6 +9,7 @@ import { setSignalsChangedHook } from './services/signals.ts';
 import { refreshActiveConnectors, stationCount } from './services/stations.ts';
 
 await seedIfEmpty();
+importProvenanceIfMissing();
 await ingestMarketData();
 refreshActiveConnectors();
 setSignalsChangedHook(clearPricingCaches);
