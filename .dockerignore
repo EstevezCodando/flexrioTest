@@ -1,0 +1,15 @@
+**/node_modules
+**/dist
+**/.vite
+.git
+.claude
+**/*.log
+**/.env
+**/.env.*
+!**/.env.example
+artifacts/api-server/data/*.db
+artifacts/api-server/data/*.db-*
+artifacts/api-server/data/backups
+public
+deploy/aws/*.env
+deploy/aws/out

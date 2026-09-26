@@ -28,3 +28,8 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Implantação
+deploy/aws/*.env
+!deploy/aws/*.env.example
+deploy/aws/out/

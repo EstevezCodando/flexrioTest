@@ -70,7 +70,7 @@ artifacts/
    ├─ src/flexia/      agent (Claude) · local-engine · tools · knowledge
    ├─ src/middleware/  segurança (sessão, CSRF, papéis, rate limit, erros)
    ├─ data/carregados_rj/  CSVs + manifesto.json + validacao.json (proveniência da coleta)
-   └─ test/            16 testes de integração
+   └─ test/            22 testes
 ```
 
 ---
@@ -216,7 +216,28 @@ Assistente **exclusivo dos gestores** (`/gestor/flexia`), com 9 ferramentas some
 | flexibilidade disponível | 🟡 | ofertas de modulação em sessões DC; estimativa agregada 🔵 |
 | versão do modelo, dados usados, data de geração, horizonte, métricas de qualidade | 🟡 | `provenance` (`processingVersion`, `generatedAt`, `marketProvider`); horizonte = parâmetro `hours`; **métricas de qualidade e `model_version` 🔵** (não há modelo treinado a avaliar) |
 
-**Motores.** Com `ANTHROPIC_API_KEY`: Claude (`claude-opus-5`, configurável em `FLEXIA_MODEL`) com **loop manual de ferramentas**, *adaptive thinking* e cache do prompt de sistema. Sem chave ou em falha da API: **motor local** por intenção que chama as mesmas ferramentas. As respostas indicam o motor e as ferramentas usadas; o texto sempre lembra que os dados são simulados.
+**Integração com a FlexIA da AWS.** A FlexIA completa — data lake de ~415 milhões de registros (ONS, ANEEL, CCEE, EPE, MME, clima), documentos regulatórios coletados pelo Cavuca e roteador NVIDIA Nemotron + Claude no Bedrock — roda no **Amazon Bedrock AgentCore Runtime** (`SINIntelligence_SINAgent`, us-west-2; projeto `FlexIA`). O Rio Flex a consome pelo SDK oficial (`@aws-sdk/client-bedrock-agentcore`, `InvokeAgentRuntime`), e não duplica o data lake.
+
+**Roteamento (sem LLM, < 1 ms)** — `src/flexia/router.ts`:
+
+| Rota | Exemplo | Quem responde | Por quê |
+|---|---|---|---|
+| **operacional** | "Proponha um sinal para a Região dos Lagos", "estações DC livres na capital" | ferramentas do Rio Flex (motor local ou Claude direto) | o dado está no Rio Flex; resposta em milissegundos |
+| **setor** | "carga do SIN no Sudeste em agosto", "o que diz a Lei 14.300" | **FlexIA na AWS** (data lake + documentos) | o dado está no lake/acervo oficial |
+| **misto** | "com a hidrologia do ONS, devo publicar sinal vermelho na capital?" | **FlexIA na AWS** + contexto operacional compacto do Rio Flex (preço, rede, sinais) anexado à pergunta | junta as duas visões numa chamada só |
+
+**Conversa eficiente.**
+- **Streaming (SSE)** — `POST /manager/flexia/chat/stream`: a interface mostra a rota, cada ferramenta em uso (as da AWS aparecem como `aws:consultar_sql`, `aws:buscar_documentos`…) e o texto token a token. O botão **Parar** cancela a chamada ao modelo (`AbortController` até o SDK).
+- **Sessão no runtime**: cada conversa usa um `runtimeSessionId` estável (`rioflex-<conversa>-<hash do usuário>`), então o AgentCore mantém o histórico e o Rio Flex envia **só a pergunta nova** (e o preâmbulo apenas na primeira mensagem).
+- **Sem chamada extra para decidir a rota**, heartbeat a cada 15 s para proxies, compressão desligada no stream, timeout configurável (`FLEXIA_TIMEOUT_MS`).
+- **Tolerância a falha**: se o runtime não responder (credencial, rede, tempo), a resposta cai para o motor local com aviso explícito na mensagem — o gestor nunca fica sem resposta.
+
+**Motores configuráveis** (`FLEXIA_BACKEND`): `agentcore` (padrão quando há `FLEXIA_RUNTIME_ARN`), `claude` (API Anthropic direta, `claude-opus-5`, loop manual de ferramentas com *adaptive thinking*), `local` (regras + as mesmas ferramentas). A tela mostra qual motor e rota responderam, as ferramentas usadas e o tempo.
+
+| Item | Estado |
+|---|---|
+| Cliente AgentCore, parser SSE Strands, sessão, roteador, streaming, cancelamento, fallback | ✅ implementado e coberto por testes unitários (`test/flexia.test.ts`) |
+| Chamada real ao runtime da AWS a partir do Rio Flex | 🟡 código pronto; **validação ao vivo pendente de credenciais válidas** (as do workshop expiram em horas) — `python deploy/aws/implantar.py verificar` testa a invocação a partir da instância |
 
 ### 7.1 Governança do sinal de preço: a IA não decide sozinha
 
@@ -249,6 +270,8 @@ FlexIA (propõe) → Gestor (revisa e aprova) → Guard rails do servidor (valid
 > **Critério: Integração — compatibilidade com sistemas e fluxos existentes.**
 
 ### O que existe (✅)
+- **FlexIA no Amazon Bedrock AgentCore**: o Rio Flex invoca o runtime da FlexIA (SDK AWS v3, credenciais da role da instância) e transmite a resposta por **SSE** ao navegador ([§7](#7-flexia-camada-de-inteligência)).
+- **Streaming** `text/event-stream` para o chat, com eventos `meta`, `tool`, `delta`, `proposal`, `done`, `error`.
 - **REST/JSON versionado** (`/api/v1`) com todos os fluxos do produto ([§17](#17-api-implementada)).
 - **Ponto de troca do mercado de energia:** a interface `MarketDataProvider` (`src/services/market.ts`) isola o PLD. Um provedor real (CCEE) implementa `fetchHourlyPld(...)` e substitui `activeProvider`; ofertas, melhor preço por região, sinais, alertas e FlexIA **não mudam**. Há job de ingestão idempotente a cada 15 min (`index.ts`).
 - **Importação de dados existentes:** CSV/manifesto de terceiros via `db/seed.ts` (parser RFC-4180 em `lib/csv.ts`).
@@ -260,7 +283,7 @@ FlexIA (propõe) → Gestor (revisa e aprova) → Guard rails do servidor (valid
 |---|---|
 | Kafka / mensageria | 🔵 |
 | Microserviços separados | 🔵 (hoje é um monólito modular; os serviços em `src/services/` têm fronteiras que permitem extração) |
-| WebSocket / MQTT | 🔵 (o frontend usa *polling*: 3 s na sessão, 30–60 s nos demais) |
+| WebSocket / MQTT | 🔵 (chat usa SSE ✅; demais telas usam *polling*: 3 s na sessão, 30–60 s nos demais) |
 | OCPP / OCPI | 🔵 |
 | Webhooks | 🔵 |
 
@@ -291,6 +314,21 @@ resposta `201`: `{ "signal": { "id": "sig_…", "status": "agendado|ativo", "mul
 ```json
 { "unread": 1, "items": [ { "id": "ntf_…", "kind": "price_signal", "title": "Janela verde: excedente solar",
   "body": "…", "data": { "signalId": "sig_…", "level": "verde", "regionId": "capital" }, "createdAt": "…", "read": false } ] }
+```
+
+**Stream real do chat** (`POST /api/v1/manager/flexia/chat/stream`, corpo `{"message": "..."}`):
+```
+event: meta
+data: {"type":"meta","conversationId":"cnv_…","route":"setor","engine":"agentcore"}
+
+event: tool
+data: {"type":"tool","name":"aws:consultar_sql"}
+
+event: delta
+data: {"type":"delta","text":"A carga média do Sudeste…"}
+
+event: done
+data: {"type":"done","meta":{"engine":"agentcore","route":"setor","toolsUsed":["aws:consultar_sql"],"ms":9120}}
 ```
 
 **Envelope proposto para Kafka (🔵, não implementado):**
@@ -375,7 +413,7 @@ A gamificação é o mecanismo de incentivo à **resposta da demanda**. O consum
 | **Anti-enumeração e força bruta** | ✅ | erro genérico, hash "fantasma" para igualar tempo, **bloqueio 15 min após 5 falhas**, limite de 20 logins/15 min por IP (`services/auth.ts`, `middleware/security.ts`) |
 | **Autorização** | ✅ | RBAC por papel (`requireRole`); portal validado no login; rotas `/me/*` só consumidor, `/manager/*` só gestor; consultas filtradas por `user_id`; gestor **sem auto-cadastro** |
 | **Proteção das APIs** | ✅ | validação **zod** em todas as entradas; SQL só com *prepared statements*; corpo JSON ≤ 32 kB; **CSRF** (SameSite + cabeçalho `X-Requested-With` + checagem de `Origin`); `helmet` (CSP restritiva); rate limit global (600/min), FlexIA (15/min); `Cache-Control: no-store` por padrão; erros internos sem vazamento de detalhes |
-| **TLS** | 🟡 | `helmet` envia HSTS e `COOKIE_SECURE=true` ativa cookie *Secure*; a **terminação TLS é responsabilidade do deploy** (proxy/Vercel). Não há TLS no `localhost` do MVP |
+| **TLS** | 🟡 | `COOKIE_SECURE=true` + HSTS quando atrás de HTTPS. Na conta do workshop **CloudFront e API Gateway são bloqueados**, então a demonstração usa HTTP direto na instância (restrito ao IP do apresentador) ou **túnel SSM** (criptografado, nada exposto). HTTPS público exige ALB/CloudFront numa conta sem essas restrições |
 | **Credenciais e secrets** | 🟡 | configuração por variáveis de ambiente; `.env` no `.gitignore`; `ANTHROPIC_API_KEY` só no servidor. Senhas de **demonstração** estão no `.env.example` e no README — **apenas para ambiente local**. Cofre de segredos 🔵 |
 | **Criptografia** | 🟡 | senhas com hash forte e tokens hasheados; **SQLite sem criptografia em repouso** 🔵 |
 | **Identificação de dispositivos IoT** | 🔵 | — |
@@ -384,6 +422,11 @@ A gamificação é o mecanismo de incentivo à **resposta da demanda**. O consum
 | **Retenção** | 🟡 | job horário remove sessões expiradas, notificações lidas com > 60 dias e PLD com > 30 dias (`index.ts`, `market.ts`); `audit_log` sem política de retenção 🔵 |
 | **FlexIA e decisões automatizadas** | ✅ | ferramentas somente-leitura, entrada validada por schema; a única "escrita" é *proposta*, com **aprovação humana**, **guard rails** no servidor, **alertas** aos gestores e **auditoria** com origem e responsável ([§7.1](#71-governança-do-sinal-de-preço-a-ia-não-decide-sozinha)). Nenhum dado pessoal de consumidor é exposto às ferramentas |
 | **Rastreabilidade das ações** | ✅ | [§5](#5-rastreabilidade-e-auditabilidade-taesa) |
+| **Cabeçalhos do frontend** | ✅ | em produção o front é servido pela API com **CSP estrita** (`script-src 'self'`, sem scripts inline; conexões só para a própria origem; imagens só do provedor de tiles), `frame-ancestors 'none'`, HSTS quando há HTTPS (`src/app.ts`) |
+| **Cache no navegador** | ✅ | o *service worker* do PWA **não intercepta `/api/`** (antes ele podia servir respostas de outro usuário a partir do cache); API responde `no-store` |
+| **Observabilidade** | ✅ | logs JSON por linha (prontos para CloudWatch), `X-Request-Id` em toda resposta, `/api/health` (vida) e `/api/ready` (banco, dados, motor da FlexIA) |
+| **Configuração segura por padrão** | ✅ | em produção a API **recusa subir** com senhas de demonstração, a menos que `DEMO_ACCOUNTS=true` seja explícito; valida `FLEXIA_BACKEND`/ARN e `WEB_DIST` na partida (`validateConfig`) |
+| **Credenciais AWS** | ✅ | nenhuma chave no contêiner: na instância o SDK usa a **role da instância** (a mesma que já invoca a FlexIA); o `.env` com chaves temporárias do workshop fica só na máquina do operador e fora do git |
 | **Testes de segurança automatizados** | ✅ | `test/api.test.ts`: CSRF, sessão obrigatória, portal errado, papel insuficiente, flags do cookie, **guard rails** (faixa, coerência, duração, sobreposição) e **alertas com cooldown** |
 
 Em produção: `NODE_ENV=production`, `COOKIE_SECURE=true`, `ALLOWED_ORIGINS`, HTTPS, e **trocar/remover as contas de demonstração**.
@@ -401,13 +444,15 @@ Classificação: **MVP funcional integrado** (aplicação completa e testada) so
 | Cavuca (coleta) | 🟡 | coleta real das estações concluída; artefatos em `api-server/data/carregados_rj/` (`manifesto.json`, `validacao.json`). Coleta agendada de ONS/ANEEL/CCEE/EPE 🔵 |
 | Data Lake / governança | 🟡 | RAW→Silver/Gold aproximados por CSV → SQLite; tabelas `dataset_snapshots`, `source_records`; camadas formais 🔵 |
 | Banco persistente | ✅ | SQLite WAL, 19 tabelas, migrações versionadas (`src/db/index.ts`), seed idempotente |
-| FlexIA | ✅/🟡 | `src/flexia/` (9 ferramentas, Claude + motor local), tela `/gestor/flexia`; previsões simuladas |
+| FlexIA (Rio Flex) | ✅ | roteador, streaming SSE, 9 ferramentas locais, Claude opcional, fallback; tela `/gestor/flexia` |
+| FlexIA na AWS (AgentCore) | ✅/🟡 | runtime `SINIntelligence_SINAgent` em produção (projeto FlexIA); cliente e integração prontos e testados em unidade; chamada ao vivo pendente de credenciais |
+| Empacotamento e implantação | 🟡 | `Dockerfile` multi-stage (API + front numa imagem), `deploy/aws/implantar.py` (verificar → publicar → implantar → status → acesso). Build da imagem não testado localmente (Docker Desktop sem DNS); o modo produção do mesmo código foi validado sem Docker |
 | Rio Flex (frontend) | ✅ | `artifacts/rio-flex` (2 portais, mapa, gráficos, PWA); build de produção e *code-splitting* por rota |
-| API REST | ✅ | 44 endpoints ([§17](#17-api-implementada)) |
+| API REST | ✅ | 45 endpoints de negócio + `/api/health` e `/api/ready` ([§17](#17-api-implementada)) |
 | Kafka / microserviços | 🔵 | — |
 | IoT | 🟡 | sessão e ocupação simuladas (`services/charging.ts`, `stations.ts`); telemetria real 🔵 |
 | Guard rails e alertas aos gestores | ✅ | `GUARDRAILS`, `createSignal`, `evaluateManagerAlerts`; grupo de testes *guard rails do sinal de preço* |
-| Testes | ✅ | 16 testes de integração passando (`pnpm --filter @workspace/api-server test`) |
+| Testes | ✅ | 22 testes passando — 16 de integração da API + 6 da integração FlexIA (`pnpm --filter @workspace/api-server test`) |
 | Tipagem | ✅ | `pnpm typecheck` (frontend + API) sem erros |
 | Documentação | ✅ | este README, diagramas Mermaid, `.env.example` |
 
@@ -419,8 +464,8 @@ Classificação: **MVP funcional integrado** (aplicação completa e testada) so
 
 | Critério | Como a solução atende | Evidência no projeto |
 |---|---|---|
-| **Maturidade Técnica** | MVP integrado: dados reais de estações, banco persistente com migrações, API REST, dois portais, FlexIA com ferramentas, simulação de recarga, testes e build de produção. Estado de cada parte declarado ([§13](#13-maturidade-técnica-do-mvp)). Documentação com bounded contexts, casos de uso, sequência e ER ([§15](#15-diagramas)). | `artifacts/api-server/src/**`, `artifacts/rio-flex/src/**`, `test/api.test.ts` (16 ✔), `pnpm typecheck`, §15 |
-| **Integração** | API REST versionada; `MarketDataProvider` como ponto de troca para o PLD da CCEE; importação de CSV/manifesto de terceiros; job de ingestão; eventos mapeados para registros existentes. Kafka, MQTT/WebSocket, OCPP/OCPI **planejados** e declarados como tal. | `src/services/market.ts` (interface + job), `src/db/seed.ts`, `src/routes/*.ts`, `src/index.ts`, [§8](#8-integração) e [§17](#17-api-implementada) |
+| **Maturidade Técnica** | MVP integrado: dados reais de estações, banco persistente com migrações, API REST, dois portais, FlexIA com ferramentas, simulação de recarga, testes e build de produção. Estado de cada parte declarado ([§13](#13-maturidade-técnica-do-mvp)). Documentação com bounded contexts, casos de uso, sequência e ER ([§15](#15-diagramas)). | `artifacts/api-server/src/**`, `artifacts/rio-flex/src/**`, `test/api.test.ts` (22 ✔), `pnpm typecheck`, §15 |
+| **Integração** | **FlexIA do Amazon Bedrock AgentCore integrada** (SDK AWS, streaming SSE, sessão no runtime, roteador operacional/setor/misto, fallback); API REST versionada; `MarketDataProvider` como ponto de troca para o PLD da CCEE; importação de CSV/manifesto de terceiros; job de ingestão; eventos mapeados para registros existentes. Kafka, MQTT/WebSocket, OCPP/OCPI **planejados** e declarados como tal. | `src/flexia/agentcore.ts`, `src/flexia/router.ts`, `POST /manager/flexia/chat/stream`, `deploy/aws/implantar.py`, `src/services/market.ts`, `src/db/seed.ts`, `src/routes/*.ts`, [§8](#8-integração) e [§17](#17-api-implementada) |
 | **Segurança e Conformidade** | scrypt, sessão httpOnly/SameSite, CSRF, RBAC por portal, bloqueio por tentativas, zod, helmet, rate limit, auditoria, minimização e dados agregados para gestores, retenção parcial. **IA sem poder de decisão:** proposta → aprovação humana → guard rails no servidor → alertas aos gestores → auditoria com origem. Lacunas (TLS no deploy, criptografia em repouso, direitos do titular, IoT) declaradas. | `src/services/auth.ts`, `src/middleware/security.ts`, `src/lib/crypto.ts`, `GUARDRAILS` + `createSignal` (`src/services/signals.ts`), `evaluateManagerAlerts`, `GET /manager/guardrails`, `audit_log`, `GET /manager/audit`, `test/api.test.ts` (grupo *autenticação e segurança*), [§12](#12-segurança-e-conformidade) |
 | **Rastreabilidade (Taesa)** | Lineage estação → banco → coleta (URL, data, SHA-256) → fonte; manifesto do snapshot com hash e validações; `processing_version` e `provenance` nas respostas de preço; PLD persistido com origem; auditoria de ações com **origem (manual/FlexIA) e gestor responsável** por cada sinal; determinismo que permite reproduzir números simulados. Normas com vigência e `model_version` **planejados**. | `GET /manager/lineage/stations/:id`, `GET /manager/lineage/datasets`, tabelas `dataset_snapshots` e `source_records`, `data/carregados_rj/manifesto.json` e `validacao.json`, `src/services/lineage.ts`, `market_prices`, `price_signals`, `audit_log`, teste *rastreabilidade* |
 
@@ -617,7 +662,60 @@ flowchart LR
   GLD -. "snapshot_id + processing_version" .-> LIN
 ```
 
-### 15.9 Camadas de controle da decisão de preço
+### 15.9 Implantação na AWS
+```mermaid
+flowchart LR
+  subgraph Local["Máquina do operador"]
+    OP["deploy/aws/implantar.py<br/>(credenciais temporárias do workshop)"]
+  end
+  subgraph AWS["Conta AWS da equipe"]
+    S3[("S3 · ons-datalake-&lt;conta&gt;<br/>rioflex/releases/&lt;commit&gt;.tar.gz")]
+    SSM["Systems Manager<br/>Run Command"]
+    subgraph EC2["Instância do Code Editor (role da instância)"]
+      C["Contêiner rioflex :8080<br/>API + frontend + SQLite (volume)"]
+    end
+    AC["Bedrock AgentCore Runtime<br/>FlexIA · SINIntelligence_SINAgent (us-west-2)"]
+    LAKE[("Data lake S3<br/>ONS · ANEEL · CCEE · EPE")]
+    BR["Bedrock<br/>Nemotron + Claude"]
+  end
+  U(("Gestor / motorista")) -->|"HTTP restrito ao IP ou túnel SSM"| C
+  OP --> S3
+  OP --> SSM --> EC2
+  EC2 -. "baixa o pacote" .-> S3
+  C -->|"InvokeAgentRuntime (SSE)"| AC
+  AC --> LAKE
+  AC --> BR
+```
+
+### 15.10 Sequência — pergunta do gestor com roteamento
+```mermaid
+sequenceDiagram
+  autonumber
+  actor Gestor
+  participant UI as Rio Flex (navegador)
+  participant API as API /manager/flexia/chat/stream
+  participant R as Roteador
+  participant L as Ferramentas Rio Flex
+  participant AC as FlexIA · AgentCore
+  Gestor->>UI: pergunta
+  UI->>API: POST (SSE)
+  API->>R: classificar (sem LLM)
+  alt operacional
+    R->>L: preço, estações, sinais, proposta
+    L-->>UI: eventos tool/delta/proposal
+  else setor ou misto
+    opt misto
+      R->>L: contexto operacional compacto
+    end
+    API->>AC: InvokeAgentRuntime(prompt, runtimeSessionId)
+    AC-->>API: SSE Strands (ferramentas do lake + texto)
+    API-->>UI: tool "aws:…", delta token a token
+  end
+  API-->>UI: done (motor, rota, ferramentas, tempo)
+  Note over API,AC: falha do runtime → motor local com aviso
+```
+
+### 15.11 Camadas de controle da decisão de preço
 ```mermaid
 flowchart LR
   D["Dados rastreados<br/>(provenance, lineage)"] --> IA["FlexIA<br/>analisa e PROPÕE"]
@@ -646,7 +744,7 @@ pnpm dev:web      # Frontend em http://localhost:5173 (proxy /api → :5000; se 
 Outros comandos:
 ```bash
 pnpm typecheck                              # frontend + API
-pnpm --filter @workspace/api-server test    # 16 testes de integração
+pnpm --filter @workspace/api-server test    # 22 testes
 pnpm db:reset                               # limpa e repopula o banco (dados em artifacts/api-server/data/rioflex.db)
 pnpm build                                  # build de produção do frontend
 ```
@@ -664,6 +762,24 @@ Novos motoristas: `/signup`.
 
 ---
 
+## 16.1 Implantação na AWS
+
+**Por que este desenho.** A conta do workshop bloqueia `iam:PassRole` (sem ECS/Lambda/App Runner com role própria), CloudFront, API Gateway e RDS. O caminho que já funcionou para a FlexIA é a **instância do Code Editor comandada via Systems Manager** — o Rio Flex usa o mesmo, numa **imagem única** (API + frontend + SQLite em volume), com a **role da instância** para chamar a FlexIA. Numa conta sem essas restrições, a mesma imagem sobe em ECS Fargate/App Runner atrás de um ALB com HTTPS.
+
+**Pré-requisitos na máquina do operador:** Python com `boto3` (o venv da FlexIA serve) e credenciais válidas no `.env` da FlexIA (`C:\Desenvolvimento\Hackathon\FlexIA\.env`), atualizadas com `.\configurar.ps1 -SalvarCredenciais`. O script lê desse `.env` a instância (`CODE_EDITOR_INSTANCIA`), o bucket e o `FLEXIA_RUNTIME_ARN`.
+
+```bash
+python deploy/aws/implantar.py verificar                    # nada é alterado; testa até a invocação da FlexIA pela instância
+python deploy/aws/implantar.py publicar implantar status    # pacote do commit atual -> S3 -> contêiner na instância
+python deploy/aws/implantar.py acesso                       # URL ou comando de túnel SSM
+python deploy/aws/implantar.py liberar-ip --cidr <ip>/32    # opcional: abre a 8080 só para o IP do apresentador
+```
+
+- **Imagem:** `Dockerfile` multi-stage (Node 24, pnpm, build do front, typecheck da API), usuário sem privilégio, `HEALTHCHECK` em `/api/ready`, volume `/data` para o SQLite.
+- **Sem Docker na instância:** `--modo node` instala Node 24 via nvm e roda o mesmo código.
+- **Variáveis do contêiner:** `deploy/aws/rioflex.env.example` (copie para `rioflex.env` para customizar; fora do git). Para a apresentação: `DEMO_ACCOUNTS=true`, `FLEXIA_BACKEND=agentcore`.
+- **Operação:** logs JSON (`docker logs rioflex`), backup do banco com `pnpm --filter @workspace/api-server db:backup` (`VACUUM INTO`, sem parar a API), reimplantação idempotente por commit.
+
 ## 17. API implementada
 
 Prefixo `/api/v1`; JSON; cookie de sessão; `X-Requested-With: RioFlex` em métodos de escrita. Tudo abaixo existe em `src/routes/`.
@@ -671,6 +787,7 @@ Prefixo `/api/v1`; JSON; cookie de sessão; `X-Requested-With: RioFlex` em méto
 | Rota | Papel | Descrição |
 |---|---|---|
 | `POST /auth/login` `{email,password,portal}` · `POST /auth/register` · `POST /auth/logout` · `GET/PATCH /auth/me` | — | Sessão e perfil |
+| `GET /api/health` · `GET /api/ready` | público | Vida e prontidão (banco, dados, motor da FlexIA) |
 | `GET /meta` | público | Tipos de recarga, níveis, regiões, estatísticas da base |
 | `GET /stations` (`region, chargeType, available, public, operational, maxPrice, lat, lng, radiusKm, sort, q`) · `/stations/markers` · `/stations/:id` | logado | Estações com preço por tipo, score, disponibilidade e `provenance` |
 | `GET /prices` · `/prices/:region/now` · `/prices/:region/forecast` · `/market/pld` · `/signals` | logado | Preço, composição, ofertas, janelas, PLD; inclui `provenance` |
@@ -682,7 +799,7 @@ Prefixo `/api/v1`; JSON; cookie de sessão; `X-Requested-With: RioFlex` em méto
 | `GET/POST /manager/signals` · `DELETE /manager/signals/:id` | gestor | Sinais de preço |
 | `GET /manager/knowledge` · `GET /manager/audit` · `GET /manager/guardrails` | gestor | Regulação; auditoria; limites de segurança do sinal |
 | `GET /manager/lineage/datasets` · `GET /manager/lineage/stations/:id` | gestor | **Rastreabilidade** |
-| `GET /manager/flexia/status` · `GET/DELETE /manager/flexia/conversations[/:id]` · `POST /manager/flexia/chat` | gestor | FlexIA (não publica nada) |
+| `GET /manager/flexia/status` · `GET/DELETE /manager/flexia/conversations[/:id]` · `POST /manager/flexia/chat` · `POST /manager/flexia/chat/stream` (SSE) | gestor | FlexIA — roteada para o AgentCore ou ferramentas locais (não publica nada) |
 
 **Dados reais × simulados:** estações/conectores/preço publicado = **reais** (snapshot 22/09/2026); PLD, ofertas (5 comercializadoras **fictícias**), demanda/geração, clima e disponibilidade = **simulados**. Tarifas do mock **não são homologadas**.
 
@@ -707,6 +824,7 @@ Dica de gravação: deixe o gestor já logado em outra aba e o sinal da FlexIA p
 
 ## 19. Limitações e próximos passos
 - Preço, rede e clima são **simulados**; comercializadoras são fictícias; não há cobrança/pagamento nem comando real de carregadores.
+- **AWS:** chamada real ao AgentCore a partir do Rio Flex e build da imagem ainda não executados (credenciais do workshop expiradas; Docker Desktop local sem DNS). HTTPS público depende de ALB/CloudFront, bloqueados na conta do workshop. SQLite = uma instância; para escalar horizontalmente, PostgreSQL/Aurora.
 - Governança: aprovação em duas etapas (*four-eyes*), limites por perfil de gestor e limites configuráveis pela interface não existem (hoje: um gestor aprova, guard rails fixos no código).
 - Não implementados: Cavuca agendado para ONS/ANEEL/CCEE/EPE/INMET, Data Lake em camadas, seleção automática da versão mais válida, normas com vigência, `model_version` e métricas de previsão, Kafka/microserviços, MQTT/WebSocket, OCPP/OCPI, telemetria e identidade de dispositivos IoT, criptografia em repouso, direitos do titular (LGPD), pontos para reserva/prioridade.
 - Abertura do mercado livre para baixa tensão: confirmar o marco regulatório vigente antes de qualquer oferta comercial.
