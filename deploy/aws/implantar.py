@@ -32,7 +32,10 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[2]
 AQUI = Path(__file__).resolve().parent
 USUARIO = "participant"
-PORTA = 8080
+# 8080 já é usado pelo próprio Code Editor (VS Code Server) do workshop no host
+# (127.0.0.1:8080) — com --network host isso colidia e derrubava o contêiner
+# silenciosamente logo após o "api.started" (EADDRINUSE na porta compartilhada).
+PORTA = 8090
 # Sobrescrevível: nesta conta/sandbox a instância do Code Editor está em us-west-2, não us-east-1.
 REGIAO_SSM = os.environ.get("RIOFLEX_REGIAO_SSM", "us-east-1")
 
