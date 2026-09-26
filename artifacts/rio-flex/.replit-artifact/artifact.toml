@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Rio Flex"
+description = "Aplicação de mobilidade elétrica que recomenda onde e quando carregar, comparando preço, distância, disponibilidade, potência e incentivos para motoristas de veículos elétricos."
+version = "1.0.0"
+id = "artifacts/rio-flex"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22099
+
+[services.development]
+run = "pnpm --filter @workspace/rio-flex run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rio-flex", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/rio-flex/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22099"
+BASE_PATH = "/"

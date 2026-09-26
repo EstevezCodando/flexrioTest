@@ -1,0 +1,28 @@
+import type { HourlyForecast } from '@/types/forecast';
+
+export const hourlyForecast: HourlyForecast[] = [
+  { hour: 0, label: '00h', demandGw: 64.2, solarGw: 0.0, status: 'normal' },
+  { hour: 1, label: '01h', demandGw: 61.8, solarGw: 0.0, status: 'normal' },
+  { hour: 2, label: '02h', demandGw: 60.1, solarGw: 0.0, status: 'normal' },
+  { hour: 3, label: '03h', demandGw: 59.4, solarGw: 0.0, status: 'normal' },
+  { hour: 4, label: '04h', demandGw: 59.9, solarGw: 0.0, status: 'normal' },
+  { hour: 5, label: '05h', demandGw: 62.3, solarGw: 0.0, status: 'normal' },
+  { hour: 6, label: '06h', demandGw: 66.8, solarGw: 0.8, status: 'normal' },
+  { hour: 7, label: '07h', demandGw: 71.2, solarGw: 3.2, status: 'normal' },
+  { hour: 8, label: '08h', demandGw: 74.5, solarGw: 6.9, status: 'normal' },
+  { hour: 9, label: '09h', demandGw: 76.1, solarGw: 9.8, status: 'normal' },
+  { hour: 10, label: '10h', demandGw: 76.9, solarGw: 12.4, status: 'solar' },
+  { hour: 11, label: '11h', demandGw: 77.2, solarGw: 13.9, status: 'solar' },
+  { hour: 12, label: '12h', demandGw: 76.8, solarGw: 14.6, status: 'solar' },
+  { hour: 13, label: '13h', demandGw: 77.0, solarGw: 14.2, status: 'solar' },
+  { hour: 14, label: '14h', demandGw: 77.5, solarGw: 13.1, status: 'solar' },
+  { hour: 15, label: '15h', demandGw: 77.9, solarGw: 11.2, status: 'solar' },
+  { hour: 16, label: '16h', demandGw: 78.4, solarGw: 7.5, status: 'solar' },
+  { hour: 17, label: '17h', demandGw: 79.1, solarGw: 2.8, status: 'normal' },
+  { hour: 18, label: '18h', demandGw: 80.6, solarGw: 0.1, status: 'pico' },
+  { hour: 19, label: '19h', demandGw: 81.2, solarGw: 0.0, status: 'pico' },
+  { hour: 20, label: '20h', demandGw: 79.3, solarGw: 0.0, status: 'pico' },
+  { hour: 21, label: '21h', demandGw: 77.7, solarGw: 0.0, status: 'pico' },
+  { hour: 22, label: '22h', demandGw: 75.3, solarGw: 0.0, status: 'normal' },
+  { hour: 23, label: '23h', demandGw: 73.8, solarGw: 0.0, status: 'normal' },
+];

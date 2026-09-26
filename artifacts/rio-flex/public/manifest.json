@@ -1,0 +1,67 @@
+{
+  "name": "Rio Flex · Mobilidade Elétrica Inteligente",
+  "short_name": "Rio Flex",
+  "description": "Mobilidade elétrica, otimização de recargas e flexibilidade da rede energética no Rio de Janeiro.",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#080d12",
+  "theme_color": "#080d12",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mapa de Eletropostos",
+      "short_name": "Mapa",
+      "description": "Encontre estações livres no trajeto",
+      "url": "/app/map",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sessão de Recarga",
+      "short_name": "Carregar",
+      "description": "Acompanhe sua carga ativa",
+      "url": "/app/session",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Minha Carteira",
+      "short_name": "Carteira",
+      "description": "Consulte seus créditos acumulados",
+      "url": "/app/wallet",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
