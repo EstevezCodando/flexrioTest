@@ -8,7 +8,7 @@
     "start": "tsx --env-file-if-exists=.env src/index.ts",
     "db:seed": "tsx --env-file-if-exists=.env src/db/cli.ts seed",
     "db:reset": "tsx --env-file-if-exists=.env src/db/cli.ts reset",
-    "test": "tsx --test src/**/*.test.ts",
+    "test": "tsx --test test/api.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {

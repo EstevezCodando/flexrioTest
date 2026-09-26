@@ -1,27 +1,29 @@
-import type { ComponentType } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import { Redirect, Route, Switch } from 'wouter';
-import { RequireRole } from '@/components/common/ui';
+import { Loading, RequireRole } from '@/components/common/ui';
 import LandingPage from '@/pages/landing';
 import AuthPage from '@/pages/auth';
 import ManagerLoginPage from '@/pages/auth/ManagerLogin';
 import OnboardingPage from '@/pages/onboarding';
 import HomePage from '@/pages/home';
-import MapPage from '@/pages/map';
-import PricesPage from '@/pages/prices';
+const MapPage = lazy(() => import('@/pages/map'));
+const PricesPage = lazy(() => import('@/pages/prices'));
 import AlertsPage from '@/pages/alerts';
 import SessionPage from '@/pages/session';
 import ReceiptPage from '@/pages/receipt';
 import WalletPage from '@/pages/wallet';
 import ProfilePage from '@/pages/profile';
-import ManagerOverviewPage from '@/pages/manager/Overview';
-import ManagerGridPage from '@/pages/manager/Grid';
-import ManagerSignalsPage from '@/pages/manager/Signals';
-import FlexiaPage from '@/pages/manager/Flexia';
-import RegulationPage from '@/pages/manager/Regulation';
+const ManagerOverviewPage = lazy(() => import('@/pages/manager/Overview'));
+const ManagerGridPage = lazy(() => import('@/pages/manager/Grid'));
+const ManagerSignalsPage = lazy(() => import('@/pages/manager/Signals'));
+const FlexiaPage = lazy(() => import('@/pages/manager/Flexia'));
+const RegulationPage = lazy(() => import('@/pages/manager/Regulation'));
 import NotFound from '@/pages/not-found';
 
-const consumer = (Page: ComponentType) => () => <RequireRole role="consumer"><Page /></RequireRole>;
-const manager = (Page: ComponentType) => () => <RequireRole role="manager"><Page /></RequireRole>;
+// Páginas pesadas (mapa, gráficos, portal do gestor) são carregadas sob demanda.
+const fallback = <div className="rf-app"><Loading /></div>;
+const consumer = (Page: ComponentType) => () => <RequireRole role="consumer"><Suspense fallback={fallback}><Page /></Suspense></RequireRole>;
+const manager = (Page: ComponentType) => () => <RequireRole role="manager"><Suspense fallback={fallback}><Page /></Suspense></RequireRole>;
 
 // Envolvidos uma única vez (identidade estável — evita remontar páginas).
 const ConsumerOnboardingPage = consumer(OnboardingPage);
